@@ -9,10 +9,11 @@ var MongoClient = require('mongodb').MongoClient;
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(express.static(__dirname));
+app.use(express.static(__dirname + "/images"));
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
-app.use('/javascripts', express.static(__dirname));
-app.use('/stylesheets', express.static(__dirname));
+app.use('/javascripts', express.static(__dirname + '/views'));
+app.use('/stylesheets', express.static(__dirname + '/views'));
 app.get('/main.html', function(req, res){res.sendFile(__dirname + "/" + "main.html");})
 
 function getPost(request, response, db) {
@@ -82,7 +83,9 @@ app.post('/accountcheck', function(req, res){
 			
 			if(req.body.username == result.username)
 				toClient = {data: "matched"}
-				socket.send(JSON.stringify(toClient));
+			else
+				toClient = {data: ""}
+				io.sockets.send(JSON.stringify(toClient));
 			db.close();
 		  });
 	});

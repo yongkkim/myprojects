@@ -26,7 +26,7 @@ function getsomedata(some_parameter_recieved, callback) {
 			bcrypt.hash("dydrnr123", some_parameter_recieved, function(err, hash) {
 			callback(hash);
 		});
-  }
+}
   
 var a = bcrypt.genSalt(10, function(req, res, next) {
   getsomedata(res, function(result) {
