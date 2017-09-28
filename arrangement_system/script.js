@@ -18,7 +18,7 @@ $(document).ready(function()
 		*/
 		//console.log("Message from the server arrived")
 		message = JSON.parse(message);
-		alert(message.data); /*converting the data into JS object */
+		//alert(message.data); /*converting the data into JS object */
 		//$('#content').append('<div >'+message.data+'</div>'); /*appending the data on the page using Jquery */
 	});	
 }) 

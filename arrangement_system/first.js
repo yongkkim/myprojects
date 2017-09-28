@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var bcrypt = require('bcryptjs');
 var io = require('socket.io');
 var http = require('http');
 var path = require('path');
@@ -14,9 +15,9 @@ app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 app.use('/javascripts', express.static(__dirname + '/views'));
 app.use('/stylesheets', express.static(__dirname + '/views'));
-app.get('/main.html', function(req, res){res.sendFile(__dirname + "/" + "main.html");})
+app.get('/', function(req, res){res.sendFile(__dirname + "/" + "main.html");})
 
-function getPost(request, response, db) {
+/*function getPost(request, response, db) {
 	var qs = require('querystring');
 		var body = '';
 
@@ -47,56 +48,57 @@ app.post('/post', function (req, res) {
 		getPost(req, res, db);
 
 	});
-})
+})*/
 
-var server = http.createServer(app).listen(8080);
-io = io.listen(server);
+	var server = http.createServer(app).listen(8080);
+	io = io.listen(server);
 
-io.sockets.on('connection', function (socket) {
-	
-	var toClient = {data:"connection established"}
-	//socket.send(JSON.stringify(toClient));
-	/*MongoClient.connect("mongodb://localhost:27017/loldb", function (err, db) {
-	   if(err) throw err;
-	     db.collection("account").findOne({}, function(err, result) {
-			if (err) throw err;
-			toClient = {data: result.password}
-			socket.send(JSON.stringify(toClient));
-			db.close();
-		  });
-	});*/
-});
-
-app.get('/signin', function(req, res){
-	var toClient = {data:"You are on signin.html"}
-	io.sockets.send(JSON.stringify(toClient));
-	res.sendFile(__dirname + "/" + "signin.html");
-	})
-
-app.post('/accountcheck', function(req, res){
-	var toClient;
-	
-	MongoClient.connect("mongodb://localhost:27017/loldb", function (err, db) {
-	   if(err) throw err;
-	     db.collection("account").findOne({}, function(err, result) {
-			if (err) throw err;
-			
-			if(req.body.username == result.username)
-				toClient = {data: "matched"}
-			else
-				toClient = {data: ""}
-				io.sockets.send(JSON.stringify(toClient));
-			db.close();
-		  });
+	io.sockets.on('connection', function (socket) {
+		
+		var toClient = {data:"connection established"}
+		//socket.send(JSON.stringify(toClient));
+		/*MongoClient.connect("mongodb://localhost:27017/loldb", function (err, db) {
+		   if(err) throw err;
+			 db.collection("account").findOne({}, function(err, result) {
+				if (err) throw err;
+				toClient = {data: result.password}
+				socket.send(JSON.stringify(toClient));
+				db.close();
+			  });
+		});*/
 	});
-	res.render("main.html");
+
+	app.get('/signin', function(req, res){
+		var toClient = {data:"You are on signin.html"}
+		io.sockets.send(JSON.stringify(toClient));
+		res.sendFile(__dirname + "/" + "signin.html");
+		})
+
+	app.post('/signin', function(req, res){
+		var matched = false;
+		var dbemail;
+		MongoClient.connect("mongodb://localhost:27017/loldb", function (err, db) {
+		   if(err) throw err;
+			 db.collection("account").findOne({}, function(err, result) {
+				if (err) throw err;
+				
+				console.log(req.body.pw);
+				bcrypt.compare(req.body.pw, result.password, function(err, resp) {
+				if(resp)
+					res.render("main.html");
+				else
+					res.render("signin.html");			
+				db.close();
+			  });	  
+			});
+		})
 	})
-	
-app.get('/signup', function(req, res){
-	var toClient = {data:"You are on signup.html"}
-	io.sockets.send(JSON.stringify(toClient));
-	res.sendFile(__dirname + "/" + "signup.html");
-	})
-	
+		
+	app.get('/signup', function(req, res){
+		var toClient = {data:"You are on signup.html"}
+		io.sockets.send(JSON.stringify(toClient));
+		res.sendFile(__dirname + "/" + "signup.html");
+		})
+		
 
 

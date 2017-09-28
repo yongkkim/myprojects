@@ -28,7 +28,7 @@ function getsomedata(some_parameter_recieved, callback) {
 		});
 }
   
-var a = bcrypt.genSalt(10, function(req, res, next) {
+/*var a = bcrypt.genSalt(10, function(req, res, next) {
   getsomedata(res, function(result) {
     console.log(result);
 		var accountinfo = { lolusername: "dragonsoup2", username: "dragonsoup2", email: "dragonsoup2@hotmail.com", password: result}; 
@@ -38,7 +38,7 @@ var a = bcrypt.genSalt(10, function(req, res, next) {
 		db.close();
 	  });
   });
-});
+});*/
 
 //console.log(a);
 
@@ -59,7 +59,7 @@ var a = bcrypt.genSalt(10, function(req, res, next) {
     console.log("1 document inserted");
     db.close();
   });*/
-  /*db.collection("account").findOne({},function(err, res) {
+  db.collection("account").findOne({},function(err, res) {
     if (err) throw err;
 	  bcrypt.compare(pw, res.password, function(err, resp) {
 			if(resp)
@@ -71,7 +71,7 @@ var a = bcrypt.genSalt(10, function(req, res, next) {
 			}
 		});
     db.close();
-  });*/
+  });
   /*var q = {lolusername: "dragonsoup2"}
     db.collection("account").deleteOne(q, function(err, res) {
     if (err) throw err;
