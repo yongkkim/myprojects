@@ -1,0 +1,22 @@
+page-tips {
+	.card{
+	   background: #ddd6f3; /* fallback for old browsers */
+	  background: -webkit-linear-gradient(to right, #ddd6f3, #faaca8); /* Chrome 10-25, Safari 5.1-6 */
+	  background: linear-gradient(to right, #ddd6f3, #faaca8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	}
+	#tips{
+		color:white;
+		text-align: center;
+	}
+	.bulb{
+		height: 40px;
+		width:auto;
+		display: block;
+	  margin-left: auto;
+	  margin-right: auto;
+	}
+	
+	.nextbtn{
+		width: 100%;
+	}
+}

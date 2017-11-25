@@ -1,0 +1,42 @@
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title class="font">Payment Information</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-item class="font">
+    <ion-label color="primary" class="heading" stacked>Card Holders Name</ion-label>
+    <ion-input type="email" placeholder="Card Holders Name"></ion-input>
+  </ion-item>
+
+  <br>
+
+   <ion-item>
+    <ion-label color="primary" class="heading" stacked>Card Number</ion-label>
+    <ion-input type="Number" placeholder="Card Number"></ion-input>
+  	<ion-icon id ="icon-style" name="ios-card" (click) ="goToAccountInfo()" item-right></ion-icon>
+  </ion-item>
+
+  <br>
+
+   <ion-item>
+    <ion-label color="primary" class="heading" stacked>CVC Code</ion-label>
+    <ion-input type="Number" placeholder="Password"></ion-input>
+  </ion-item>
+
+  <br>
+
+   <ion-item>
+    <ion-label color="primary" class="heading" stacked>Expires Month/Year</ion-label>
+    <ion-input type="Number" placeholder="Expires Month/Year"></ion-input>
+  </ion-item>
+
+  <br>
+  <br>
+  <button class="submit-button" ion-button (click)="saveInfo()">Submit</button>
+</ion-content>

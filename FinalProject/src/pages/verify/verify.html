@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title class="title1">
+      Verification Check
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="cont1">
+   <ion-item class="cont2"  *ngFor="let user of users" (click) ="goToPerson(user)" no-lines>
+      <img class ="profIMG" src="{{user.url}}">
+      <p class ="name"> {{user.title}}</p>
+      <p class ="carName"> {{user.car}}</p>
+    </ion-item>
+  </div>
+</ion-content>

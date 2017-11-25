@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Personal Info</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+ <ion-item>
+    <ion-label color="primary" class="heading" stacked>Company</ion-label>
+    <ion-input type="email" placeholder="Company Name"></ion-input>
+  </ion-item>
+
+  <br>
+
+   <ion-item>
+    <ion-label color="primary" class="heading" stacked>Phone Number</ion-label>
+    <ion-input type="Number" placeholder="Phone Number"></ion-input>
+  </ion-item>
+
+  <br>
+
+   <ion-item>
+    <ion-label color="primary" class="heading" stacked>Password</ion-label>
+    <ion-input type="email" placeholder="Password"></ion-input>
+  </ion-item>
+
+  <br>
+
+   <ion-item>
+    <ion-label color="primary" class="heading" stacked>Bank Account</ion-label>
+    <ion-input type="Number" placeholder="Bank Account"></ion-input>
+  </ion-item>
+
+  <br>
+  <br>
+  <button class="submit-button" ion-button (click)="saveInfo()">Save</button>
+</ion-content>

@@ -1,0 +1,30 @@
+
+<ion-content padding>
+
+
+<div class="adimg"></div>
+
+	<div class ="container">
+	<ion-list>
+	  <ion-item (click) ="goToMyAds()">
+	    <ion-label class="title1" detail-forward>My Ads</ion-label>
+	  </ion-item>
+	  <ion-item (click) = "info()">
+	  	<ion-label class="title1" detail-forward> Edit Personal Information </ion-label>
+	  	<button ion-button icon-only>
+		  <ion-icon name="arrow-forward"></ion-icon>
+		</button>
+	  </ion-item>
+	  <ion-item (click) ="goToBank()">
+	  	<ion-label class="title1" detail-forward> Change Bank Info </ion-label>
+	  	<button ion-button icon-only>
+		  <ion-icon name="arrow-forward"></ion-icon>
+		</button>
+	  </ion-item>
+	  <ion-item (click) = "LogOut()">
+	  	<ion-label class="title1"> Log Out </ion-label>
+	  </ion-item>
+	</ion-list>
+	</div>
+
+</ion-content>

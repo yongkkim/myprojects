@@ -1,0 +1,49 @@
+<!--
+  Generated template for the ModelinfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title class="font">Model Info</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+ <ion-item>
+    <ion-label class="font heading" stacked>Car Type</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+
+  <br>
+
+    <ion-item>
+      <ion-label class="font heading" stacked>Model</ion-label>
+      <ion-select [(ngModel)]="model">
+        <ion-option value="l">Lexus</ion-option>
+        <ion-option value="t">Toyota</ion-option>
+        <ion-option value="h">Honda</ion-option>
+        <ion-option value="b">Benz</ion-option>
+      </ion-select>
+    </ion-item>
+
+  <br>
+
+   <ion-item>
+    <ion-label  class="font heading" stacked>Year</ion-label>
+    <ion-input type="Number"></ion-input>
+  </ion-item>
+
+  <br>
+
+   <ion-item>
+    <ion-label class="font heading" stacked>Color</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+
+  <br>
+  <br>
+  <button class="font submit-button" ion-button (click)="DoneInfo()">Done</button>
+</ion-content>
+
+

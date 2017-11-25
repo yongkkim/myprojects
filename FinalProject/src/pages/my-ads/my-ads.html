@@ -1,0 +1,20 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title class="font">MyAds</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+<div class="container" *ngFor="let ad of ads" (click)="goToPerson(ad)"> 
+		<ion-row>
+			<ion-col><img src="{{ad.image}}"></ion-col>
+			<ion-col class="font left">
+			<p id="title1"> Ad Title:</p>
+			<p> {{ad.name}}</p>
+			<p id="title1">Date Publish:</p> 
+			<p> {{ad.date}}</p>
+			</ion-col>
+		</ion-row>
+</div>
+</ion-content>

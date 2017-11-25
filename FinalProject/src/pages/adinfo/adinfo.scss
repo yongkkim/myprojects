@@ -1,0 +1,102 @@
+page-adinfo {
+
+*
+{
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+.heading
+{
+	line-height: 75%;
+}
+#back 
+{
+	margin-bottom: 0cm;
+
+}
+.outer
+{
+	padding-top: 0px;
+	margin: 0px;
+	text-align: center;
+}
+.text1
+{
+	padding-top: 0px;
+	font-size: 36px;
+	text-align: center;
+	
+}
+.text2
+{
+	font-size: 20px;
+	margin-top: 0px;
+	color: #A9A9A9;
+}
+.inner
+{
+	width:30%;
+	display: inline-block;
+	margin-top: 0px;
+    vertical-align: top;
+}
+
+.bar
+{
+	background-color: #FFFFFF;
+}
+.middle
+{
+	line-height: 50%;
+	margin-top: 0.7cm;
+	text-transform: uppercase;
+}
+
+.mtitle1
+{
+	color: #DC143C;
+	font-size: 10px;
+	margin-left: 0.5cm;
+}
+
+.mtitle2
+{
+	color: Black;
+	font-size: 20px;
+	margin-left: 0.5cm
+}
+
+.mtitle3
+{
+	color: Darkgrey;
+	font-size: 14px;
+	margin-left: 0.5cm;
+}
+
+.image
+{
+	background: url('../../assets/Images/carad.PNG');
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 340px;
+	height: 240px;
+	margin-left: 0.3cm;
+}
+
+.specCont
+{
+	border-radius: 15px 15px 0px 0px;
+	background-color: #1E90FF;
+	width: 360px;
+	height: 250px;
+	margin-left: 0.5cm;
+}
+
+#endbutton
+{
+	margin-left: 32%;
+	height: 60px;
+	
+}
+
+
+}

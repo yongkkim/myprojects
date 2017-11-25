@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title id="title" >New Advertisment</ion-title>
+    <ion-buttons end>
+     <div (click)="goNext()">
+     <button *ngIf="!Status" ion-button clear>Next</button>
+    </div>
+   </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <br>
+  <div class="center container" (click)="uploadIMG()">
+    <div class="center uImage"></div>
+    <ion-title> Upload</ion-title>
+  </div>
+  <br>
+  <br>
+  <button *ngIf="!Status" (click)="uploadIMG()" class ="text1" ion-button clear>Change Image?</button>
+</ion-content>
