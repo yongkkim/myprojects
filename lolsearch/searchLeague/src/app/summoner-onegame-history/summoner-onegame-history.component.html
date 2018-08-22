@@ -1,0 +1,19 @@
+<p>
+  summoner-onegame-history
+</p>
+
+<!--ul *ngFor="let h of history?.matches">
+  <li> 
+    {{ h.lane }}
+    {{ h.gameId }}
+    {{ h.champion }}
+  </li>
+</ul-->
+<ul *ngFor = "let m of images; let i = index;">
+	<p *ngIf = "(i % 10) == 0">A list of champions in a game</p>
+	<li><img src = {{m}}/></li>
+</ul>
+<<<<<<< HEAD
+<!--app-champion-stats></app-champion-stats-->
+=======
+>>>>>>> 5c7e29a9b614a085a2485b874a41a1db953dd689

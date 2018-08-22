@@ -1,0 +1,9 @@
+Enter Summoner's Name : <input type = "text" (change) = "backToDefault()" #box (keyup.enter)="onEnter(box.value)">
+Enter Summoner's Name : <input #box (keyup.enter)="onEnter(box.value)">
+<p *ngIf="typed">
+  <img *ngIf = "profileimg" src = {{profileimg}}/>
+  {{heroes?.name}}
+  {{heroes?.summonerLevel}}
+   
+</p>
+<app-summoner-history *ngIf = "heroes != null" [userinfo] = "heroes"></app-summoner-history>

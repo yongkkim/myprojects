@@ -1,0 +1,28 @@
+<p>
+  summoner-history
+</p>
+<<<<<<< HEAD
+<p >
+  <img src = {{info?.profileimg}}/>
+  {{info?.name}}
+  {{info?.summonerLevel}}
+</p>
+<!--ul *ngFor="let h of history?.matches">
+=======
+
+<ul *ngFor="let h of history?.matches">
+>>>>>>> 5c7e29a9b614a085a2485b874a41a1db953dd689
+  <li> 
+    {{ h.lane }}
+    {{ h.gameId }}
+    {{ h.champion }}
+  </li>
+<<<<<<< HEAD
+ </ul-->
+=======
+ </ul>
+>>>>>>> 5c7e29a9b614a085a2485b874a41a1db953dd689
+<div *ngFor = "let m of images">
+<img src = {{m}}/>
+</div>
+<app-summoner-onegame-history *ngIf = "history != null" [info] = "history"></app-summoner-onegame-history>
