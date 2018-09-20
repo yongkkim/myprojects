@@ -1,5 +1,7 @@
 import { Stats } from './stats';
 export interface Detail{
 	stats: Array<Stats>;
+	spell1Id: number;
+	spell2Id: number;
 	championId: number;
 }

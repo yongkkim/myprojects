@@ -19,7 +19,7 @@ export class SummonerService {
   constructor(private  http:  HttpClient) {}
   
   setURL(name: string){
-	 this.apiurl = '/api/lol/summoner/v3/summoners/by-name/' + name + '?api_key=RGAPI-cf0256aa-b524-4a91-9134-3d3404565252';
+	 this.apiurl = '/api/lol/summoner/v3/summoners/by-name/' + name + '?api_key=RGAPI-09a853aa-2d79-4ac0-a027-c4d691a2c504';
   }
   
   getdata(name: string): Observable<LOLUserData>

@@ -5,7 +5,8 @@ import { ChampionStatsService } from './champion-stats.service';
 import { TopTwoTier } from './toptwotier';
 import { Champ } from '../summoner-history/champ';
 import { SummonerHistoryService } from '../summoner-history/summoner-history.service';
-import { interval } from '../../../node_modules/rxjs';
+import { interval, observable, Observable } from '../../../node_modules/rxjs';
+import { TopTwoTiers } from './toptwotiers';
 
 @Component({
   selector: 'app-champion-stats',
@@ -17,44 +18,62 @@ export class ChampionStatsComponent implements OnInit {
   private url: string = 'http://ddragon.leagueoflegends.com/cdn/8.15.1/img/profileicon/';
   private profileimg: string = "";
   private challenger : TopTwoTier;
+  private temp : TopTwoTiers[] = Array<TopTwoTiers>();
   private master : TopTwoTier;
-  private players = new Array<LOLUserData>(); 
-  private keys= new Map();
+  private players: LOLUserData[] = Array<LOLUserData>();
+  private keyss = new Map();
   private champimages: Champ;
-  private interval = interval(5000);
+  private count: number = 0;
+ 
 
   constructor(private summonerService: SummonerService, private championstatsservice : ChampionStatsService, private summonerHistoryService: SummonerHistoryService) { }
 
-  ngOnInit() {
+  ngOnInit() { 
     this.championstatsservice.getChallenger().subscribe(challdata => {
-        this.challenger = challdata;
-        this.challenger.entries.forEach(c => {
-          this.interval.subscribe(() => this.championstatsservice.getdata(c).subscribe(challs => {
-            this.players.push(challs);
-            console.log(challs); 
-        }));
-      });
-            /*this.championstatsservice.getchamp(this.players).subscribe(matches =>{
-              console.log(matches);
-              this.summonerHistoryService.getimage().subscribe(champsinfo => {
-                for(let c of Object.values(champsinfo.data))
-                {
-                  this.keys.set(c.key, [new Map().set("name", c.name), new Map().set("image", c.image.full), new Map().set("frequency", 0)]);
-                }
-                console.log(this.keys);
+      this.challenger = challdata;
+      this.count50();
+          this.championstatsservice.getdata(this.challenger).subscribe(challs => {
+          this.championstatsservice.getchamp(challs, this.count).subscribe(matches =>{
+            this.summonerHistoryService.getimage().subscribe(champsinfo => {
+              for(let c of Object.values(champsinfo.data))
+              {
+                let values = new Map();
+                values.set("frequency", 0);
+                values.set("name", c.name);
+                values.set("image", c.image.full);
+                this.keyss.set(c.key, values);
+              }
+
                 matches.forEach(m =>{
-                  m.matches.forEach(ms =>{
-                    let record = this.keys.get((ms.champion).toString);
-                    record.set("frequency", record.get("frequency") + 1);
-                  })
+                m.matches.forEach(ms =>{
+                let temp = this.keyss.get((ms.champion).toString());
+                temp.set("frequency", temp.get("frequency") + 1);
+                this.keyss.set((ms.champion).toString(),  temp);
                 });
               });
+              //console.log(this.keyss);
             });
-        });*/
+          });
+        });
+      });
+  /*this.championstatsservice.getMaster().subscribe(mastdata => {
+    this.master = mastdata;
+  });*/
+   }
+   count50(){
+    this.challenger.entries.forEach(ff => {
+      if(this.count <= 40)
+      {
+        this.temp.push(ff);
+        this.count++;
+      }
+      else
+      {
+        this.challenger.entries = this.temp;
+        return;
+      }
     });
-    /*this.championstatsservice.getMaster().subscribe(mastdata => {
-      this.master = mastdata;
-    });*/
   }
-
 }
+
+

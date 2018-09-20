@@ -6,6 +6,7 @@ import { SummonerComponent } from './summoner/summoner.component';
 import { SummonerHistoryComponent } from './summoner-history/summoner-history.component';
 import { SummonerOnegameHistoryComponent } from './summoner-onegame-history/summoner-onegame-history.component';
 import { ChampionStatsComponent } from './champion-stats/champion-stats.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ChampionStatsComponent } from './champion-stats/champion-stats.componen
   ],
   imports: [
     BrowserModule,
-	HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

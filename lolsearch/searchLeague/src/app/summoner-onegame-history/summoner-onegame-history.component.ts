@@ -1,8 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { debounceTime } from 'rxjs/operators';
 import { SummonerOnegameHistoryService } from './summoner-onegame-history.service';
 import { SummonerHistoryService } from '../summoner-history/summoner-history.service';
-import { LOLUserData } from '../summoner/lolinterface';
 import { Match } from '../summoner-history/match';
 import { Champ } from '../summoner-history/champ';
 import { Player } from './player';
@@ -16,7 +14,7 @@ export class SummonerOnegameHistoryComponent implements OnInit {
 
   private champimages: Champ;
   private images: string[] = [];
-  private url: string = 'http://ddragon.leagueoflegends.com/cdn/8.15.1/img/champion/';
+  private url: string = 'http://ddragon.leagueoflegends.com/cdn/8.17.1/img/champion/';
   private typed : boolean = false;
   private players: Player[];
   @Input('info') private matchinfo: Match;
