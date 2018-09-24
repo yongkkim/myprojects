@@ -25,7 +25,7 @@ export class SummonerOnegameHistoryService {
 
   setURL(gameid: string)
   {
-	 this.apiurl = "/api/lol/match/v3/matches/" + gameid + "?api_key=RGAPI-09a853aa-2d79-4ac0-a027-c4d691a2c504";
+	 this.apiurl = "/api/lol/match/v3/matches/" + gameid + "?api_key=RGAPI-cd1010f6-bd0d-4453-85b7-51b54014ae26";
   }
   
   getdata(match: Match): Observable<Player[]>

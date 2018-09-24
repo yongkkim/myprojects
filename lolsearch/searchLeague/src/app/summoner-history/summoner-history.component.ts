@@ -40,16 +40,14 @@ export class SummonerHistoryComponent implements OnInit{
   private champimages: Champ;
 	private images: Array<string[]> = [];
 	private memberimages: Array<Array<string[]>> = [];
-	private spellinfo: Array<string[]> = [];
 	private players: Player[];
 	private url: string = 'http://ddragon.leagueoflegends.com/cdn/8.15.1/img/champion/';
 	private spellurl: string = 'http://ddragon.leagueoflegends.com/cdn/8.15.1/img/spell/';
 	private spell: Spell;
-	private spellcount: number = 0;
-  private keys= new Map();
+  	private keys= new Map();
 	private history: Match;
 	private clicked: Array<string[]> = [];
-  @Input('userinfo') private info: LOLUserData;
+  	@Input('userinfo') private info: LOLUserData;
   
   constructor(private summonerHistoryService: SummonerHistoryService, private summonerOneGameHistoryService: SummonerOnegameHistoryService) {}
   
@@ -158,8 +156,19 @@ export class SummonerHistoryComponent implements OnInit{
 
 		return this.clicked;
 	}
-	getspell() : string[]{
-		if(this.spellcount != this.spellinfo.length -1)
-			return this.spellinfo[this.spellcount++];
+	pop(desc: string, event){
+		//let target = event.srcElement.attributes.id || event.currentTarget.id;
+		let ds = document.getElementById("desc");
+		let z = document.getElementById(event.target.id);
+		let pos = z.getBoundingClientRect();
+		let newpos = "translate(" + event.screenX + "px, " + event.screenY + "px)";
+		console.log(newpos);
+		ds.style.display = "block";
+		ds.innerHTML = desc;
+		ds.style.transform = newpos;
+	}
+	out(){
+		let ds = document.getElementById("desc");
+		ds.style.display = "none";
 	}
 }

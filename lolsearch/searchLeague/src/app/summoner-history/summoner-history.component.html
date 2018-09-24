@@ -8,20 +8,17 @@
 </p>
 <div *ngFor = "let m of images; index as i">
 <button id = {{m[m.length-1]}} (click) = "toggle(m[m.length-1], i)"><img src = {{m[0]}}/></button>
-  <div class = "container" id = {{i}}>
-    <div class = "row">
-      <div class=  "col-6">
-        <ul class= "list-group flex-wrap">
-          <li *ngFor = "let z of data(m[m.length-1]) | slice: 0 : 10; index as j" class = "list-group-item">
+  <div class = "col-12 container" id = {{i}}>
+        <ul class= "list-unstyled row">
+          <li *ngFor = "let z of data(m[m.length-1]) | slice: 0 : 10; index as j" class = "list-item col-6">
             <img id = "champ" src = {{z[0]}}/>
-            <div id = "spell">
-              <img title = {{z[1].description}} src = {{z[1].spellurl}}/>
-              <img title = {{z[2].description}} src = {{z[2].spellurl}}/>
+            <div id = "spells">
+              <img id = "spell1" (mouseover)="pop(z[1].description, $event)" (mouseout) = "desc = out()" src = {{z[1].spellurl}}/>
+              <img id = "spell2" (mouseover)="pop(z[2].description, $event)" (mouseout) = "desc = out()" src = {{z[2].spellurl}}/>
+              <div id = "desc"></div>
             </div>
           </li>
         </ul>
-      </div>
-    </div>
-</div>
+  </div>
   <br/>
 </div>
