@@ -1,6 +1,6 @@
 import { Stats } from './stats';
 export interface Detail{
-	stats: Array<Stats>;
+	stats: Stats;
 	spell1Id: number;
 	spell2Id: number;
 	championId: number;

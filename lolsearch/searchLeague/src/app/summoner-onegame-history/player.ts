@@ -7,4 +7,5 @@ export interface Player{
 	participantIdentities: Array<Players>;
 	teams: Array<Team>;
 	participants: Array<Detail>;
+	gameDuration: number;
 }

@@ -8,6 +8,7 @@ export interface Stats{
     item5: number;
     kills: number;
     deaths: number;
+    assists: number;
     totalMinionsKilled: number;
     goldEarned: number;
 }

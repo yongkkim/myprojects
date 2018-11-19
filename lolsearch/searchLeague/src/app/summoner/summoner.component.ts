@@ -13,7 +13,7 @@ export class SummonerComponent/*implements OnInit*/{
 
   private typed : boolean = false;
   private heroes: LOLUserData;
-  private url: string = 'http://ddragon.leagueoflegends.com/cdn/8.17.1/img/profileicon/';
+  private url: string = 'http://ddragon.leagueoflegends.com/cdn/8.19.1/img/profileicon/';
   private profileimg: string = "";
   constructor(private summonerService: SummonerService) {}
   

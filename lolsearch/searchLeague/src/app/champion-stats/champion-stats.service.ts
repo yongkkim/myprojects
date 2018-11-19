@@ -23,10 +23,10 @@ export class ChampionStatsService {
   constructor(private http : HttpClient) { }
 
   setURL1(name: string){
-    this.apiurl = '/api/lol/summoner/v3/summoners/by-name/' + name + '?api_key=RGAPI-cd1010f6-bd0d-4453-85b7-51b54014ae26';
+    this.apiurl = '/api/lol/summoner/v3/summoners/by-name/' + name + '?api_key=RGAPI-9e1797ad-74e6-43e8-8c65-31be5c6fc29b';
    }
    setURL2(name: string){
-    this.apiurl = '/api/lol/match/v3/matchlists/by-account/' + name + '?api_key=RGAPI-cd1010f6-bd0d-4453-85b7-51b54014ae26';
+    this.apiurl = '/api/lol/match/v3/matchlists/by-account/' + name + '?api_key=RGAPI-9e1797ad-74e6-43e8-8c65-31be5c6fc29b';
   }
    
    getdata(ttt: TopTwoTier): Observable<LOLUserData[]>
@@ -53,13 +53,13 @@ export class ChampionStatsService {
 
    getChallenger(): Observable<TopTwoTier>
    {
-     this.apiurl = '/api/lol/league/v3/challengerleagues/by-queue/RANKED_SOLO_5x5?api_key=RGAPI-cd1010f6-bd0d-4453-85b7-51b54014ae26';
+     this.apiurl = '/api/lol/league/v3/challengerleagues/by-queue/RANKED_SOLO_5x5?api_key=RGAPI-9e1797ad-74e6-43e8-8c65-31be5c6fc29b';
      return this.http.get<TopTwoTier>(this.apiurl, httpOptions).pipe(map(res => res));
    }
     
    getMaster(): Observable<TopTwoTier>
    {
-     this.apiurl = '/api/lol/league/v3/masterleagues/by-queue/RANKED_SOLO_5x5?api_key=RGAPI-cd1010f6-bd0d-4453-85b7-51b54014ae26';
+     this.apiurl = '/api/lol/league/v3/masterleagues/by-queue/RANKED_SOLO_5x5?api_key=RGAPI-9e1797ad-74e6-43e8-8c65-31be5c6fc29b';
      return this.http.get<TopTwoTier>(this.apiurl, httpOptions).pipe(map(res => res));
    }
 }

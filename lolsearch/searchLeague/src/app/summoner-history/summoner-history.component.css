@@ -1,71 +1,203 @@
-.list-item.col-6{
+/* button css */
+div.me{
 	border: 1px solid black;
+	width: 100%;
+	height: 100%;
 }
-.list-item.col-6 img#champ{
+div.me ul.spells{
+	padding: 0;
+	margin-left: 1px;
+	margin-right: 1px;
+}
+div.me ul.spells li.spell{
+	display: inline-block;
+	padding: 0;
+	height: 40px;
+	width: 40px;
+}
+div.me button, div.me button img{
+	display: inline-block;
+	padding: 0;
+}
+/* after click button css */
+ul.history{
+	display: flex;
+	height: 425px;
+	flex-wrap: wrap;
+	flex-direction: column;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+li.onehistory{
+	margin-bottom: 5px;
+}
+.onehistory img.champ{
 	padding: 0;
 	float: left;
 	height: 80px;
 	width: 80px;
 }
-.list-item.col-6 div#spells{
-	display: inline;
-	position: absolute;
+li.onehistory ul.spells{
+	float:left;
+	padding: 0;
+	margin-left: 1px;
+	margin-right: 1px;
 }
-.list-item.col-6 div#spells img{
+
+li.onehistory ul.spells li.spell{
 	display: block;
 	padding: 0;
 	height: 40px;
 	width: 40px;
 }
-button{
-	padding: 0;
+ul.spells li.spell img{
+	height: 100%;
+	width: 100%;
+	vertical-align: top;
 }
-div#desc{
-	position: absolute;
+.onehistory div.items{
+	display: flex;
+	height:80px;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-content: flex-start;
+}
+.onehistory div.items img.item{
+	display: inline-block;
+	padding: 0;
+	height: 40px;
+	width: 40px;
+}
+.onehistory div.items div.item{
+	display: inline-block;
+	padding: 0;
+	height: 40px;
+	width: 40px;
+	box-shadow: inset 0 0 4px #000000;
+}
+.item{
+	vertical-align: top;
+}
+.onehistory div.items img.nothing, div.nothing{
 	display: none;
-	height:auto;
-	width: 150px;
-	background-color: #3B3B3B;
-	color: white;
-	z-index: 10;
 }
 
+
 @media only screen and (min-width: 768px) and (max-width: 1024px){
-	.list-item.col-6 img#champ{
+	ul.history{
+		display: flex;
+		height: 265px;
+		flex-wrap: wrap;
+		flex-direction: column;
+		list-style-type: none;
+		padding: 0;
+		margin: 0;
+	}
+	li.onehistory{
+		margin-bottom: 3px;
+	}
+	.onehistory img.champ{
 		padding: 0;
 		float: left;
 		height: 50px;
 		width: 50px;
 	}
-	.list-item.col-6 div#spells img{
+	li.onehistory ul.spells li.spell{
 		display: block;
 		padding: 0;
 		height: 25px;
 		width: 25px;
 	}
-	button img{
+	div.me ul.spells li.spell{
+		display: block;
 		padding: 0;
-		height: 100px;
-		width: 100px;
+		height: 25px;
+		width: 25px;
+	}
+	li.onehistory div.items{
+		display: flex;
+		height: 50px;
+		flex-direction: column;
+		flex-wrap: wrap;
+		align-content: flex-start;
+	}
+	.onehistory div.items img.item{
+		display: inline-block;
+		padding: 0;
+		height: 25px;
+		width: 25px;
+	}
+	.onehistory div.items div.item{
+		display: inline-block;
+		padding: 0;
+		height: 25px;
+		width: 25px;
+		box-shadow: inset 0px 0px 4px #000000;
+	}
+	div.me button img{
+		padding: 0;
+		height: 80px;
+		width: 80px;
 	}
 }
 @media only screen and (min-width: 375px) and (max-width: 767px){
-	.list-item.col-6 img#champ{
+	li.onehistory{
+		margin-bottom: 2px;
+	}
+	ul.history{
+		display: flex;
+		height: 160px;
+		flex-wrap: wrap;
+		flex-direction: column;
+		list-style-type: none;
+		padding: 0;
+		margin: 0;
+	}
+	.onehistory img.champ{
 		padding: 0;
 		float: left;
 		height: 30px;
 		width: 30px;
 	}
-	.list-item.col-6 div#spells img{
+	li.onehistory ul.spells li.spell{
 		display: block;
 		padding: 0;
 		height: 15px;
 		width: 15px;
 	}
-	button img{
+	div.me ul.spells li.spell{
+		display: block;
 		padding: 0;
-		height: 50px;
-		width: 50px;
+		height: 30px;
+		width: 30px;
+	}
+	div.me button img{
+		padding: 0;
+		height: 60px;
+		width: 60px;
+	}
+	.onehistory div.items{
+		display: flex;
+		height:30px;
+		flex-direction: column;
+		flex-wrap: wrap;
+		padding: 0;
+		margin: 0;
+		align-content: flex-start;
+	}
+	.onehistory div.items img.item{
+		display: inline-block;
+		padding: 0;
+		height: 15px;
+		width: 15px;
+	}
+	.onehistory div.items div.item{
+		display: inline-block;
+		padding: 0;
+		height: 15px;
+		width: 15px;
+		box-shadow: inset 0 0 4px #000000;
 	}
 }
 div.container{

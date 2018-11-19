@@ -15,7 +15,7 @@ import { TopTwoTiers } from './toptwotiers';
 })
 export class ChampionStatsComponent implements OnInit {
   private heroes: LOLUserData;
-  private url: string = 'http://ddragon.leagueoflegends.com/cdn/8.15.1/img/profileicon/';
+  private url: string = 'http://ddragon.leagueoflegends.com/cdn/8.19.1/img/profileicon/';
   private profileimg: string = "";
   private challenger : TopTwoTier;
   private temp : TopTwoTiers[] = Array<TopTwoTiers>();
