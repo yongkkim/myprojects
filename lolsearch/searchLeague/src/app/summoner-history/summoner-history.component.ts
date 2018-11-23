@@ -96,7 +96,6 @@ export class SummonerHistoryComponent implements OnInit{
 			this.summonerOneGameHistoryService.getdata(this.history)
 			.subscribe((play) => {
 				this.players = play;
-				console.log(play);
 				this.players.forEach(player => {
 					let accid: number[] = [];
 					let temp: Array<any[]> = [];
@@ -190,67 +189,35 @@ export class SummonerHistoryComponent implements OnInit{
 		let newtext = document.createElement('p');
 		let pos = event.target.getBoundingClientRect();
 		let newpos;
-		newimg.src = img; 
-		if(half < 5)
-		{
-			newpos = this.setdivpos(half, event.target.parentNode.className, pos.width);
-			//set minimum height and maximum height
-			if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-				newdiv.setAttribute("style", 
-			"position: absolute; height:auto; width: 130px; background-color: #3B3B3B; color: white; z-index: 10; display: block; border-radius: 5px; padding: 5px; opacity: 0.9;");
-			newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 4px;");
-			newimg.setAttribute("style", "height: 40px; width: 40px;");
-			}
-			else if( /iPad/i.test(navigator.userAgent) ) {
-				newdiv.setAttribute("style", 
-			"position: absolute; height:auto; width: 175px; background-color: #3B3B3B; color: white; z-index: 10; display: block; border-radius: 5px; padding: 5px; opacity: 0.9;");
-			newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 7px;");
-			newimg.setAttribute("style", "height: 40px; width: 40px;");
-			}
-			else if(window.innerWidth >= 720 && window.innerWidth <= 1024) 
-			{
-				newdiv.setAttribute("style", 
-			"position: absolute; height:auto; width: 200px; background-color: #3B3B3B; color: white; z-index: 10; display: block; border-radius: 5px; padding: 5px; opacity: 0.9;");
-			newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 9px;");
-			newimg.setAttribute("style", "height: 50px; width: 50px;");
-			}
-			else{
-				newdiv.setAttribute("style", 
-			"position: absolute; height:auto; width: 225px; background-color: #3B3B3B; color: white; z-index: 10; display: block; border-radius: 5px; padding: 5px; opacity: 0.9;");
-			newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 11px;");
-			}
+		newimg.src = img;
+
+		if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			newdiv.setAttribute("style", 
+		"position: absolute; height:auto; width: 130px; background-color: #3B3B3B; color: white; z-index: 10; display: block; border-radius: 5px; padding: 5px; opacity: 0.9;");
+		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 4px;");
+		newimg.setAttribute("style", "height: 40px; width: 40px;");
 		}
-		else if(half >= 5 || half < 10)
+		else if( /iPad/i.test(navigator.userAgent) ) {
+			newdiv.setAttribute("style", 
+		"position: absolute; height:auto; width: 175px; background-color: #3B3B3B; color: white; z-index: 10; display: block; border-radius: 5px; padding: 5px; opacity: 0.9;");
+		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 7px;");
+		newimg.setAttribute("style", "height: 40px; width: 40px;");
+		}
+		else if(window.innerWidth >= 720 && window.innerWidth <= 1024) 
 		{
+			newdiv.setAttribute("style", 
+		"position: absolute; height:auto; width: 200px; background-color: #3B3B3B; color: white; z-index: 10; display: block; border-radius: 5px; padding: 5px; opacity: 0.9;");
+		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 9px;");
+		newimg.setAttribute("style", "height: 50px; width: 50px;");
+		}
+		else{
+			newdiv.setAttribute("style", 
+		"position: absolute; height:auto; width: 225px; background-color: #3B3B3B; color: white; z-index: 10; display: block; border-radius: 5px; padding: 5px; opacity: 0.9;");
+		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 11px;");
+		}
+
 			newpos = this.setdivpos(half, event.target.parentNode.className, pos.width);
 
-			//set minimum height and maximum height
-			if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-				newdiv.setAttribute("style", 
-			"position: absolute; height:auto; width: 130px; background-color: #3B3B3B; color: white; z-index: 10; display: block; border-radius: 5px; padding: 5px; opacity: 0.9;");
-			newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 4px;");
-			newimg.setAttribute("style", "height: 40px; width: 40px;");
-			}
-			else if( /iPad/i.test(navigator.userAgent) ) 
-			{
-				newdiv.setAttribute("style", 
-			"position: absolute; height:auto; width: 175px; background-color: #3B3B3B; color: white; z-index: 10; display: block; border-radius: 5px; padding: 5px; opacity: 0.9;");
-			newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 7px;");
-			newimg.setAttribute("style", "height: 40px; width: 40px;");
-			}
-			else if(window.innerWidth >= 720 && window.innerWidth <= 1024) 
-			{
-				newdiv.setAttribute("style", 
-			"position: absolute; height:auto; width: 200px; background-color: #3B3B3B; color: white; z-index: 10; display: block; border-radius: 5px; padding: 5px; opacity: 0.9;");
-			newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 9px;");
-			newimg.setAttribute("style", "height: 50px; width: 50px;");
-			}
-			else{
-				newdiv.setAttribute("style", 
-			"position: absolute; height:auto; width: 225px; background-color: #3B3B3B; color: white; z-index: 10; display: block; border-radius: 5px; padding: 5px; opacity: 0.9;");
-			newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 11px;");
-			}
-		}
 			newdiv.style.transform = newpos;
 			newdiv.id = "desc";
 			newdiv.appendChild(newimg);
@@ -289,11 +256,15 @@ export class SummonerHistoryComponent implements OnInit{
 	{
 		let pos: string = "";
 		if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-			if(th < 5)
+			if(th == -1)
+			{
+				pos = "translate("+ (width + 30) + "px, " + -(document.querySelector(".champ").clientHeight) +"px)";
+			}
+			else if(th < 5)
 			{
 				if(cname == "spell")
 				{
-					pos = "translate("+ (width + 30) + "px, " + -(document.querySelector(".champ").clientHeight-10) +"px)";
+					pos = "translate("+ (width + 30) + "px, " + -(document.querySelector(".champ").clientHeight) +"px)";
 				}
 				if(cname == "items")
 				{

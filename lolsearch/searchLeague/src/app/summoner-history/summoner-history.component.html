@@ -8,13 +8,15 @@
   {{sample}}
 </p>
 <div *ngFor = "let m of images; index as p">
-  <div class  = "me">
-    <button id = {{m[m.length-1]}} (click) = "toggle(m[m.length-1], p)"><img src = {{m[0]}}/></button>
+  <ul class  = "btnhistory">
+    <li class = "btnonehistory"><button id = {{m[m.length-1]}} (click) = "toggle(m[m.length-1], p)"><img src = {{m[0]}}/></button>
     <ul class = "spells">
-        <li class = "spell"><img (mouseover)="pop(p, initialhis[p][1].spellurl, initialhis[p][1].description, $event)" (mouseout) = "out()" src = {{initialhis[p][1].spellurl}}/></li>
-        <li class = "spell"><img (mouseover)="pop(p, initialhis[p][2].spellurl, initialhis[p][2].description, $event)" (mouseout) = "out()" src = {{initialhis[p][2].spellurl}}/></li>
+      <!-- in function pop, parameter "-1" is only for button pop ups -->
+        <li class = "spell"><img (mouseover)="pop(-1, initialhis[p][1].spellurl, initialhis[p][1].description, $event)" (mouseout) = "out()" src = {{initialhis[p][1].spellurl}}/></li>
+        <li class = "spell"><img (mouseover)="pop(-1, initialhis[p][2].spellurl, initialhis[p][2].description, $event)" (mouseout) = "out()" src = {{initialhis[p][2].spellurl}}/></li>
     </ul>
-  </div>
+    </li>
+  </ul>
   <div class = "col-12 container" id = {{p}}>
       <!--label for each column-->  
         <ul class= "history">
