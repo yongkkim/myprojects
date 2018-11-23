@@ -258,7 +258,7 @@ export class SummonerHistoryComponent implements OnInit{
 		if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 			if(th == -1)
 			{
-				pos = "translate("+ (width + 30) + "px, " + -(document.querySelector(".champ").clientHeight) +"px)";
+				pos = "translate("+ (width + 30) + "px, " + -(document.querySelector(".btnonehistory").clientHeight -10) +"px)";
 			}
 			else if(th < 5)
 			{
@@ -284,7 +284,11 @@ export class SummonerHistoryComponent implements OnInit{
 			}
 		}
 		else if(/iPad/i.test(navigator.userAgent) ) {
-			if(th < 5)
+			if(th == -1)
+			{
+				pos = "translate("+ (width + 30) + "px, " + -(document.querySelector(".btnonehistory").clientHeight -10) +"px)";
+			}
+			else if(th < 5)
 			{
 				if(cname == "spell")
 				{
@@ -309,7 +313,11 @@ export class SummonerHistoryComponent implements OnInit{
 		}
 		else if(window.innerWidth >= 720 && window.innerWidth <= 1024) 
 		{
-			if(th < 5)
+			if(th == -1)
+			{
+				pos = "translate("+ (width + 30) + "px, " + -(document.querySelector(".btnonehistory").clientHeight -10) +"px)";
+			}
+			else if(th < 5)
 			{
 				if(cname == "spell")
 				{
@@ -333,7 +341,11 @@ export class SummonerHistoryComponent implements OnInit{
 			}
 		}
 		else{
-			if(cname == "spell")
+			if(th == -1)
+			{
+				pos = "translate("+ (width + 30) + "px, " + -(document.querySelector(".btnonehistory").clientHeight) +"px)";
+			}
+			else if(cname == "spell")
 			{
 				pos = "translate("+ (width + 50) + "px, " + -(document.querySelector(".champ").clientHeight-30) +"px)";
 			}
