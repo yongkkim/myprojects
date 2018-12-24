@@ -18,21 +18,21 @@ export class SummonerComponent/*implements OnInit*/{
   constructor(private summonerService: SummonerService) {}
   
   getHeroes(name: string): void {
-    this.summonerService.getdata(name)
-	.pipe(debounceTime(500)).subscribe(hero => 
-	{
-		this.heroes = hero;
-		this.heroes.profileimg = this.url + this.heroes.profileIconId + ".png";
-	});
+      this.summonerService.getdata(name)
+    .pipe(debounceTime(500)).subscribe(hero => 
+    {
+      this.heroes = hero;
+      this.heroes.profileimg = this.url + this.heroes.profileIconId + ".png";
+    });
   }
   onEnter(value: string) {
-	if(value.length != 0){
-		this.typed = true;
-		if(this.typed)
-		{
-			this.getHeroes(value);
-		}
-	}
+    if(value.length != 0){
+      this.typed = true;
+      if(this.typed)
+      {
+        this.getHeroes(value);
+      }
+    }
   }
   backToDefault(){
 	this.heroes = null;

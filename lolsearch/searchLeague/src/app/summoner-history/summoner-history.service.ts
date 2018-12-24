@@ -22,7 +22,7 @@ export class SummonerHistoryService {
   constructor(private  http:  HttpClient) {}
   
   setURL(id: string){
-	 this.apiurl = '/api/lol/match/v3/matchlists/by-account/' + id + '?beginIndex=0&endIndex=5&api_key=RGAPI-bd61c363-9d61-4bea-9d1d-460981304f8d';
+	 this.apiurl = '/api/lol/match/v3/matchlists/by-account/' + id + '?beginIndex=0&endIndex=10&api_key=RGAPI-03df762a-e2d8-48c6-b7cb-14b947424b69';
   }
   getdata(id: string): Observable<Match>
   {

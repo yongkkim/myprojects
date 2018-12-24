@@ -10,6 +10,8 @@ import { trigger, state, style, transition,	animate, group, query, stagger, keyf
 } from '@angular/animations';
 import { Item } from './item';
 import { Spells } from './spells';
+import { environment } from '../../environments/environment';
+
 
 @Component({
   selector: 'app-summoner-history',
@@ -57,6 +59,7 @@ export class SummonerHistoryComponent implements OnInit{
 	private history: Match;
 	private clicked: Array<string[]> = [];
 	private initialhis : Array<string[]> = [];
+	private deviceType : string;
   	@Input('userinfo') private info: LOLUserData;
   
   constructor(private elementRef:ElementRef, private summonerHistoryService: SummonerHistoryService, private summonerOneGameHistoryService: SummonerOnegameHistoryService) {}
@@ -124,21 +127,24 @@ export class SummonerHistoryComponent implements OnInit{
 						temp2.push(this.finditem(igs.stats.item5));
 						temp2.push(this.finditem(igs.stats.item6));
 						//kda
-						kda = igs.stats.kills.toString() + "/" + igs.stats.assists.toString() + "/" + igs.stats.deaths.toString();
+						kda = igs.stats.kills.toString() + "/" + igs.stats.assists.toString() + "/" 
+						+ igs.stats.deaths.toString();
 						temp2.push(kda);
+						temp2.push(((igs.stats.kills + igs.stats.assists) / igs.stats.deaths).toFixed(2) + ":1 KDA");
 						//minions
 						temp2.push(igs.stats.totalMinionsKilled);
 						//money earned
-						temp2.push(igs.stats.goldEarned);
+						temp2.push((igs.stats.goldEarned / 1000).toFixed(1) + "k");
 						temp.push(temp2);
 						if(acid == this.info.accountId)
 						{
+							temp2.push(player.gameMode);
 							me = temp2;
 						}
 						//this.initialhis.push(temp2);
-
 					});
 					//add info to initialhis for list of history
+
 					this.initialhis.push(me);
 					let gameid: string[] = []
 					gameid.push((player.gameId).toString())
@@ -154,21 +160,39 @@ export class SummonerHistoryComponent implements OnInit{
 		this.getHistory(this.info.accountId.toString());
 	}
 
-	toggle(gid : string, n: string){//where n is order number of li tag
-				let div = document.getElementById(n);
-				let btn = document.getElementById(gid);
-				if(div.getAttribute("value") == "yes")
-				{
-					div.style.display = "none";
-					div.setAttribute("value", "no");
-					btn.blur();
-				}
-				else
-				{
-					div.style.display = "block";
-					div.setAttribute("value", "yes");
-					btn.scrollIntoView();
-				}
+	toggle(gid : string, n: string, event){//where n is order number of li tag
+		if(this.deviceType == "smartphone" && (event.target.tagName == "BUTTON" || event.target.tagName == "I"))
+		{
+			event.stopPropagation();	
+			let div = document.getElementById(n);
+			if(div.getAttribute("value") == "yes")
+			{
+				div.style.display = "none";
+				div.setAttribute("value", "no");
+			}
+			else
+			{
+				div.style.display = "block";
+				div.setAttribute("value", "yes");
+			}
+		}
+		else if(this.deviceType == "desktop")
+		{
+			let div = document.getElementById(n);
+			let li = document.getElementById(gid);
+			if(div.getAttribute("value") == "yes")
+			{
+				div.style.display = "none";
+				div.setAttribute("value", "no");
+				li.blur();
+			}
+			else
+			{
+				div.style.display = "block";
+				div.setAttribute("value", "yes");
+				li.scrollIntoView();
+			}
+		}
 	}
 	data(gid : string) : Array<string[]>
 	{
@@ -185,45 +209,48 @@ export class SummonerHistoryComponent implements OnInit{
 	}
 	pop(half: number, img: string, desc: string, event){
 		let newdiv = document.createElement('div');
+		newdiv.id = "desc";
 		let newimg = document.createElement('img');
+		newimg.src = img;
 		let newtext = document.createElement('p');
+		newtext.id = "text";
 		let pos = event.target.getBoundingClientRect();
 		let newpos;
-		newimg.src = img;
+		
 
 		if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 			newdiv.setAttribute("style", 
-		"position: absolute; height:auto; width: 130px; background-color: #3B3B3B; color: white; z-index: 10; display: block; border-radius: 5px; padding: 5px; opacity: 0.9;");
-		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 4px;");
-		newimg.setAttribute("style", "height: 40px; width: 40px;");
+		"position: fixed; height:auto; width: 150px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;");
+		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 2px;");
+		newimg.setAttribute("style", "height: 30px; width: 30px;");
 		}
-		else if( /iPad/i.test(navigator.userAgent) ) {
+		/*else if( /iPad/i.test(navigator.userAgent) ) {
 			newdiv.setAttribute("style", 
-		"position: absolute; height:auto; width: 175px; background-color: #3B3B3B; color: white; z-index: 10; display: block; border-radius: 5px; padding: 5px; opacity: 0.9;");
+		"position: absolute; height:auto; width: 175px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;");
 		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 7px;");
 		newimg.setAttribute("style", "height: 40px; width: 40px;");
 		}
 		else if(window.innerWidth >= 720 && window.innerWidth <= 1024) 
 		{
 			newdiv.setAttribute("style", 
-		"position: absolute; height:auto; width: 200px; background-color: #3B3B3B; color: white; z-index: 10; display: block; border-radius: 5px; padding: 5px; opacity: 0.9;");
+		"position: absolute; height:auto; width: 200px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;");
 		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 9px;");
 		newimg.setAttribute("style", "height: 50px; width: 50px;");
-		}
+		}*/
 		else{
 			newdiv.setAttribute("style", 
-		"position: absolute; height:auto; width: 225px; background-color: #3B3B3B; color: white; z-index: 10; display: block; border-radius: 5px; padding: 5px; opacity: 0.9;");
+		"position: fixed; height:auto; width: 225px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;");
 		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 11px;");
 		}
-
-			newpos = this.setdivpos(half, event.target.parentNode.className, pos.width);
-
-			newdiv.style.transform = newpos;
-			newdiv.id = "desc";
-			newdiv.appendChild(newimg);
+			if(half != -2){
+				newdiv.appendChild(newimg);
+			}
 			newtext.innerHTML = desc;
 			newdiv.appendChild(newtext);
 			event.target.parentElement.appendChild(newdiv);
+			newdiv.style.display = "block";
+			newpos = this.setdivpos(half, event.target.className, pos.width, pos.top, pos.bottom);
+			newdiv.style.transform = newpos;
 	}
 	out(){
 		let selected = document.getElementById("desc");
@@ -252,112 +279,86 @@ export class SummonerHistoryComponent implements OnInit{
 			return "nothing";
 		}
 	}
-	setdivpos(th: number, cname: string, width: number) : string
+	setdivpos(th: number, cname: string, width: number, targettop: number, targetbot: number) : string //prevent popup window from going out of a page
 	{
+		let pop = document.getElementById("desc");
+		let poptext = document.getElementById("text");
+		let poppos = pop.getBoundingClientRect();
 		let pos: string = "";
+
 		if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-			if(th == -1)
+			if(th == -2)
 			{
-				pos = "translate("+ (width + 30) + "px, " + -(document.querySelector(".btnonehistory").clientHeight -10) +"px)";
+				pop.style.top = (targetbot - 30) + "px";
+				poptext.style.fontSize = "10px";
+				poptext.style.textAlign = "center";
+				pop.style.width = "70px";
+				pop.style.padding = "3px";
+				
 			}
-			else if(th < 5)
+			else if(th == -1)
 			{
-				if(cname == "spell")
-				{
-					pos = "translate("+ (width + 30) + "px, " + -(document.querySelector(".champ").clientHeight) +"px)";
+				pop.style.width = "130px";
+				if((targetbot + poppos.height) > window.innerHeight - 80){
+					let newtop = targettop - (poppos.height + 5);
+					pop.style.top = newtop.toString() + "px";
+					pos = "translateX("+ width + "px)";	
 				}
-				if(cname == "items")
-				{
-					pos = "translate("+ (width + 60) + "px, " + -(document.querySelector(".champ").clientHeight-20) +"px)";
-				}
+				else{
+					pop.style.top = targetbot.toString() + "px";
+					pos = "translateX("+ width + "px)";
+				}		
 			}
-			else if(th >= 5 || th < 10)
+			else
 			{
-				if(cname == "spell")
-				{
-					pos = "translate("+ -155 + "px, " + -(document.querySelector(".champ").clientHeight-10) +"px)";
+				if((targetbot + poppos.height) > window.innerHeight - 80){
+					let newtop = targettop - (poppos.height + 5);
+					pop.style.top = newtop.toString() + "px";
+					pos = "translateX("+ width + "px)";	
 				}
-				if(cname == "items")
-				{
-					pos = "translate("+ -175 + "px, " + -(document.querySelector(".champ").clientHeight-20) +"px)";
-				}
-			}
-		}
-		else if(/iPad/i.test(navigator.userAgent) ) {
-			if(th == -1)
-			{
-				pos = "translate("+ (width + 30) + "px, " + -(document.querySelector(".btnonehistory").clientHeight -10) +"px)";
-			}
-			else if(th < 5)
-			{
-				if(cname == "spell")
-				{
-					pos = "translate("+ (width + 10) + "px, " + -(document.querySelector(".champ").clientHeight-20) +"px)";
-				}
-				if(cname == "items")
-				{
-					pos = "translate("+ (width + 80) + "px, " + -(document.querySelector(".champ").clientHeight-40) +"px)";
-				}
-			}
-			else if(th >= 5 || th < 10)
-			{
-				if(cname == "spell")
-				{
-					pos = "translate("+ -190 + "px, " + -(document.querySelector(".champ").clientHeight-20) +"px)";
-				}
-				if(cname == "items")
-				{
-					pos = "translate("+ -210 + "px, " + -(document.querySelector(".champ").clientHeight-40) +"px)";
+				else{
+					pop.style.top = targetbot.toString() + "px";
+					pos = "translateX("+ width + "px)";
 				}
 			}
 		}
-		else if(window.innerWidth >= 720 && window.innerWidth <= 1024) 
-		{
-			if(th == -1)
+		else{        //Desktop
+			if(th == -2)
 			{
-				pos = "translate("+ (width + 30) + "px, " + -(document.querySelector(".btnonehistory").clientHeight -10) +"px)";
+				pop.style.top = (targetbot - 50) + "px";
+				poptext.style.fontSize = "15px";
+				poptext.style.textAlign = "center";
+				pop.style.width = "100px";
+				pop.style.padding = "6px";
 			}
-			else if(th < 5)
+			else
 			{
-				if(cname == "spell")
-				{
-					pos = "translate("+ (width + 30) + "px, " + -(document.querySelector(".champ").clientHeight-20) +"px)";
+				if((targetbot + poppos.height) > window.innerHeight - 80){
+					let newtop = targettop - (poppos.height + 5);
+					pop.style.top = newtop.toString() + "px";
+					pos = "translateX("+ width + "px)";	
 				}
-				if(cname == "items")
-				{
-					pos = "translate("+ (width + 90) + "px, " + -(document.querySelector(".champ").clientHeight-40) +"px)";
+				else{
+					if(cname == "spellimg"){
+						pop.style.top = targettop.toString() + "px";
+					}
+					else if(cname == "item ng-tns-c2-0 ng-star-inserted"){
+						pop.style.top = targetbot.toString() + "px";
+					}
+					pos = "translateX("+ width + "px)";
 				}
-			}
-			else if(th >= 5 || th < 10)
-			{
-				if(cname == "spell")
-				{
-					pos = "translate("+ -260 + "px, " + -(document.querySelector(".champ").clientHeight-20) +"px)";
-				}
-				if(cname == "items")
-				{
-					pos = "translate("+ -280 + "px, " + -(document.querySelector(".champ").clientHeight-40) +"px)";
-				}
-			}
-		}
-		else{
-			if(th == -1)
-			{
-				pos = "translate("+ (width + 30) + "px, " + -(document.querySelector(".btnonehistory").clientHeight) +"px)";
-			}
-			else if(cname == "spell")
-			{
-				pos = "translate("+ (width + 50) + "px, " + -(document.querySelector(".champ").clientHeight-30) +"px)";
-			}
-			if(cname == "items")
-			{
-				pos = "translate("+ (width + 130) + "px, " + -(document.querySelector(".champ").clientHeight-60) +"px)";
 			}
 		}
 		return pos;
 	}
-	setbtimg(img: string) {
-		const styles = {'background-image' : img};
-		return styles;
-	}	
+	findtype() : boolean {
+		if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			this.deviceType = "smartphone";
+			return true;
+		}
+		else{
+			this.deviceType = "desktop";
+			return false;
+		}
+	}
 }

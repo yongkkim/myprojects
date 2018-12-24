@@ -7,6 +7,7 @@ import { SummonerHistoryComponent } from './summoner-history/summoner-history.co
 import { SummonerOnegameHistoryComponent } from './summoner-onegame-history/summoner-onegame-history.component';
 import { ChampionStatsComponent } from './champion-stats/champion-stats.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     HttpClientModule,
-    BrowserAnimationsModule 
+    BrowserAnimationsModule ,
+    AngularFontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
