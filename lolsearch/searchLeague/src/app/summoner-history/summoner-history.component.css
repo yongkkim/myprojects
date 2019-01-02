@@ -84,10 +84,32 @@ ul.history{
 	margin: 0;
 }
 li.onehistory{
-	margin-bottom: 5px;
-	border: 0.5px solid grey 
+	display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 5px;
+	border: 0.5px solid grey;
+	margin-right: 5px;
 }
-.onehistory img.champ{
+li.onehistory div.forone{
+	display: flex;
+    align-items: center;
+	justify-content: center;
+	text-align: center;
+    float: right;
+	height: 60px;
+	flex: 2;
+}
+li.onehistory div.forone div.updownforone, div.kdaforone, div.minionforone, div.moneyforone{
+	flex: 1;
+}
+li.onehistory div.forone div.updownforone, div.kdaforone p, div.minionforone p, div.moneyforone p{
+	margin: 0;
+	color: black;
+	font-size: 12px;
+}
+li.onehistory img.champ{
 	padding: 0;
 	float: left;
 	height: 60px;
@@ -106,32 +128,26 @@ li.onehistory ul.spells li.spell{
 	height: 30px;
     width: 30px;
 }
-li.onehistory ul.spells li.spell img{
-	float: left;
-	display: block;
-	padding: 0;
-	margin: 0;
-	border: none;
-}
 ul.spells li.spell img{
 	height: 100%;
 	width: 100%;
 	vertical-align: top;
 }
-.onehistory div.items{
+li.onehistory div.items{
 	display: flex;
 	height: 60px;
 	flex-direction: column;
 	flex-wrap: wrap;
 	align-content: flex-start;
+	flex: 1;
 }
-.onehistory div.items img.item{
+li.onehistory div.items img.item{
 	display: inline-block;
 	padding: 0;
 	height: 30px;
     width: 30px;
 }
-.onehistory div.items div.item{
+li.onehistory div.items div.item{
 	display: inline-block;
 	padding: 0;
 	height: 30px;
@@ -141,7 +157,7 @@ ul.spells li.spell img{
 .item{
 	vertical-align: top;
 }
-.onehistory div.items img.nothing, div.nothing{
+li.onehistory div.items img.nothing, div.nothing{
 	display: none;
 }
 
@@ -171,16 +187,51 @@ button{
 	float: right;
 	z-index: 30;
 }
-ul#columnName{
-	list-style-type: none;
-	padding-left: 15px;
+div.column{
+	height: 25px;
 	margin: 0;
 }
-ul#columnName li{
+ul#columnName{
+	float: left;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+ul#columnName2{
+	display: flex;
+	list-style-type: none;
+	padding: 0;
+	margin-right: 5px;
+	justify-content: space-between;
+}
+ul#columnName li, ul#columnName2 li{
 	position: relative;
 	display: inline-block;
-	width: 25px;
 	height: 25px;
+}
+ul#columnName2 li{
+	text-align: center;
+}
+ul#columnName li{
+	width: 25px;
+}
+ul#columnName2 li.updowni, li.kdai, li.goldi, li.minioni{
+	flex: 1
+}
+ul#columnName2 li.updowni img, li.kdai img, li.goldi img, li.minioni img{
+	padding-left: 13px;
+}
+ul#columnName li#champi{
+	margin: 0 17.5px 0 17.5px;
+}
+ul#columnName li#spelli{
+    margin: 0 0.5px 0 6.5px;
+}
+ul#columnName li#itemi{
+	margin: 0 42.5px 0 52.5px;
+}
+ul#columnName2 li.updowni img{
+	height: 75%;
 }
 ul#columnName li img{
 	position: absolute;
@@ -208,7 +259,7 @@ ul#columnName li img{
 	li.onehistory{
 		margin-bottom: 3px;
 	}
-	.onehistory img.champ{
+	li.onehistory img.champ{
 		height: 50px;
 		width: 50px;
 	}
@@ -219,11 +270,11 @@ ul#columnName li img{
 	li.onehistory div.items{
 		height: 50px;
 	}
-	.onehistory div.items img.item{
+	li.onehistory div.items img.item{
 		height: 25px;
 		width: 25px;
 	}
-	.onehistory div.items div.item{
+	li.onehistory div.items div.item{
 		height: 25px;
 		width: 25px;
 		box-shadow: inset 0px 0px 4px #000000;
@@ -232,7 +283,7 @@ ul#columnName li img{
 		height: 60px;
 	}
 }
-@media only screen and (min-width: 375px) and (max-width: 767px){
+@media only screen and (min-width: 375px) and (max-width: 1024px){
 	ul.btnhistory{
 		width: 100%;
 	}
@@ -268,6 +319,10 @@ ul#columnName li img{
 	li.btnonehistory div#kda p, div#gamemode p, div#minion p, div#money p{
 		font-size: 3px;
 	}
+	ul#columnName li{
+		width: 15px;
+		height: 15px;
+	}
 	li.onehistory{
 		margin-bottom: 2px;
 		width: 100%;
@@ -277,7 +332,7 @@ ul#columnName li img{
 		width: 100%;
 		height: 50%;
 	}
-	.onehistory img.champ{
+	li.onehistory img.champ{
 		height: 30px;
 		width: 30px;
 	}
@@ -285,14 +340,14 @@ ul#columnName li img{
 		height: 15px;
 		width: 15px;
 	}
-	.onehistory div.items{
+	li.onehistory div.items{
 		height:30px;
 	}
-	.onehistory div.items img.item{
+	li.onehistory div.items img.item{
 		height: 15px;
 		width: 15px;
 	}
-	.onehistory div.items div.item{
+	li.onehistory div.items div.item{
 		height: 15px;
 		width: 15px;
 		box-shadow: inset 0 0 4px #000000;

@@ -25,7 +25,7 @@
       </div>
       <div id = "minion" >
           <p>{{initialhis[p][12]}}</p>
-        </div>
+      </div>
       <div class = "items">
         <div class = "item" *ngIf = "initialhis[p][3] == 'nothing'"></div>
         <img class = "item" *ngIf = "initialhis[p][3] != 'nothing'" (mouseover)="pop(-1, initialhis[p][3].itemsrc, initialhis[p][3].description, $event)" (mouseout) = "out()" src = {{initialhis[p][3].itemsrc}}/>
@@ -50,14 +50,19 @@
   </ul>
   <div class = "container" id = {{p}}>
         <ul class= "history">
-          <ul id = "columnName">
+          <div class = "column">
+            <ul id = "columnName">
               <li id = "champi"><img src = "{{champicon}}"/></li>
               <li id = "spelli"><img src = "{{spellicon}}"/></li>
-              <li id = "kdai"><img src = "{{kdaicon}}"/></li>
-              <li id = "minioni"><img src = "{{minionicon}}"/></li>
               <li id = "itemi"><img src = "{{itemicon}}"/></li>
-              <li id = "goldi"><img src = "{{goldicon}}"/></li>
-            </ul>  
+            </ul>
+            <ul id = "columnName2">
+                <li class = "updowni"><img src = "..\..\assets\updown.png"/></li>
+                <li class = "kdai"><img src = "{{kdaicon}}"/></li>
+                <li class = "minioni"><img src = "{{minionicon}}"/></li>
+                <li class = "goldi"><img src = "{{goldicon}}"/></li>
+            </ul>
+          </div>  
           <li *ngFor = "let z of data(m[m.length-1]) | slice: 0 : 5; index as j" class = "onehistory">
             <img class = "champ" src = {{z[0]}}/>
             <ul class = "spells">
@@ -80,15 +85,34 @@
               <div class = "item" *ngIf = "z[9] == 'nothing'"></div>
               <img class = "item" *ngIf = "z[9] != 'nothing'" (mouseover)="pop(j, z[9].itemsrc, z[9].description, $event)" (mouseout) = "out()" src = {{z[9].itemsrc}}/>
             </div>
+            <div class = "forone">
+              <div class = "kdaforone" >
+                <p>50%</p>
+              </div>
+              <div class = "kdaforone" >
+                <p (mouseover)="pop(-3, '', z[11], $event)" (mouseout) = "out()">{{z[10]}}</p>
+              </div>
+              <div class = "minionforone" >
+                  <p>{{z[12]}}</p>
+              </div>
+              <div class = "moneyforone" >
+                <p>{{z[13]}}</p>
+              </div>
+            </div>
           </li>
-          <ul id = "columnName">
+          <div class = "column">
+            <ul id = "columnName">
               <li id = "champi"><img src = "{{champicon}}"/></li>
               <li id = "spelli"><img src = "{{spellicon}}"/></li>
-              <li id = "kdai"><img src = "{{kdaicon}}"/></li>
-              <li id = "minioni"><img src = "{{minionicon}}"/></li>
               <li id = "itemi"><img src = "{{itemicon}}"/></li>
-              <li id = "goldi"><img src = "{{goldicon}}"/></li>
-            </ul>  
+            </ul>
+            <ul id = "columnName2">
+                <li class = "updowni"><img src = "..\..\assets\updown.png"/></li>
+                <li class = "kdai"><img src = "{{kdaicon}}"/></li>
+                <li class = "minioni"><img src = "{{minionicon}}"/></li>
+                <li class = "goldi"><img src = "{{goldicon}}"/></li>
+            </ul>
+          </div>   
           <li *ngFor = "let z of data(m[m.length-1]) | slice: 5 : 10; index as j" class = "onehistory">
               <img class = "champ" src = {{z[0]}}/>
               <ul class = "spells">
@@ -110,6 +134,20 @@
                 <img class = "item" *ngIf = "z[8] != 'nothing'" (mouseover)="pop(j, z[8].itemsrc, z[8].description, $event)" (mouseout) = "out()" src = {{z[8].itemsrc}}/>
                 <div class = "item" *ngIf = "z[9] == 'nothing'"></div>
                 <img class = "item" *ngIf = "z[9] != 'nothing'" (mouseover)="pop(j, z[9].itemsrc, z[9].description, $event)" (mouseout) = "out()" src = {{z[9].itemsrc}}/>
+              </div>
+              <div class = "forone">
+                <div class = "kdaforone" >
+                  <p>50%</p>
+                </div>
+                <div class = "kdaforone" >
+                  <p (mouseover)="pop(-3, '', z[11], $event)" (mouseout) = "out()">{{z[10]}}</p>
+                </div>
+                <div class = "minionforone" >
+                    <p>{{z[12]}}</p>
+                </div>
+                <div class = "moneyforone" >
+                  <p>{{z[13]}}</p>
+                </div>
               </div>
             </li>
         </ul>

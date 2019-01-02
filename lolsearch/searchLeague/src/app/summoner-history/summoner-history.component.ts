@@ -242,7 +242,7 @@ export class SummonerHistoryComponent implements OnInit{
 		"position: fixed; height:auto; width: 225px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;");
 		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 11px;");
 		}
-			if(half != -2){
+			if(half != -2 && half != -3){
 				newdiv.appendChild(newimg);
 			}
 			newtext.innerHTML = desc;
@@ -287,7 +287,16 @@ export class SummonerHistoryComponent implements OnInit{
 		let pos: string = "";
 
 		if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-			if(th == -2)
+			if(th == -3)        //Desktop
+			{
+				pop.style.top = (targetbot - 50) + "px";
+				poptext.style.fontSize = "9px";
+				poptext.style.textAlign = "center";
+				poptext.style.textAlign = "center";
+				pop.style.width = "70px";
+				pop.style.padding = "3px";			
+			}
+			else if(th == -2)
 			{
 				pop.style.top = (targetbot - 30) + "px";
 				poptext.style.fontSize = "10px";
@@ -322,8 +331,16 @@ export class SummonerHistoryComponent implements OnInit{
 				}
 			}
 		}
-		else{        //Desktop
-			if(th == -2)
+		else{
+			if(th == -3)        //Desktop
+			{
+				pop.style.top = (targetbot - 50) + "px";
+				poptext.style.fontSize = "13px";
+				poptext.style.textAlign = "center";
+				pop.style.width = "90px";
+				pop.style.padding = "4px";				
+			}
+			else if(th == -2)
 			{
 				pop.style.top = (targetbot - 50) + "px";
 				poptext.style.fontSize = "15px";
