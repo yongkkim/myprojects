@@ -7,10 +7,10 @@
     <tr>
       <td><img id = "profileImg" src = {{info?.profileimg}}/></td>
       <td id = "infogroup" *ngIf = "info.rank">
-            <tr><td class = "proinfos">LEVEL : <span>{{info?.summonerLevel}}</span></td></tr>
-            <tr><td class = "proinfos">Winning Rate (10 games) : <span>{{winRate}}</span></td></tr>
-            <tr><td class = "proinfos">Rank : <span>{{info?.rank[1]?.tier}} {{info?.rank[1]?.rank}} / 
-            {{info?.rank[1]?.leaguePoints}} Point / {{info?.rank[1]?.wins}}W:{{info?.rank[1]?.losses}}L</span></td></tr>
+            <tr><td class = "proinfos">LEVEL : {{info?.summonerLevel}}</td></tr>
+            <tr><td class = "proinfos">Winning Rate (10 games) : {{winRate}}</td></tr>
+            <tr><td class = "proinfos">Rank : {{info?.rank[1]?.tier}} {{info?.rank[1]?.rank}} / 
+            {{info?.rank[1]?.leaguePoints}} Point / {{info?.rank[1]?.wins}}W:{{info?.rank[1]?.losses}}L</td></tr>
             <tr><td class = "proinfos"></td></tr>
       </td>
     </tr>

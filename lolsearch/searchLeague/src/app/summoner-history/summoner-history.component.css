@@ -4,8 +4,9 @@ table#profile{
 	margin: 0 auto;
 	margin-top: 25px;
 	margin-bottom: 25px;
-	color: black;
-	background-color: rgb(163, 207, 236, 0.3);
+	color: white;
+	background-color:rgb(69, 20, 170, 0.3);
+	font-size: 18px;
 	font-weight: bold;
 	border-radius: 35px;
 	border: none;
@@ -13,7 +14,7 @@ table#profile{
 table#profile td{
 	padding: 0;
 	margin: 0;
-	width: 300px;
+	width: 340px;
 	height: 300px;
 }
 table#profile th#userTH{
@@ -27,13 +28,10 @@ hr {
     border-top: 3px solid #D4D9FF;
     box-shadow: 0 1px #9AA2E3;
 }
-table#profile td#infogroup{height: 300px;}
+table#profile td#infogroup{height: 340px;}
 table#profile td.proinfos{
-	height: calc(300px / 5); 
+	height: calc(340px / 5); 
 	padding-left: 10px;
-}
-table#profile td.proinfos span{
-	color :rgb(0,191,255, 0.8);
 }
 img#profileImg{
 	display: block;
@@ -145,7 +143,7 @@ li.onehistory div.forone{
     justify-content: start;
     text-align: center;
     height: 60px;
-    flex: 2.5;
+    flex: 2;
 }
 li.onehistory div.forone div.kdaforone, div.minionforone, div.moneyforone{flex: 1;}
 li.onehistory div.forone div.accountforone{width: 130px;}
@@ -383,6 +381,12 @@ ul#columnName2 li.accounti img{
 	table#profile{
 		margin-top: 35px;
 		margin-bottom: 35px;
+		font-size: 8px;
+		border-radius: 20px;
+	}
+	table#profile th#userTH{
+		text-align: center;
+		font-size: 30px;
 	}
 	table#profile td{
 		width: 150px;
