@@ -1,31 +1,43 @@
-<p>
-  summoner-history
-</p>
-<p >
-  <img src = {{info?.profileimg}}/>
-  {{info?.name}}
-  {{info?.summonerLevel}}
-  {{sample}}
-</p>
+<table id = "profile">
+  <tbody>
+    <tr>
+      <th colspan="2" id = "userTH">{{info?.name}}</th>
+    </tr>
+    <tr><th colspan="2"><hr/></th></tr>
+    <tr>
+      <td><img id = "profileImg" src = {{info?.profileimg}}/></td>
+      <td id = "infogroup" *ngIf = "info.rank">
+            <tr><td class = "proinfos">LEVEL : <span>{{info?.summonerLevel}}</span></td></tr>
+            <tr><td class = "proinfos">Winning Rate (10 games) : <span>{{winRate}}</span></td></tr>
+            <tr><td class = "proinfos">Rank : <span>{{info?.rank[1]?.tier}} {{info?.rank[1]?.rank}} / 
+            {{info?.rank[1]?.leaguePoints}} Point / {{info?.rank[1]?.wins}}W:{{info?.rank[1]?.losses}}L</span></td></tr>
+            <tr><td class = "proinfos"></td></tr>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class = "hcolumn">
+    <ul id = "hcolumnName">
+        <li title = "Champion" class = "hchampi"><img src = "{{champicon}}"/></li>
+        <li title = "Spells" class = "hspelli"><img src = "{{spellicon}}"/></li>
+        <li title = "Items" class = "hitemi"><img src = "{{itemicon}}"/></li>
+        <li title = "Game Type" class = "hgametypei"><img src = "..\..\assets\gametype.png"/></li>
+        <li title = "KDA" class = "hkdai"><img src = "{{kdaicon}}"/></li>
+        <li title = "Minions" class = "hminioni"><img src = "{{minionicon}}"/></li>
+        <li title = "Gold" class = "hgoldi"><img src = "{{goldicon}}"/></li>
+        <li title = "Total Time & Date" class = "htimei"><img src = "..\..\assets\clock.svg"/></li>
+    </ul>
+  </div> 
 <div id = "content">
 <div class = "eachgame" *ngFor = "let m of images; index as p">
   <ul class  = "btnhistory">
-    <li class = "btnonehistory" *ngIf = "initialhis[p]" id = {{m[m.length-1]}} (click) = "toggle(m[m.length-1], p, $event)">
-      <img src = {{m[0]}}/>
+    <li class = "btnonehistory" id = {{m[m.length-1]}} [style.background-color]="setBackground(initialhis[p][14])" *ngIf = "initialhis[p]" (click) = "toggle(m[m.length-1], p, $event)">
+      <img src = {{m[0]}} (mouseover)="pop(-4, '', initialhis[p][15], $event)" (mouseout) = "out()" />
       <ul class = "spells"> 
         <!-- in function pop, parameter "-1" is only for button pop ups -->
         <li class = "spell"><img class = "spellimg" (mouseover)="pop(-1, initialhis[p][1].spellurl, initialhis[p][1].description, $event)" (mouseout) = "out()" src = {{initialhis[p][1].spellurl}}/></li>
         <li class = "spell"><img class = "spellimg" (mouseover)="pop(-1, initialhis[p][2].spellurl, initialhis[p][2].description, $event)" (mouseout) = "out()" src = {{initialhis[p][2].spellurl}}/></li>
       </ul>
-      <div id = "gamemode" >
-        <p>{{initialhis[p][14]}}</p>
-      </div>
-      <div id = "kda" >
-        <p (mouseover)="pop(-2, '', initialhis[p][11], $event)" (mouseout) = "out()">{{initialhis[p][10]}}</p>
-      </div>
-      <div id = "minion" >
-          <p>{{initialhis[p][12]}}</p>
-      </div>
       <div class = "items">
         <div class = "item" *ngIf = "initialhis[p][3] == 'nothing'"></div>
         <img class = "item" *ngIf = "initialhis[p][3] != 'nothing'" (mouseover)="pop(-1, initialhis[p][3].itemsrc, initialhis[p][3].description, $event)" (mouseout) = "out()" src = {{initialhis[p][3].itemsrc}}/>
@@ -42,9 +54,24 @@
         <div class = "item" *ngIf = "initialhis[p][9] == 'nothing'"></div>
         <img class = "item" *ngIf = "initialhis[p][9] != 'nothing'" (mouseover)="pop(-1, initialhis[p][9].itemsrc, initialhis[p][9].description, $event)" (mouseout) = "out()" src = {{initialhis[p][9].itemsrc}}/>
       </div>
-      <button id = "togglebtn" *ngIf = "findtype()" (click) = "toggle(m[m.length-1], p, $event)"><i class="fa fa-caret-down"></i></button>
-      <div id = "money" >
-        <p>{{initialhis[p][13]}}</p>
+      <div class = "forme">
+        <div id = "gamemode" >
+          <p>{{initialhis[p][17]}}</p>
+        </div>
+        <div id = "kda" >
+          <p (mouseover)="pop(-2, '', initialhis[p][11], $event)" (mouseout) = "out()">{{initialhis[p][10]}}</p>
+        </div>
+        <div id = "minion" >
+            <p>{{initialhis[p][12]}}</p>
+        </div>
+        <div id = "money" >
+          <p>{{initialhis[p][13]}}</p>
+        </div>
+        <div id = "time" >
+            <p>{{initialhis[p][18]}}</p>
+            <p class = "creationDate">{{initialhis[p][19]}}</p>
+        </div>
+        <button id = "togglebtn" *ngIf = "findtype()" (click) = "toggle(m[m.length-1], p, $event)"><i class="fa fa-caret-down"></i></button>
       </div>
     </li>
   </ul>
@@ -52,19 +79,19 @@
         <ul class= "history">
           <div class = "column">
             <ul id = "columnName">
-              <li id = "champi"><img src = "{{champicon}}"/></li>
-              <li id = "spelli"><img src = "{{spellicon}}"/></li>
-              <li id = "itemi"><img src = "{{itemicon}}"/></li>
+              <li class = "champi"><img src = "{{champicon}}"/></li>
+              <li class = "spelli"><img src = "{{spellicon}}"/></li>
+              <li class = "itemi"><img src = "{{itemicon}}"/></li>
             </ul>
             <ul id = "columnName2">
-                <li class = "updowni"><img src = "..\..\assets\updown.png"/></li>
+                <li class = "accounti"><img src = "..\..\assets\account.png"/></li>
                 <li class = "kdai"><img src = "{{kdaicon}}"/></li>
                 <li class = "minioni"><img src = "{{minionicon}}"/></li>
                 <li class = "goldi"><img src = "{{goldicon}}"/></li>
             </ul>
           </div>  
-          <li *ngFor = "let z of data(m[m.length-1]) | slice: 0 : 5; index as j" class = "onehistory">
-            <img class = "champ" src = {{z[0]}}/>
+          <li *ngFor = "let z of data(m[m.length-1]) | slice: 0 : 5; index as j" [style.background-color]="setBackground(z[14])" class = "onehistory">
+            <img class = "champ" src = {{z[0]}}  (mouseover)="pop(-4, '', z[15], $event)" (mouseout) = "out()" />
             <ul class = "spells">
                 <li class = "spell"><img class = "spellimg" (mouseover)="pop(j, z[1].spellurl, z[1].description, $event)" (mouseout) = "out()" src = {{z[1].spellurl}}/></li>
                 <li class = "spell"><img class = "spellimg" (mouseover)="pop(j, z[2].spellurl, z[2].description, $event)" (mouseout) = "out()" src = {{z[2].spellurl}}/></li>
@@ -86,8 +113,8 @@
               <img class = "item" *ngIf = "z[9] != 'nothing'" (mouseover)="pop(j, z[9].itemsrc, z[9].description, $event)" (mouseout) = "out()" src = {{z[9].itemsrc}}/>
             </div>
             <div class = "forone">
-              <div class = "kdaforone" >
-                <p>50%</p>
+              <div class = "accountforone" >
+                <p (click) = "searchIt(z[16][0])">{{z[16][0]}}</p>
               </div>
               <div class = "kdaforone" >
                 <p (mouseover)="pop(-3, '', z[11], $event)" (mouseout) = "out()">{{z[10]}}</p>
@@ -102,19 +129,19 @@
           </li>
           <div class = "column">
             <ul id = "columnName">
-              <li id = "champi"><img src = "{{champicon}}"/></li>
-              <li id = "spelli"><img src = "{{spellicon}}"/></li>
-              <li id = "itemi"><img src = "{{itemicon}}"/></li>
+              <li class = "champi"><img src = "{{champicon}}"/></li>
+              <li class = "spelli"><img src = "{{spellicon}}"/></li>
+              <li class = "itemi"><img src = "{{itemicon}}"/></li>
             </ul>
             <ul id = "columnName2">
-                <li class = "updowni"><img src = "..\..\assets\updown.png"/></li>
+                <li class = "accounti"><img src = "..\..\assets\account.png"/></li>
                 <li class = "kdai"><img src = "{{kdaicon}}"/></li>
                 <li class = "minioni"><img src = "{{minionicon}}"/></li>
                 <li class = "goldi"><img src = "{{goldicon}}"/></li>
             </ul>
           </div>   
-          <li *ngFor = "let z of data(m[m.length-1]) | slice: 5 : 10; index as j" class = "onehistory">
-              <img class = "champ" src = {{z[0]}}/>
+          <li *ngFor = "let z of data(m[m.length-1]) | slice: 5 : 10; index as j" [style.background-color]="setBackground(z[14])" class = "onehistory">
+              <img class = "champ" src = {{z[0]}} (mouseover)="pop(-4, '', z[15], $event)" (mouseout) = "out()"/>
               <ul class = "spells">
                   <li class = "spell"><img class = "spellimg" (mouseover)="pop(j, z[1].spellurl, z[1].description, $event)" (mouseout) = "out()" src = {{z[1].spellurl}}/></li>
                   <li class = "spell"><img class = "spellimg" (mouseover)="pop(j, z[2].spellurl, z[2].description, $event)" (mouseout) = "out()" src = {{z[2].spellurl}}/></li>
@@ -136,8 +163,8 @@
                 <img class = "item" *ngIf = "z[9] != 'nothing'" (mouseover)="pop(j, z[9].itemsrc, z[9].description, $event)" (mouseout) = "out()" src = {{z[9].itemsrc}}/>
               </div>
               <div class = "forone">
-                <div class = "kdaforone" >
-                  <p>50%</p>
+                <div class = "accountforone" >
+                  <p (click) = "searchIt(z[16][0])">{{z[16][0]}}</p>
                 </div>
                 <div class = "kdaforone" >
                   <p (mouseover)="pop(-3, '', z[11], $event)" (mouseout) = "out()">{{z[10]}}</p>

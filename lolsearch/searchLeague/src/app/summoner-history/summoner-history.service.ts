@@ -22,7 +22,7 @@ export class SummonerHistoryService {
   constructor(private  http:  HttpClient) {}
   
   setURL(id: string){
-	 this.apiurl = '/api/lol/match/v3/matchlists/by-account/' + id + '?beginIndex=0&endIndex=10&api_key=RGAPI-20b68089-c47f-4564-8fe5-da48fc0a9043';
+	 this.apiurl = '/api/lol/match/v4/matchlists/by-account/' + id + '?beginIndex=0&endIndex=10&api_key=RGAPI-d763d908-661a-459a-83bf-41f96c44ec23';
   }
   getdata(id: string): Observable<Match>
   {
@@ -31,7 +31,7 @@ export class SummonerHistoryService {
   }
   getimage(): Observable<Champ>
   {
-	this.apiurl = '/dragon/cdn/8.19.1/data/en_US/champion.json';
+	this.apiurl = '/dragon/cdn/9.1.1/data/en_US/champion.json';
 	return this.http.get<Champ>(this.apiurl, httpOptions).pipe(map((res) => res));
   }
   getspell(): Observable<Spell>

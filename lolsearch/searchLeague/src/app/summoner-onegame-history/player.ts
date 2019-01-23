@@ -8,4 +8,5 @@ export interface Player{
 	teams: Array<Team>;
 	participants: Array<Detail>;
 	gameDuration: number;
+	gameCreation: number;
 }

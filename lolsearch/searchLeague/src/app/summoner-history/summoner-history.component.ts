@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { SummonerHistoryService } from './summoner-history.service';
+import {SummonerComponent} from '../summoner/summoner.component';
 import { SummonerOnegameHistoryService } from '../summoner-onegame-history/summoner-onegame-history.service';
 import { LOLUserData } from '../summoner/lolinterface';
 import { Match } from './match';
@@ -10,7 +12,6 @@ import { trigger, state, style, transition,	animate, group, query, stagger, keyf
 } from '@angular/animations';
 import { Item } from './item';
 import { Spells } from './spells';
-import { environment } from '../../environments/environment';
 
 
 @Component({
@@ -44,9 +45,9 @@ export class SummonerHistoryComponent implements OnInit{
 	private images: Array<any[]> = [];
 	private memberimages: Array<Array<string[]>> = [];
 	private players: Player[];
-	private url: string = 'http://ddragon.leagueoflegends.com/cdn/8.19.1/img/champion/';
-	private spellurl: string = 'http://ddragon.leagueoflegends.com/cdn/8.19.1/img/spell/';
-	private itemurl: string = 'http://ddragon.leagueoflegends.com/cdn/8.19.1/img/item/';
+	private url: string = 'http://ddragon.leagueoflegends.com/cdn/9.1.1/img/champion/';
+	private spellurl: string = 'http://ddragon.leagueoflegends.com/cdn/8.24.1/img/spell/';
+	private itemurl: string = 'http://ddragon.leagueoflegends.com/cdn/8.24.1/img/item/';
 	private itemicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/items.png';
 	private goldicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/gold.png';
 	private kdaicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/score.png';
@@ -60,16 +61,29 @@ export class SummonerHistoryComponent implements OnInit{
 	private clicked: Array<string[]> = [];
 	private initialhis : Array<string[]> = [];
 	private deviceType : string;
+	private deskorcell : boolean;
+	private form : FormGroup;
+	private control : FormControl;
+	private countWin: number = 0;
+	private winRate: string = "";
   	@Input('userinfo') private info: LOLUserData;
   
-  constructor(private elementRef:ElementRef, private summonerHistoryService: SummonerHistoryService, private summonerOneGameHistoryService: SummonerOnegameHistoryService) {}
+  constructor(private summonerComponent: SummonerComponent, private summonerHistoryService: SummonerHistoryService, private summonerOneGameHistoryService: SummonerOnegameHistoryService) {}
   
   ngOnInit(){
 	if(this.info != null){
+		console.log("not null = " + this.info);
+		this.info.searchControl = new FormControl('', Validators.required)
+		this.info.searchForm = new FormGroup({
+		  summonerName: this.info.searchControl
+		});;
+
 		this.findHistory();
 	}
-  }
-
+  }	
+  findHistory(){
+		this.getHistory(this.info.accountId.toString());
+	}
   getHistory(id: string): void {
 	this.summonerHistoryService.getitem().subscribe((im) =>{
 		this.item = im;
@@ -86,13 +100,18 @@ export class SummonerHistoryComponent implements OnInit{
 			this.champimages = img;
 			for(let c of Object.values(this.champimages.data))
 			{
-				this.keys.set(c.key, c.image.full);
+				let mix : Array<any> = [];
+				mix.push(c.image.full);
+				mix.push(c.name);
+				this.keys.set(c.key, mix);
 			}
 			this.history.champlist = this.keys;
 			this.history.matches.forEach(ig => {
 				let i: any[] = [];
-				let imgurl = this.url + this.keys.get((ig.champion).toString());
-				i.push(imgurl);
+				let mix = this.keys.get((ig.champion).toString());
+				let champinfo = this.url + mix[0];
+				i.push(champinfo);
+				i.push(mix[1]);
 				i.push(ig.gameId);
 				this.images.push(i);			
 			});
@@ -100,21 +119,34 @@ export class SummonerHistoryComponent implements OnInit{
 			.subscribe((play) => {
 				this.players = play;
 				this.players.forEach(player => {
-					let accid: number[] = [];
+					let winner: number;
+					let accinfo: Array<any[]> = [];
 					let temp: Array<any[]> = [];
 					let me: any[] = [];
+					let account: string[] = [];
 					let timetaken: number = player.gameDuration;
+					let gameCreated: number = player.gameCreation;
+					player.teams.forEach(winteam=>{
+						if(winteam.win == "Win")
+						{
+							winner = winteam.teamId;
+						}
+					})
 					player.participantIdentities.forEach(first=>{
-						accid.push(first.player.accountId);
+						let account: any[] = [];
+						account.push(first.player.summonerName);
+						account.push(first.player.accountId);
+						accinfo.push(account);
 					})
 					player.participants.forEach((igs, index) => {
 						//for each player's champ, spells, items, kda, total money earned, total minions killed
-						let acid = accid[index];
+						let acid = accinfo[index];
 						let temp2: any[] = [];
 						let kda: string = "";
 						let iturl: string[] = [];
-						let imgurl = this.url + this.history.champlist.get((igs.championId).toString());
-						temp2.push(imgurl);
+						let mix = this.history.champlist.get((igs.championId).toString());
+						let champinfo = this.url + mix[0];
+						temp2.push(champinfo);
 						//spells
 						temp2.push(this.findspell(igs.spell1Id));
 						temp2.push(this.findspell(igs.spell2Id));
@@ -127,39 +159,62 @@ export class SummonerHistoryComponent implements OnInit{
 						temp2.push(this.finditem(igs.stats.item5));
 						temp2.push(this.finditem(igs.stats.item6));
 						//kda
-						kda = igs.stats.kills.toString() + "/" + igs.stats.assists.toString() + "/" 
-						+ igs.stats.deaths.toString();
+						kda = igs.stats.kills.toString() + "/" + igs.stats.deaths.toString() + "/" 
+						+ igs.stats.assists.toString();
 						temp2.push(kda);
-						temp2.push(((igs.stats.kills + igs.stats.assists) / igs.stats.deaths).toFixed(2) + ":1 KDA");
+						if(igs.stats.deaths == 0){
+							temp2.push("PERFECT KDA");
+						}else{
+							temp2.push(((igs.stats.kills + igs.stats.assists) / igs.stats.deaths).toFixed(2) + ":1 KDA");
+						}
 						//minions
 						temp2.push(igs.stats.totalMinionsKilled);
 						//money earned
 						temp2.push((igs.stats.goldEarned / 1000).toFixed(1) + "k");
+						if(igs.teamId == winner){
+							temp2.push("win");
+						}
+						else{
+							temp2.push("loss");
+						}
+						temp2.push(mix[1]);
+						temp2.push(acid);
 						temp.push(temp2);
-						if(acid == this.info.accountId)
+
+						if(acid[1] == this.info.accountId)
 						{
+							if(igs.teamId == winner){
+								this.countWin++;
+							}
 							temp2.push(player.gameMode);
+							let second = Number((timetaken % 60).toFixed(2));
+							let total = (Math.floor(timetaken / 60) + (second / 100)).toFixed(2);
+							total = total.replace(/\./g, ':');
+							let d = new Date(gameCreated);
+							temp2.push(total);
+							temp2.push((d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear()));
 							me = temp2;
 						}
-						//this.initialhis.push(temp2);
 					});
 					//add info to initialhis for list of history
-
 					this.initialhis.push(me);
 					let gameid: string[] = []
 					gameid.push((player.gameId).toString())
 					temp.push(gameid);
 					this.memberimages.push(temp);
 				});
+				this.winRate = this.countWin + "W/" + Math.abs(this.countWin-10) + "L";
 			});
 		});
 	});
 	}
-	
-  findHistory(){
-		this.getHistory(this.info.accountId.toString());
+	setBackground(winloss: string){
+		if(winloss == "win"){
+			return "#a3cfec";
+		}else{
+			return "#e2b6b3";
+		}
 	}
-
 	toggle(gid : string, n: string, event){//where n is order number of li tag
 		if(this.deviceType == "smartphone" && (event.target.tagName == "BUTTON" || event.target.tagName == "I"))
 		{
@@ -242,7 +297,7 @@ export class SummonerHistoryComponent implements OnInit{
 		"position: fixed; height:auto; width: 225px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;");
 		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 11px;");
 		}
-			if(half != -2 && half != -3){
+			if(half != -2 && half != -3 && half != -4){
 				newdiv.appendChild(newimg);
 			}
 			newtext.innerHTML = desc;
@@ -287,79 +342,98 @@ export class SummonerHistoryComponent implements OnInit{
 		let pos: string = "";
 
 		if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-			if(th == -3)        //Desktop
+			if(th == -4) 
 			{
-				pop.style.top = (targetbot - 50) + "px";
+				pop.style.top = (targetbot) + "px";
 				poptext.style.fontSize = "9px";
-				poptext.style.textAlign = "center";
-				poptext.style.textAlign = "center";
-				pop.style.width = "70px";
-				pop.style.padding = "3px";			
+				pop.style.textAlign = "center";
+				pop.style.width = "40px";
+				pop.style.padding = "3px";
+				poptext.style.fontWeight = "bold";
+				pop.style.opacity = "1";
+				pop.style.padding = "2px";
+			}
+			else if(th == -3)  
+			{
+				pop.style.top = (targetbot - 35) + "px";
+				poptext.style.fontSize = "9px";
+				pop.style.textAlign = "center";
+				pop.style.width = "auto";
+				//pop.style.padding = "3px";			
 			}
 			else if(th == -2)
 			{
-				pop.style.top = (targetbot - 30) + "px";
-				poptext.style.fontSize = "10px";
+				pop.style.top = (targetbot - 28) + "px";
+				poptext.style.fontSize = "9px";
 				poptext.style.textAlign = "center";
-				pop.style.width = "70px";
+				pop.style.width = "auto";
 				pop.style.padding = "3px";
 				
 			}
-			else if(th == -1)
-			{
-				pop.style.width = "130px";
-				if((targetbot + poppos.height) > window.innerHeight - 80){
-					let newtop = targettop - (poppos.height + 5);
-					pop.style.top = newtop.toString() + "px";
-					pos = "translateX("+ width + "px)";	
-				}
-				else{
-					pop.style.top = targetbot.toString() + "px";
-					pos = "translateX("+ width + "px)";
-				}		
-			}
 			else
 			{
-				if((targetbot + poppos.height) > window.innerHeight - 80){
-					let newtop = targettop - (poppos.height + 5);
-					pop.style.top = newtop.toString() + "px";
+				pop.style.width = "150px";
+				if((targetbot + poppos.height) > window.innerHeight - 40){
+					let newtop = targettop - poppos.height;
+					pop.style.top = newtop + "px";
 					pos = "translateX("+ width + "px)";	
 				}
 				else{
-					pop.style.top = targetbot.toString() + "px";
+					let firstc = cname.split(' ');
+					if(firstc[0] == "spellimg"){
+						pop.style.top = targettop.toString() + "px";
+					}
+					else if(firstc[0] == "item"){
+						pop.style.top = targetbot.toString() + "px";
+					}
 					pos = "translateX("+ width + "px)";
 				}
 			}
 		}
 		else{
-			if(th == -3)        //Desktop
+			if(th == -4) ///Desktop
+			{
+				pop.style.top = (targetbot) + "px";
+				poptext.style.fontSize = "18px";
+				poptext.style.marginBottom = "13px";
+				poptext.style.fontWeight = "bold";
+				pop.style.textAlign = "center";
+				pop.style.opacity = "1";
+				pop.style.width = "80px";
+				pop.style.padding = "0px";
+				pos = "translateX(" + ((width - pop.offsetWidth) / 2) + "px)";			
+			}
+			else if(th == -3)
 			{
 				pop.style.top = (targetbot - 50) + "px";
 				poptext.style.fontSize = "13px";
-				poptext.style.textAlign = "center";
-				pop.style.width = "90px";
-				pop.style.padding = "4px";				
+				pop.style.textAlign = "center";
+				pop.style.width = "auto";
+				pop.style.padding = "4px";
+				pos = "translateX(" + ((width - pop.offsetWidth) / 2) + "px)";			
 			}
 			else if(th == -2)
 			{
 				pop.style.top = (targetbot - 50) + "px";
 				poptext.style.fontSize = "15px";
-				poptext.style.textAlign = "center";
-				pop.style.width = "100px";
+				pop.style.textAlign = "center";
+				pop.style.width = "auto";
 				pop.style.padding = "6px";
+				pos = "translateX(" + ((width - pop.offsetWidth) / 2) + "px)";
 			}
 			else
 			{
-				if((targetbot + poppos.height) > window.innerHeight - 80){
+				if((targetbot + poppos.height) > window.innerHeight - 30){
 					let newtop = targettop - (poppos.height + 5);
 					pop.style.top = newtop.toString() + "px";
 					pos = "translateX("+ width + "px)";	
 				}
 				else{
-					if(cname == "spellimg"){
+					let firstc = cname.split(' ');
+					if(firstc[0] == "spellimg"){
 						pop.style.top = targettop.toString() + "px";
 					}
-					else if(cname == "item ng-tns-c2-0 ng-star-inserted"){
+					else if(firstc[0] == "item"){
 						pop.style.top = targetbot.toString() + "px";
 					}
 					pos = "translateX("+ width + "px)";
@@ -377,5 +451,9 @@ export class SummonerHistoryComponent implements OnInit{
 			this.deviceType = "desktop";
 			return false;
 		}
+	}
+	searchIt(accid: string){
+		this.info.searchControl.setValue(accid);
+		document.getElementById("submit").click();
 	}
 }

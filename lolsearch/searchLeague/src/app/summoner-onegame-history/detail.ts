@@ -4,4 +4,5 @@ export interface Detail{
 	spell1Id: number;
 	spell2Id: number;
 	championId: number;
+	teamId: number;
 }
