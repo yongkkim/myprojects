@@ -20,10 +20,10 @@ export class SummonerService {
   constructor(private  http:  HttpClient) {}
   
   setURL(name: string){
-	 this.apiurl = '/api/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-d763d908-661a-459a-83bf-41f96c44ec23';
+	 this.apiurl = '/api/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-bcf2408e-d883-44cf-b57b-52c67b7295c2';
   }
   setURL2(summonerID: string){
-    this.apiurl = '/api/lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-d763d908-661a-459a-83bf-41f96c44ec23';
+    this.apiurl = '/api/lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-bcf2408e-d883-44cf-b57b-52c67b7295c2';
    }
 
   getdata(name: string): Observable<LOLUserData>{
@@ -32,11 +32,9 @@ export class SummonerService {
     map(res => res),
     catchError(error => {return throwError(true);}));
   }
+
   getRankdata(summonerID: string): Observable<RankInfo>{
     this.setURL2(summonerID);
-    return this.http.get<RankInfo>(this.apiurl, httpOptions).pipe(
-      map(res => res),
-      catchError(error => {return throwError(true);}));
-    }
-
+    return this.http.get<RankInfo>(this.apiurl, httpOptions).pipe(map(res => res));
+  }
 }

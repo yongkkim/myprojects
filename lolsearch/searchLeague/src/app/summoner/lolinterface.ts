@@ -13,5 +13,4 @@ export interface LOLUserData {
   searchForm: FormGroup;
   searchControl: FormControl;
   rank: RankInfo;
-
 }

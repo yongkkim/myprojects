@@ -22,26 +22,26 @@ export class SummonerHistoryService {
   constructor(private  http:  HttpClient) {}
   
   setURL(id: string){
-	 this.apiurl = '/api/lol/match/v4/matchlists/by-account/' + id + '?beginIndex=0&endIndex=10&api_key=RGAPI-d763d908-661a-459a-83bf-41f96c44ec23';
+	 this.apiurl = '/api/lol/match/v4/matchlists/by-account/' + id + '?beginIndex=0&endIndex=10&api_key=RGAPI-bcf2408e-d883-44cf-b57b-52c67b7295c2';
   }
   getdata(id: string): Observable<Match>
   {
-	this.setURL(id);
-	return this.http.get<Match>(this.apiurl, httpOptions).pipe(map((res) => res));
+    this.setURL(id);
+    return this.http.get<Match>(this.apiurl, httpOptions).pipe(map((res) => res));
   }
   getimage(): Observable<Champ>
   {
-	this.apiurl = '/dragon/cdn/9.1.1/data/en_US/champion.json';
+	this.apiurl = '/dragon/cdn/9.2.1/data/en_US/champion.json';
 	return this.http.get<Champ>(this.apiurl, httpOptions).pipe(map((res) => res));
   }
   getspell(): Observable<Spell>
   {
-	this.apiurl = '/dragon/cdn/8.19.1/data/en_US/summoner.json';
+	this.apiurl = '/dragon/cdn/9.2.1/data/en_US/summoner.json';
 	return this.http.get<Spell>(this.apiurl, httpOptions).pipe(map((res) => res));
   }
   getitem(): Observable<Item>
   {
-    this.apiurl = '/dragon/cdn/8.19.1/data/en_US/item.json';
+    this.apiurl = '/dragon/cdn/9.2.1/data/en_US/item.json';
     return this.http.get<Item>(this.apiurl, httpOptions).pipe(map((res) => res));
   }
 }

@@ -2,11 +2,11 @@
     <div id = "textLogo"><span id = "lol">LOL</span>LY ONE</div>
     <form id = "searchform" [formGroup]="form" (ngSubmit)="onSubmit()">
         <div id = "searchbox">
-            <input id = "search" formControlName="summonerName" (change) = "backToDefault()" autocomplete="off" placeholder=" Summoner Name..  ex)dragonsoup2" required/>  
-            <button id = "submit" [disabled] = "submitted" type="submit">Search</button>
+            <input id = "search" formControlName="summonerName" autocomplete="off" placeholder=" Summoner Name..  ex)dragonsoup2" required/>  
+            <button id = "submit" type="submit">Search</button>
             <div id = "err1" class="alert alert-danger" *ngIf = "summonerName.invalid">Cannot be empty</div>
             <div id = "err2" class="alert alert-danger" *ngIf = "summonerName.valid"></div>
         </div>
     </form>
+    <app-summoner-history *ngIf = "submitted && checkObj(heroes)" [userinfo] = "heroes"></app-summoner-history>
 </div>
-<app-summoner-history *ngIf = "checkObj(heroes)" [userinfo] = "heroes"></app-summoner-history>

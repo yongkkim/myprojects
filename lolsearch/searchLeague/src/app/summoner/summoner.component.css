@@ -73,6 +73,7 @@ div#err1, div#err2{
         height: 260px;
         padding-top: 40px;
         border-radius: 10px;
+        border-color: cadetblue;
     }
     div#textLogo{
         font-size: 50px;

@@ -4,6 +4,7 @@ import { SummonerHistoryService } from './summoner-history.service';
 import {SummonerComponent} from '../summoner/summoner.component';
 import { SummonerOnegameHistoryService } from '../summoner-onegame-history/summoner-onegame-history.service';
 import { LOLUserData } from '../summoner/lolinterface';
+import { RankInfo } from '../summoner/rankinfo';
 import { Match } from './match';
 import { Champ } from './champ';
 import { Spell } from './Spell';
@@ -45,9 +46,9 @@ export class SummonerHistoryComponent implements OnInit{
 	private images: Array<any[]> = [];
 	private memberimages: Array<Array<string[]>> = [];
 	private players: Player[];
-	private url: string = 'http://ddragon.leagueoflegends.com/cdn/9.1.1/img/champion/';
-	private spellurl: string = 'http://ddragon.leagueoflegends.com/cdn/8.24.1/img/spell/';
-	private itemurl: string = 'http://ddragon.leagueoflegends.com/cdn/8.24.1/img/item/';
+	private url: string = 'http://ddragon.leagueoflegends.com/cdn/9.2.1/img/champion/';
+	private spellurl: string = 'http://ddragon.leagueoflegends.com/cdn/9.2.1/img/spell/';
+	private itemurl: string = 'http://ddragon.leagueoflegends.com/cdn/9.2.1/img/item/';
 	private itemicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/items.png';
 	private goldicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/gold.png';
 	private kdaicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/score.png';
@@ -66,18 +67,20 @@ export class SummonerHistoryComponent implements OnInit{
 	private control : FormControl;
 	private countWin: number = 0;
 	private winRate: string = "";
+	private rankinfo: string = "";
   	@Input('userinfo') private info: LOLUserData;
   
   constructor(private summonerComponent: SummonerComponent, private summonerHistoryService: SummonerHistoryService, private summonerOneGameHistoryService: SummonerOnegameHistoryService) {}
   
   ngOnInit(){
 	if(this.info != null){
-		console.log("not null = " + this.info);
-		this.info.searchControl = new FormControl('', Validators.required)
-		this.info.searchForm = new FormGroup({
-		  summonerName: this.info.searchControl
-		});;
-
+		if(this.info.rank != undefined){
+			this.rankinfo = this.info.rank.tier + " " + this.info.rank.rank + " / " + 
+			this.info.rank.leaguePoints + " Point  / " + this.info.rank.wins + "W:" + this.info.rank.losses + "L";
+		}
+		else{
+			this.rankinfo = "Unranked";
+		}
 		this.findHistory();
 	}
   }	
@@ -114,7 +117,7 @@ export class SummonerHistoryComponent implements OnInit{
 				i.push(mix[1]);
 				i.push(ig.gameId);
 				this.images.push(i);			
-			});
+			});	
 			this.summonerOneGameHistoryService.getdata(this.history)
 			.subscribe((play) => {
 				this.players = play;
@@ -124,8 +127,19 @@ export class SummonerHistoryComponent implements OnInit{
 					let temp: Array<any[]> = [];
 					let me: any[] = [];
 					let account: string[] = [];
+
+					let currdate = new Date();
 					let timetaken: number = player.gameDuration;
 					let gameCreated: number = player.gameCreation;
+					let gc = new Date(gameCreated);
+					
+					//checking a date differenced between game creation and current date
+					let dayDifference: number = this.datediff(gc, currdate);
+				//checking every game that has been played within 6 months.
+				//if a game is older than 6 months, it will be discardedd
+				
+				if(dayDifference < 185)
+				{			 
 					player.teams.forEach(winteam=>{
 						if(winteam.win == "Win")
 						{
@@ -146,43 +160,48 @@ export class SummonerHistoryComponent implements OnInit{
 						let iturl: string[] = [];
 						let mix = this.history.champlist.get((igs.championId).toString());
 						let champinfo = this.url + mix[0];
+
+						//Champion image
 						temp2.push(champinfo);
+
 						//spells
 						temp2.push(this.findspell(igs.spell1Id));
 						temp2.push(this.findspell(igs.spell2Id));
+
 						//items
-						temp2.push(this.finditem(igs.stats.item0));
-						temp2.push(this.finditem(igs.stats.item1));
-						temp2.push(this.finditem(igs.stats.item2));
-						temp2.push(this.finditem(igs.stats.item3));
-						temp2.push(this.finditem(igs.stats.item4));
-						temp2.push(this.finditem(igs.stats.item5));
-						temp2.push(this.finditem(igs.stats.item6));
-						//kda
+						temp2.push(this.finditem(igs.stats.item0, temp2[0]));
+						temp2.push(this.finditem(igs.stats.item1, temp2[0]));
+						temp2.push(this.finditem(igs.stats.item2, temp2[0]));
+						temp2.push(this.finditem(igs.stats.item3, temp2[0]));
+						temp2.push(this.finditem(igs.stats.item4, temp2[0]));
+						temp2.push(this.finditem(igs.stats.item5, temp2[0]));
+						temp2.push(this.finditem(igs.stats.item6, temp2[0]));
+
+						//kda (Kill/Death/Assist)
 						kda = igs.stats.kills.toString() + "/" + igs.stats.deaths.toString() + "/" 
 						+ igs.stats.assists.toString();
 						temp2.push(kda);
-						if(igs.stats.deaths == 0){
+						if(igs.stats.deaths == 0){//when there is no death
 							temp2.push("PERFECT KDA");
 						}else{
 							temp2.push(((igs.stats.kills + igs.stats.assists) / igs.stats.deaths).toFixed(2) + ":1 KDA");
 						}
+
 						//minions
-						temp2.push(igs.stats.totalMinionsKilled);
+						temp2.push(igs.stats.totalMinionsKilled + " CS");
 						//money earned
 						temp2.push((igs.stats.goldEarned / 1000).toFixed(1) + "k");
-						if(igs.teamId == winner){
-							temp2.push("win");
-						}
-						else{
-							temp2.push("loss");
-						}
+
+						if(igs.teamId == winner)
+							{temp2.push("win");}
+						else
+							{temp2.push("loss");}
+
 						temp2.push(mix[1]);
 						temp2.push(acid);
 						temp.push(temp2);
 
-						if(acid[1] == this.info.accountId)
-						{
+						if(acid[1] == this.info.accountId){
 							if(igs.teamId == winner){
 								this.countWin++;
 							}
@@ -196,14 +215,25 @@ export class SummonerHistoryComponent implements OnInit{
 							me = temp2;
 						}
 					});
+				
 					//add info to initialhis for list of history
 					this.initialhis.push(me);
 					let gameid: string[] = []
 					gameid.push((player.gameId).toString())
 					temp.push(gameid);
 					this.memberimages.push(temp);
+				}
 				});
-				this.winRate = this.countWin + "W/" + Math.abs(this.countWin-10) + "L";
+				this.winRate = this.countWin + "W/" + Math.abs(this.countWin-this.initialhis.length) + "L";
+				
+				setTimeout(()=> {
+					if(this.initialhis.length == 0){
+					let noinfo = document.getElementById("content");
+					noinfo.innerHTML = "The user is inactive for more than 6 months";
+					noinfo.style.color = "white";
+					noinfo.style.textAlign = "center";
+					}
+				},2000);
 			});
 		});
 	});
@@ -322,8 +352,8 @@ export class SummonerHistoryComponent implements OnInit{
 			}
 		}
 	}
-	finditem(itemnum: number): any{
-	
+	finditem(itemnum: number, hero: string): any{
+
 		if(itemnum != 0)
 		{
 			this.item.data[itemnum].itemsrc = this.itemurl + this.item.data[itemnum].image.full;
@@ -453,7 +483,13 @@ export class SummonerHistoryComponent implements OnInit{
 		}
 	}
 	searchIt(accid: string){
-		this.info.searchControl.setValue(accid);
+		this.info = null;
+		this.summonerComponent.form.get("summonerName").setValue(accid);
 		document.getElementById("submit").click();
+		this.ngOnInit();
+	}
+	
+	datediff(first, second) {
+		return Math.round((second-first)/(1000*60*60*24));
 	}
 }

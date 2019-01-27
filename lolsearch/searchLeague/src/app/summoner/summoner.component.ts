@@ -1,10 +1,7 @@
 import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { LOLUserData } from './lolinterface';
 import { SummonerService } from './summoner.service';
-import { debounceTime } from 'rxjs/operators';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import { Router } from '@angular/router';
-import { RankInfo } from './rankinfo';
 
 @Component({
   selector: 'app-summoner',
@@ -16,7 +13,7 @@ export class SummonerComponent implements OnInit{
 
   private typed : boolean = false;
   private heroes: LOLUserData;
-  private url: string = 'http://ddragon.leagueoflegends.com/cdn/8.19.1/img/profileicon/';
+  private url: string = 'http://ddragon.leagueoflegends.com/cdn/9.2.1/img/profileicon/';
   private profileimg: string = "";
   private notMatching: boolean = false;
   private errorMsg: string = "";
@@ -36,26 +33,19 @@ export class SummonerComponent implements OnInit{
 
   getHeroes(name: string): void {
     this.summonerService.getdata(name)
-    .subscribe(hero => 
-        this.zone.run(() => {
+    .subscribe(hero => {
         this.heroes = hero;
         this.heroes.profileimg = this.url + this.heroes.profileIconId + ".png";
         this.heroes.searchForm = this.form;
         this.heroes.searchControl = this.summonerName;
-        this.summonerService.getRankdata(this.heroes.id)
-        .subscribe(rank => {
-          this.heroes.rank = rank
-          console.log(rank);
-        });       
-        })
-      ,
-      (error => 
-      {
-        this.setErrValue(this.heroes)
-        console.log(this.notMatching);
-      }),
-      () => console.log("done")
-    )
+        this.submitted = true;
+          this.summonerService.getRankdata(this.heroes.id)
+          .subscribe(rank => {
+              this.heroes.rank = rank;
+            });
+        },       
+        (error => this.setErrValue(this.heroes))
+      );
   }
   setErrValue(ob: any){
     this.submitted = false;
@@ -65,23 +55,27 @@ export class SummonerComponent implements OnInit{
       err2.innerHTML = "Cannot find the Summoner";
     }
   }
-  
-  onSubmit(){
-    this.submitted = true;
-
-    if(this.form.invalid){
+  inputValidate(invalid: boolean){
+    if(invalid){
       let err1 = document.getElementById("err1");
       if(err1 != null || err1.style.display == "none"){
+        console.log("here");
         err1.style.display = "block";
       }
       this.submitted = false;
-      return;
+      return false;
     }
-    this.getHeroes(this.form.get("summonerName").value);
+    else{
+      return true;
+    }
   }
-
-  backToDefault(){
-	this.heroes = null;
+  onSubmit(){
+    if(this.heroes != null){
+      this.heroes = null;
+    }
+      if(!this.inputValidate(this.form.invalid))
+        return;
+      this.getHeroes(this.form.get("summonerName").value);
   }
 
   checkObj(hrs: LOLUserData) : boolean{
@@ -93,8 +87,7 @@ export class SummonerComponent implements OnInit{
     let html = document.getElementsByTagName("html")[0];
 
     if(hrs != null){
-      this.submitted = false;
-
+      //console.log("came in = " + this.submitted);
       this.form.get("summonerName").markAsPristine();
       this.form.get("summonerName").markAsUntouched();
 
@@ -127,7 +120,6 @@ export class SummonerComponent implements OnInit{
       if(error2 != null){
         error2.style.display="none";
       }
-
       return true;
     }
     return false;

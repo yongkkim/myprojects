@@ -6,7 +6,6 @@ table#profile{
 	margin-bottom: 25px;
 	color: white;
 	background-color:rgb(69, 20, 170, 0.3);
-	font-size: 18px;
 	font-weight: bold;
 	border-radius: 35px;
 	border: none;
@@ -14,8 +13,11 @@ table#profile{
 table#profile td{
 	padding: 0;
 	margin: 0;
-	width: 340px;
+	width: 300px;
 	height: 300px;
+}
+table#profile td#picTD{
+	text-align: center;
 }
 table#profile th#userTH{
 	text-align: center;
@@ -28,17 +30,17 @@ hr {
     border-top: 3px solid #D4D9FF;
     box-shadow: 0 1px #9AA2E3;
 }
-table#profile td#infogroup{height: 340px;}
+table#profile td#infogroup{height: 300px;}
 table#profile td.proinfos{
-	height: calc(340px / 5); 
+	height: calc(300px / 5); 
 	padding-left: 10px;
 }
 img#profileImg{
 	display: block;
-	padding: 0;
-	margin: 0;
-	width: 100%;
-	border-radius: 20px;
+    padding: 0;
+    margin: 0 auto;
+    width: 80%;
+    border-radius: 20px;
 }
 
 /* css for button display*/
@@ -142,16 +144,26 @@ li.onehistory div.forone{
     align-items: center;
     justify-content: start;
     text-align: center;
-    height: 60px;
-    flex: 2;
+	height: 60px;
+	padding-top: 10px;
+	flex: 1.5;
+	flex-direction: column-reverse;
 }
-li.onehistory div.forone div.kdaforone, div.minionforone, div.moneyforone{flex: 1;}
-li.onehistory div.forone div.accountforone{width: 130px;}
+li.onehistory div.forone div.accountforone, div.kmm{
+	flex: 1;
+	padding-left: 7px;
+}
+li.onehistory div.forone div.kmm div.kdaforone, div.minionforone, div.moneyforone{
+	display: inline-block;
+	width: 53px;
+}
+/*li.onehistory div.forone div.accountforone{width: 130px;}*/
 li.onehistory div.forone div.accountforone p, div.kdaforone p, div.minionforone p, div.moneyforone p{
 	margin: 0;
 	color: black;
-	font-size: 12px;
+	font-size: 14px;
 }
+li.onehistory div.forone div.accountforone p{font-size: 16px;}
 li.onehistory img.champ{
 	padding: 0;
 	float: left;
@@ -302,11 +314,8 @@ ul#hcolumnName li.hspelli{width: 40px; margin: 0 1px 0 1px;}
 ul#hcolumnName li.hitemi{width: 280px;}
 ul#hcolumnName li:not(.hchampi):not(.hspelli):not(.hitemi){width: calc((100% - 85px - 42px - 280px) / 5);}
 
-ul#columnName2 li.kdai, li.goldi, li.minioni{flex: 1;}
-ul#columnName2 li.accounti{width: 130px;}
-ul#columnName2 li:not(.accounti) img, li.kdai img, li.goldi img, li.minioni img{
-    padding-left: 6px;
-}
+ul#columnName2 li.accounti{flex: 1;}
+
 ul#columnName2 li img{
 	height: 85%;
 }
@@ -491,9 +500,20 @@ ul#columnName2 li.accounti img{
 	}
 	li.onehistory div.forone{
 		height: 40px;
+		padding-top: 0;
+		flex:2;
+		flex-direction: row;
+	}
+	li.onehistory div.forone div.kmm div.kdaforone, div.minionforone, div.moneyforone{
+		width: 40px;
+		padding-left: 0;
 	}
 	li.onehistory div.forone div.accountforone, div.kdaforone p, div.minionforone p, div.moneyforone p{
 		font-size: 9px;
+	}
+	li.onehistory div.forone div.accountforone{
+		flex: none;
+		width: 70px;
 	}
 	li.btnonehistory{
 		display: flex;
