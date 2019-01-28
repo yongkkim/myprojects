@@ -5,7 +5,7 @@ table#profile{
 	margin-top: 25px;
 	margin-bottom: 25px;
 	color: white;
-	background-color:rgb(69, 20, 170, 0.3);
+	background-color:rgba(69, 20, 170, 0.3);
 	font-weight: bold;
 	border-radius: 35px;
 	border: none;
@@ -283,7 +283,7 @@ ul#columnName2 li, ul#columnName li{border-radius: 8px;}
 ul#columnName li, ul#columnName2 li, ul#hcolumnName li{
 	position: relative;
 	display: inline-block;
-	background: rgb(163, 207, 200, 0.6);
+	background: rgba(163, 207, 200, 0.6);
 	height: 25px;
 }
 ul#hcolumnName li, ul#hcolumnName li img{height: 100%;}

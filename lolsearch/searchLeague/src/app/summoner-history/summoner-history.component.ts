@@ -42,7 +42,7 @@ import { Spells } from './spells';
 })
 export class SummonerHistoryComponent implements OnInit{
 
-  private champimages: Champ;
+  	private champimages: Champ;
 	private images: Array<any[]> = [];
 	private memberimages: Array<Array<string[]>> = [];
 	private players: Player[];
@@ -101,12 +101,13 @@ export class SummonerHistoryComponent implements OnInit{
 		.subscribe(img => 
 		{
 			this.champimages = img;
-			for(let c of Object.values(this.champimages.data))
+			console.log(this.champimages.data);
+			for(let c in this.champimages.data)
 			{
 				let mix : Array<any> = [];
-				mix.push(c.image.full);
-				mix.push(c.name);
-				this.keys.set(c.key, mix);
+				mix.push(this.champimages.data[c].image.full);
+				mix.push(this.champimages.data[c].name);
+				this.keys.set(this.champimages.data[c].key, mix);
 			}
 			this.history.champlist = this.keys;
 			this.history.matches.forEach(ig => {
@@ -314,17 +315,10 @@ export class SummonerHistoryComponent implements OnInit{
 		"position: absolute; height:auto; width: 175px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;");
 		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 7px;");
 		newimg.setAttribute("style", "height: 40px; width: 40px;");
-		}
-		else if(window.innerWidth >= 720 && window.innerWidth <= 1024) 
-		{
-			newdiv.setAttribute("style", 
-		"position: absolute; height:auto; width: 200px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;");
-		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 9px;");
-		newimg.setAttribute("style", "height: 50px; width: 50px;");
 		}*/
 		else{
 			newdiv.setAttribute("style", 
-		"position: fixed; height:auto; width: 225px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;");
+		"position: fixed; height:auto; width: 250px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;");
 		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 11px;");
 		}
 			if(half != -2 && half != -3 && half != -4){
@@ -343,12 +337,12 @@ export class SummonerHistoryComponent implements OnInit{
 	}
 	findspell(spellid: number) : Spells{
 		
-		for(let c of Object.values(this.spell.data))
+		for(let c in this.spell.data)
 		{
-			if(spellid.toString() == c.key)
+			if(spellid.toString() == this.spell.data[c].key)
 			{
-				c.spellurl = this.spellurl + c.image.full;
-				return c;
+				this.spell.data[c].spellurl = this.spellurl + this.spell.data[c].image.full;
+				return this.spell.data[c];
 			}
 		}
 	}

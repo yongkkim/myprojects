@@ -1,4 +1,3 @@
-import { FormGroup, FormControl } from "../../../node_modules/@angular/forms";
 import { RankInfo } from './rankinfo';
 
 export interface LOLUserData {
@@ -10,7 +9,5 @@ export interface LOLUserData {
   id: string;
   accountId: number;
   profileimg: string;
-  searchForm: FormGroup;
-  searchControl: FormControl;
   rank: RankInfo;
 }

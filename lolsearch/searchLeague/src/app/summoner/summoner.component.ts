@@ -36,8 +36,6 @@ export class SummonerComponent implements OnInit{
     .subscribe(hero => {
         this.heroes = hero;
         this.heroes.profileimg = this.url + this.heroes.profileIconId + ".png";
-        this.heroes.searchForm = this.form;
-        this.heroes.searchControl = this.summonerName;
         this.submitted = true;
           this.summonerService.getRankdata(this.heroes.id)
           .subscribe(rank => {

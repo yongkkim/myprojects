@@ -20,10 +20,10 @@ export class SummonerService {
   constructor(private  http:  HttpClient) {}
   
   setURL(name: string){
-	 this.apiurl = '/api/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-bcf2408e-d883-44cf-b57b-52c67b7295c2';
+	 this.apiurl = '/api/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-4115e284-e1a3-4ba0-85df-c27f14523444';
   }
   setURL2(summonerID: string){
-    this.apiurl = '/api/lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-bcf2408e-d883-44cf-b57b-52c67b7295c2';
+    this.apiurl = '/api/lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-4115e284-e1a3-4ba0-85df-c27f14523444';
    }
 
   getdata(name: string): Observable<LOLUserData>{
