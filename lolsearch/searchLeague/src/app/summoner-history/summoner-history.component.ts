@@ -43,18 +43,18 @@ import { Spells } from './spells';
 export class SummonerHistoryComponent implements OnInit{
 
   	private champimages: Champ;
-	private images: Array<any[]> = [];
+	public images: Array<any[]> = [];
 	private memberimages: Array<Array<string[]>> = [];
 	private players: Player[];
 	private url: string = 'http://ddragon.leagueoflegends.com/cdn/9.2.1/img/champion/';
 	private spellurl: string = 'http://ddragon.leagueoflegends.com/cdn/9.2.1/img/spell/';
 	private itemurl: string = 'http://ddragon.leagueoflegends.com/cdn/9.2.1/img/item/';
-	private itemicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/items.png';
-	private goldicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/gold.png';
-	private kdaicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/score.png';
-	private champicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/champion.png';
-	private minionicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/minion.png';
-	private spellicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/spells.png';
+	public itemicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/items.png';
+	public goldicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/gold.png';
+	public kdaicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/score.png';
+	public champicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/champion.png';
+	public minionicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/minion.png';
+	public spellicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/spells.png';
 	private spell: Spell;
 	private item: Item;
   	private keys= new Map();
@@ -66,9 +66,9 @@ export class SummonerHistoryComponent implements OnInit{
 	private form : FormGroup;
 	private control : FormControl;
 	private countWin: number = 0;
-	private winRate: string = "";
-	private rankinfo: string = "";
-  	@Input('userinfo') private info: LOLUserData;
+	public winRate: string = "";
+	public rankinfo: string = "";
+  	@Input('userinfo') public info: LOLUserData;
   
   constructor(private summonerComponent: SummonerComponent, private summonerHistoryService: SummonerHistoryService, private summonerOneGameHistoryService: SummonerOnegameHistoryService) {}
   

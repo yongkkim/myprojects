@@ -12,7 +12,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class SummonerComponent implements OnInit{
 
   private typed : boolean = false;
-  private heroes: LOLUserData;
+  public heroes: LOLUserData;
   private url: string = 'http://ddragon.leagueoflegends.com/cdn/9.2.1/img/profileicon/';
   private profileimg: string = "";
   private notMatching: boolean = false;
@@ -20,7 +20,7 @@ export class SummonerComponent implements OnInit{
   public form: FormGroup;
   public summonerName: FormControl;
   private fromClick : boolean = false;
-  private submitted: boolean = false;
+  public submitted: boolean = false;
   private wrong: boolean = false;
   constructor(private summonerService: SummonerService, private zone: NgZone) {  }
 
@@ -57,7 +57,6 @@ export class SummonerComponent implements OnInit{
     if(invalid){
       let err1 = document.getElementById("err1");
       if(err1 != null || err1.style.display == "none"){
-        console.log("here");
         err1.style.display = "block";
       }
       this.submitted = false;

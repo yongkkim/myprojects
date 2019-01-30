@@ -3,7 +3,7 @@
     <form id = "searchform" [formGroup]="form" (ngSubmit)="onSubmit()">
         <div id = "searchbox">
             <input id = "search" formControlName="summonerName" autocomplete="off" placeholder=" Summoner Name..  ex)dragonsoup2" required/>  
-            <button id = "submit" type="submit">Search</button>
+            <button id = "submit" type="submit">Search!!</button>
             <div id = "err1" class="alert alert-danger" *ngIf = "summonerName.invalid">Cannot be empty</div>
             <div id = "err2" class="alert alert-danger" *ngIf = "summonerName.valid"></div>
         </div>
