@@ -101,7 +101,6 @@ export class SummonerHistoryComponent implements OnInit{
 		.subscribe(img => 
 		{
 			this.champimages = img;
-			console.log(this.champimages.data);
 			for(let c in this.champimages.data)
 			{
 				let mix : Array<any> = [];
