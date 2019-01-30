@@ -4,6 +4,7 @@ import { Observable, from, throwError} from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { LOLUserData } from './lolinterface';
 import { RankInfo } from './rankinfo';
+import { environment } from '../../environments/environment.prod';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,14 +17,14 @@ const httpOptions = {
 export class SummonerService {
 
   private apiurl: string;
-  
+  baseApiUrl: string = environment.baseApiUrl;
   constructor(private  http:  HttpClient) {}
   
   setURL(name: string){
-	 this.apiurl = '/api/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-1ad94f40-c57d-4586-8cb9-01a6ace0c9a7';
+	 this.apiurl = this.baseApiUrl + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-1ad94f40-c57d-4586-8cb9-01a6ace0c9a7';
   }
   setURL2(summonerID: string){
-    this.apiurl = '/api/lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-1ad94f40-c57d-4586-8cb9-01a6ace0c9a7';
+    this.apiurl = this.baseApiUrl + '/api/lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-1ad94f40-c57d-4586-8cb9-01a6ace0c9a7';
    }
 
   getdata(name: string): Observable<LOLUserData>{
