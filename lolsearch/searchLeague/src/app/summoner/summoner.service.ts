@@ -23,11 +23,11 @@ export class SummonerService {
   constructor(private  http:  HttpClient) {}
   
   setURL(name: string){
-    this.apiurl = '/lolsearch/' + this.baseApiUrl + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-1ad94f40-c57d-4586-8cb9-01a6ace0c9a7';
+    this.apiurl = '/lolsearch' + this.baseApiUrl + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-1ad94f40-c57d-4586-8cb9-01a6ace0c9a7';
 	  //this.apiurl = '/api/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-1ad94f40-c57d-4586-8cb9-01a6ace0c9a7';
   }
   setURL2(summonerID: string){
-    this.apiurl = '/lolsearch/' + this.baseApiUrl + 'lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-1ad94f40-c57d-4586-8cb9-01a6ace0c9a7';
+    this.apiurl = '/lolsearch' + this.baseApiUrl + 'lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-1ad94f40-c57d-4586-8cb9-01a6ace0c9a7';
     //this.apiurl = '/api/lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-1ad94f40-c57d-4586-8cb9-01a6ace0c9a7';
    }
 
