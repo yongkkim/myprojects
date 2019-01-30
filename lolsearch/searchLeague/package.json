@@ -2,7 +2,7 @@
   "name": "search-league",
   "version": "0.0.0",
   "scripts": {
-    "npm": "npm",
+    "ng": "ng",
     "start": "ng serve --proxy-config proxyconfig.json",
     "build": "ng build",
     "test": "ng test",
