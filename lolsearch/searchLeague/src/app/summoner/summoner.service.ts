@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClientModule, HttpClient, HttpHeaders, HttpErrorResponse} from  '@angular/common/http';
-import { Observable, from, throwError} from 'rxjs';
+import { HttpClient, HttpHeaders} from  '@angular/common/http';
+import { Observable, throwError} from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { LOLUserData } from './lolinterface';
 import { RankInfo } from './rankinfo';
