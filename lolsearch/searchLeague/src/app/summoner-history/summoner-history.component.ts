@@ -160,7 +160,7 @@ export class SummonerHistoryComponent implements OnInit{
 						let iturl: string[] = [];
 						let mix = this.history.champlist.get((igs.championId).toString());
 						let champinfo = this.url + mix[0];
-
+						//console.log(mix[1]);
 						//Champion image
 						temp2.push(champinfo);
 
@@ -223,6 +223,7 @@ export class SummonerHistoryComponent implements OnInit{
 					temp.push(gameid);
 					this.memberimages.push(temp);
 				}
+				//console.log("--------------done info----------------");
 				});
 				this.winRate = this.countWin + "W/" + Math.abs(this.countWin-this.initialhis.length) + "L";
 				
@@ -346,7 +347,7 @@ export class SummonerHistoryComponent implements OnInit{
 		}
 	}
 	finditem(itemnum: number, hero: string): any{
-
+		//console.log(itemnum);
 		if(itemnum != 0)
 		{
 			this.item.data[itemnum].itemsrc = this.itemurl + this.item.data[itemnum].image.full;
