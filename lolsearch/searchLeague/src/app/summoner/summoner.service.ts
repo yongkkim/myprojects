@@ -26,11 +26,11 @@ export class SummonerService {
   constructor(private  http:  HttpClient) {}
   
   setURL(name: string){
-    this.apiurl = this.baseApiUrl + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-c9492ea1-feef-4a79-a1dd-dd1aa5966164';
+    this.apiurl = 'https://yongkkim.github.io/lolsearch/' + this.baseApiUrl + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-c9492ea1-feef-4a79-a1dd-dd1aa5966164';
 	  //this.apiurl = '/api/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-c9492ea1-feef-4a79-a1dd-dd1aa5966164';
   }
   setURL2(summonerID: string){
-    this.apiurl = this.baseApiUrl + '/lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-c9492ea1-feef-4a79-a1dd-dd1aa5966164';
+    this.apiurl = 'https://yongkkim.github.io/lolsearch/' + this.baseApiUrl + '/lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-c9492ea1-feef-4a79-a1dd-dd1aa5966164';
     //this.apiurl = '/api/lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-c9492ea1-feef-4a79-a1dd-dd1aa5966164';
    }
 
