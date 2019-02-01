@@ -52,11 +52,13 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "searchLeague:build"
+            "browserTarget": "searchLeague:build",
+            "proxyConfig": "./proxyconfig.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "searchLeague:build:production"
+              "browserTarget": "searchLeague:build:production",
+              "proxyConfig": "./proxyconfig.json"
             }
           }
         },

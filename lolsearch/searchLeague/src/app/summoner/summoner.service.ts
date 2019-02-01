@@ -8,7 +8,10 @@ import { environment } from '../../environments/environment.prod';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, PUT, OPTIONS',
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+    'Content-Type':  'application/json'
   })
 };
 
@@ -23,23 +26,24 @@ export class SummonerService {
   constructor(private  http:  HttpClient) {}
   
   setURL(name: string){
-    this.apiurl = this.baseApiUrl + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-ea0b3ae8-d98b-45c6-adaa-f473fb3d3dc8';
-	  //this.apiurl = '/api/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-ea0b3ae8-d98b-45c6-adaa-f473fb3d3dc8';
+    this.apiurl = this.baseApiUrl + '/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-c9492ea1-feef-4a79-a1dd-dd1aa5966164';
+	  //this.apiurl = '/api/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-c9492ea1-feef-4a79-a1dd-dd1aa5966164';
   }
   setURL2(summonerID: string){
-    this.apiurl = this.baseApiUrl + '/lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-ea0b3ae8-d98b-45c6-adaa-f473fb3d3dc8';
-    //this.apiurl = '/api/lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-ea0b3ae8-d98b-45c6-adaa-f473fb3d3dc8';
+    this.apiurl = this.baseApiUrl + '/lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-c9492ea1-feef-4a79-a1dd-dd1aa5966164';
+    //this.apiurl = '/api/lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-c9492ea1-feef-4a79-a1dd-dd1aa5966164';
    }
 
   getdata(name: string): Observable<LOLUserData>{
   this.setURL(name);
-  return this.http.get<LOLUserData>(this.apiurl, httpOptions).pipe(
+  return this.http.get<LOLUserData>(this.apiurl, {headers: httpOptions.headers}).pipe(
     map(res => res),
     catchError(error => {return throwError(true);}));
   }
 
   getRankdata(summonerID: string): Observable<RankInfo>{
     this.setURL2(summonerID);
-    return this.http.get<RankInfo>(this.apiurl, httpOptions).pipe(map(res => res));
+
+    return this.http.get<RankInfo>(this.apiurl, {headers: httpOptions.headers}).pipe(map(res => res));
   }
 }
