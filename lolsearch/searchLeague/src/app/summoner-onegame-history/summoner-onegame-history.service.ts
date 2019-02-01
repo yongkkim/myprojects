@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClientModule, HttpClient, HttpHeaders} from  '@angular/common/http';
-import { Observable, from, forkJoin} from 'rxjs';
+import { HttpClient, HttpHeaders} from  '@angular/common/http';
+import { Observable, forkJoin} from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Champ } from '../summoner-history/champ';
 import { Player } from './player';
 import { Match } from '../summoner-history/match';
 import { environment } from 'src/environments/environment.prod';
