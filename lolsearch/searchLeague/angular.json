@@ -57,7 +57,7 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "searchLeague:build:production",
+              "browserTarget": "https://yongkkim.github.io/lolsearch/:build:production",
               "proxyConfig": "./proxyconfig.json"
             }
           }
