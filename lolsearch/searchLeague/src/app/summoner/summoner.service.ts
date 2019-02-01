@@ -4,7 +4,7 @@ import { Observable, throwError} from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { LOLUserData } from './lolinterface';
 import { RankInfo } from './rankinfo';
-import { environment } from '../../environments/environment.prod';
+import { environment } from 'src/environments/environment.prod';
 
 const httpOptions = {
   headers: new HttpHeaders({
