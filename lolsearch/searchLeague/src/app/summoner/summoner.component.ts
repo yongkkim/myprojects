@@ -2,18 +2,6 @@ import { OnInit, NgZone, Component } from '@angular/core';
 import { LOLUserData } from './lolinterface';
 import { SummonerService } from './summoner.service';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
-import { HttpHeaders} from  '@angular/common/http';
-
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Access-Control-Allow-Origin' : '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, PUT, OPTIONS',
-    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token, content-type',
-    'Content-Type':  'application/json'
-  })
-};
-
 
 @Component({
   selector: 'app-summoner',
