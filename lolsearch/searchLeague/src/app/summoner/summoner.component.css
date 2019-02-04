@@ -59,9 +59,6 @@ div#err1, div#err2{
         height: 40px;
         padding: 0;
     }
-    font-size: 20px;
-    line-height: 3;
-}
     button#submit{
         margin-left: -68px;
         height: 33px;
