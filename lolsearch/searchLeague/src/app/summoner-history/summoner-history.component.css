@@ -523,8 +523,11 @@ ul#columnName2 li.accounti img{
 		width: 40px;
 		padding-left: 0;
 	}
-	li.onehistory div.forone div.accountforone, div.kdaforone p, div.minionforone p, div.moneyforone p{
+	li.onehistory div.forone div.kdaforone p, div.minionforone p, div.moneyforone p{
 		font-size: 9px;
+	}
+	li.onehistory div.forone div.accountforone p{
+		font-size: 7px;
 	}
 	li.onehistory div.forone div.accountforone{
 		flex: none;
