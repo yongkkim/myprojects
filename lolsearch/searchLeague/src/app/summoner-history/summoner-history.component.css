@@ -441,18 +441,24 @@ ul#columnName2 li.accounti img{
 	}
 	li.btnonehistory div.forme{
 		float: right;
-    	flex: 3;
+		/*flex: 3 chrome mobile*/
+    	flex: 2.5;
 		height: 40px;
 	}
 	li.btnonehistory div.forme div#kda, div#gamemode, div#minion, div#money, div#time{
 		flex: 1;
 		text-align: center;
 	}
+	/* desktop mobiel
 	li.btnonehistory div#kda p, div#gamemode p, div#minion p, div#money p, div#time p{
 		font-size: 3px;
 	}
 	li.btnonehistory div#time p.creationDate{
 		font-size: 1px;
+	}*/
+	/* mobile */
+	li.btnonehistory div#kda p, div#gamemode p, div#minion p, div#money p, div#time p{
+		font-size: 7px;
 	}
 	ul#columnName li{
 		width: 25px;
