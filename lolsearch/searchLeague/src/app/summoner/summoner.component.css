@@ -61,7 +61,6 @@ div#err1, div#err2{
     button#submit{
         margin-left: -68px;
         height: 33px;
-        width: 65px;
     }
     div.alert-danger{
         width: 330px;
