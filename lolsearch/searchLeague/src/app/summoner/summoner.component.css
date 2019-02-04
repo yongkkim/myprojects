@@ -33,6 +33,8 @@ input#search{
     border-radius: 6px;
 }
 button#submit{
+    display: inline-block;
+    text-align: center;
     margin-left: -73px;
     height: 58px;
     color: white;
