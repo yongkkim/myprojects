@@ -89,7 +89,7 @@ export class SummonerComponent implements OnInit{
       this.form.get("summonerName").markAsPristine();
       this.form.get("summonerName").markAsUntouched();
 
-      html.style.backgroundImage = "linear-gradient(to bottom, transparent 60%, #07131A), url('src/assets/Bilgewater.jpg')";
+      html.style.backgroundImage = "linear-gradient(to bottom, transparent 60%, #07131A), url('assets/Bilgewater.jpg')";
       html.style.backgroundColor = "#07131A";
       html.style.backgroundSize = "100% 100%";
       html.style.backgroundRepeat = "no-repeat";
