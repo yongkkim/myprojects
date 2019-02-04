@@ -247,6 +247,7 @@ button{
 	-webkit-appearance: none;
 	-webkit-border-radius: 0;
 	background-color: whitesmoke;
+	border-color: currentColor;
 	float: right;
 	z-index: 30;
 }
@@ -500,6 +501,7 @@ ul#columnName2 li.accounti img{
 		-webkit-appearance: none;
 		-webkit-border-radius: 0;
 		background-color: whitesmoke;
+		border-color: currentColor;
 		height: 40px;
 		width: 15px;
 		padding: 1px;
