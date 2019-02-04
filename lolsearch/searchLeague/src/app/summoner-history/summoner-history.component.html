@@ -70,7 +70,7 @@
             <p>{{initialhis[p][18]}}</p>
             <p class = "creationDate">{{initialhis[p][19]}}</p>
         </div>
-        <button id = "togglebtn" *ngIf = "findtype()" (click) = "toggle(m[m.length-1], p, $event)"><i class="fa fa-caret-down"></i></button>
+        <button id = "togglebtn" *ngIf = "findtype()" (click) = "toggle(m[m.length-1], p, $event)"></button>
       </div>
     </li>
   </ul>
@@ -132,7 +132,7 @@
               <li class = "itemi"><img src = "{{itemicon}}"/></li>
             </ul>
             <ul id = "columnName2">
-                <li class = "accounti"><img src = "..\..\assets\account.png"/></li>
+                <li class = "accounti"><img src = "assets/account.png"/></li>
             </ul>
           </div>   
           <li *ngFor = "let z of data(m[m.length-1]) | slice: 5 : 10; index as j" [style.background-color]="setBackground(z[14])" class = "onehistory">
