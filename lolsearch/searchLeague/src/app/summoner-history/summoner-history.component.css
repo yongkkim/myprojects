@@ -516,6 +516,7 @@ ul#columnName2 li.accounti img{
 		height: 40px;
 		padding-top: 0;
 		/*flex : 2 chrome mobile*/
+		margin-left: 15px;
 		flex:3;
 		flex-direction: row;
 	}
@@ -531,7 +532,10 @@ ul#columnName2 li.accounti img{
 	}
 	li.onehistory div.forone div.accountforone{
 		flex: none;
-		width: 70px;
+		width: 80px;
+	}
+	li.onehistory div.forone div.accountforone a{
+		word-break: break-word;
 	}
 	li.btnonehistory{
 		display: flex;
