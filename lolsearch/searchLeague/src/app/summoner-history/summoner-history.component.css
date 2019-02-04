@@ -244,7 +244,6 @@ div#content{
 	float: right;
 }
 button{
-	-webkit-appearance: none;
 	-webkit-border-radius: 0;
 	float: right;
 	z-index: 30;
@@ -496,7 +495,6 @@ ul#columnName2 li.accounti img{
 		border-width: 3px;
 	}
 	button{
-		-webkit-appearance: none;
 		-webkit-border-radius: 0;
 		height: 40px;
 		width: 15px;
