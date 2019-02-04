@@ -65,14 +65,13 @@ div#err1, div#err2{
         margin-top: 4px;
     }
     div#start{
-        border: 0;
         border-top: 2px solid;
         border-bottom: 2px solid;
+        border-color: #5f9ea0;
         width: 100%;
         height: 260px;
         padding-top: 40px;
         border-radius: 10px;
-        border-color: cadetblue;
     }
     div#textLogo{
         font-size: 50px;
