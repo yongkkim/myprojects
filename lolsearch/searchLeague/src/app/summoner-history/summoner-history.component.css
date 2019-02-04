@@ -515,7 +515,8 @@ ul#columnName2 li.accounti img{
 	li.onehistory div.forone{
 		height: 40px;
 		padding-top: 0;
-		flex:2;
+		/*flex : 2 chrome mobile*/
+		flex:3;
 		flex-direction: row;
 	}
 	li.onehistory div.forone div.kmm div.kdaforone, div.minionforone, div.moneyforone{
@@ -553,7 +554,6 @@ ul#columnName2 li.accounti img{
 	}
 	ul#columnName li.itemi{
 		width: 85.65px;
-		margin-right: 20px;
 	}
 	ul#columnName li.itemi img{
 		width: 18%;
