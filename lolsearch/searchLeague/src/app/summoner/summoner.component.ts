@@ -102,8 +102,6 @@ export class SummonerComponent implements OnInit{
       start.style.paddingTop = "0";
       start.style.border = "none";
       start.style.borderRadius = "0";
-      //start.style.borderBottom = "2px solid #D4D9FF";
-      //start.style.boxShadow = "0 1px #9AA2E3";
 
       if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         start.style.height= "60px"
