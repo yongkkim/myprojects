@@ -105,7 +105,7 @@ export class SummonerComponent implements OnInit{
 
       if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         start.style.height = "60px";
-        start.style.width = "100%";
+        input.style.width = "100%";
       }
       else{
         start.style.height= "90px";
