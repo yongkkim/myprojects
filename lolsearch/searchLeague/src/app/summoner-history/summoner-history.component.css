@@ -249,7 +249,7 @@ button{
 	background-color: whitesmoke;
 	border-color: currentColor;
 	float: right;
-	z-index: 30;
+	z-index: 9;
 }
 div.column, div.hcolumn{
 	height: 25px;
