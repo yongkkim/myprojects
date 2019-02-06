@@ -74,6 +74,7 @@ div#err1, div#err2{
         margin-left: -68px;
         height: 33px;
         width: 65px;
+        padding: 0;
     }
     div.alert-danger{
         width: 330px;
