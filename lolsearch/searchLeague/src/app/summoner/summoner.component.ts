@@ -104,10 +104,11 @@ export class SummonerComponent implements OnInit{
       start.style.borderRadius = "0";
 
       if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-        start.style.height= "60px"
+        start.style.height = "60px";
+        start.style.width = "100%";
       }
       else{
-        start.style.height= "90px"
+        start.style.height= "90px";
       }
 
       if(error1 != null){
