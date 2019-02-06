@@ -8,7 +8,7 @@ div#textLogo{
 span#lol{
     text-shadow: -3px 12px 0px #96B6FF, -5px 12px 0px #CBDBFF;
 }
-div#start{
+div#start, .sticky{
     border-top: 5px solid;
     border-bottom: 5px solid;
     border-color: cadetblue;
@@ -18,6 +18,15 @@ div#start{
     margin-top: 80px;
     padding-top: 60px;
     border-radius: 60px;
+}
+.sticky {
+    position: fixed;
+    border : none;
+    top: 0;
+    z-index: 10;
+    margin-top: 0;
+    padding-top: 0;
+    height: 60px;
 }
 div#searchbox{
     text-align: center;

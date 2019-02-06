@@ -73,6 +73,8 @@ export class SummonerHistoryComponent implements OnInit{
   constructor(private summonerComponent: SummonerComponent, private summonerHistoryService: SummonerHistoryService, private summonerOneGameHistoryService: SummonerOnegameHistoryService) {}
   
   ngOnInit(){
+	window.addEventListener('scroll', this.searchbar, true);
+
 	if(this.info != null){
 		if(this.info.rank != undefined){
 			this.rankinfo = this.info.rank.tier + " " + this.info.rank.rank + " / " + 
@@ -84,10 +86,24 @@ export class SummonerHistoryComponent implements OnInit{
 		this.findHistory();
 	}
   }	
-  findHistory(){
+
+	searchbar() {
+		let searchbar = document.getElementById("searchform");
+		let sticky = searchbar.offsetTop;
+		let marginprofile = document.getElementById("profile");
+		
+		if (window.pageYOffset > sticky) {
+			searchbar.classList.add("sticky")
+			marginprofile.style.marginTop = "85px";
+		} else {
+			searchbar.classList.remove("sticky");
+			marginprofile.style.marginTop = "25px";
+		}
+	}
+  	findHistory(){
 		this.getHistory(this.info.accountId.toString());
 	}
-  getHistory(id: string): void {
+  	getHistory(id: string): void {
 	this.summonerHistoryService.getitem().subscribe((im) =>{
 		this.item = im;
 	});
