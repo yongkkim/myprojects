@@ -51,6 +51,9 @@ ul.btnhistory{
 	list-style-type: none;
 	padding: 0;
 }
+ul.btnhistory:hover{
+	cursor: pointer;
+}
 li.btnonehistory{
 	box-shadow: inset 0 0 40px darkslategrey
 }
@@ -221,6 +224,7 @@ li.onehistory div.items img.nothing, div.nothing{
 
 
 div.container{
+	cursor: auto;
 	position: relative;
 	width: 100%;
 	display: none;
