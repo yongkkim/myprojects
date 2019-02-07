@@ -226,9 +226,6 @@ div.container{
 	display: none;
 	padding: 5px 15px 5px 15px;
 }
-.eachgame li.btnonehistory{
-	background: rgb(208, 234, 255);
-}
 .eachgame:last-child ul.btnhistory{
 	margin: 0 auto;
 }

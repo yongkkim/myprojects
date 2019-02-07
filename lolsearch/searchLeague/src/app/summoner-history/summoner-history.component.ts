@@ -95,9 +95,12 @@ export class SummonerHistoryComponent implements OnInit{
 		if (window.pageYOffset > sticky) {
 			searchbar.classList.add("sticky")
 			marginprofile.style.marginTop = "85px";
+			searchbar.style.marginBottom = "80px";
+
 		} else {
 			searchbar.classList.remove("sticky");
 			marginprofile.style.marginTop = "25px";
+			searchbar.style.marginBottom = "0";
 		}
 	}
   	findHistory(){
@@ -293,6 +296,7 @@ export class SummonerHistoryComponent implements OnInit{
 				div.style.display = "block";
 				div.setAttribute("value", "yes");
 				li.scrollIntoView();
+				window.scrollBy(0, -80);
 			}
 		}
 	}
