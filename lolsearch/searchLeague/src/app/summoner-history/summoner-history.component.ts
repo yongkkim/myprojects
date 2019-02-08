@@ -46,9 +46,9 @@ export class SummonerHistoryComponent implements OnInit{
 	public images: Array<any[]> = [];
 	private memberimages: Array<Array<string[]>> = [];
 	private players: Player[];
-	private url: string = 'http://ddragon.leagueoflegends.com/cdn/9.2.1/img/champion/';
-	private spellurl: string = 'http://ddragon.leagueoflegends.com/cdn/9.2.1/img/spell/';
-	private itemurl: string = 'http://ddragon.leagueoflegends.com/cdn/9.2.1/img/item/';
+	private url: string = 'http://ddragon.leagueoflegends.com/cdn/9.3.1/img/champion/';
+	private spellurl: string = 'http://ddragon.leagueoflegends.com/cdn/9.3.1/img/spell/';
+	private itemurl: string = 'http://ddragon.leagueoflegends.com/cdn/9.3.1/img/item/';
 	public itemicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/items.png';
 	public goldicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/gold.png';
 	public kdaicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/score.png';

@@ -38,17 +38,17 @@ export class SummonerHistoryService {
   }
   getimage(): Observable<Champ>
   {
-	this.apiurl = 'https://cors-anywhere.herokuapp.com/' + this.baseDragonUrl + '/cdn/9.2.1/data/en_US/champion.json';
+	this.apiurl = 'https://cors-anywhere.herokuapp.com/' + this.baseDragonUrl + '/cdn/9.3.1/data/en_US/champion.json';
 	return this.http.get<Champ>(this.apiurl, httpOptions).pipe(map((res) => res));
   }
   getspell(): Observable<Spell>
   {
-	this.apiurl = 'https://cors-anywhere.herokuapp.com/' + this.baseDragonUrl + '/cdn/9.2.1/data/en_US/summoner.json';
+	this.apiurl = 'https://cors-anywhere.herokuapp.com/' + this.baseDragonUrl + '/cdn/9.3.1/data/en_US/summoner.json';
 	return this.http.get<Spell>(this.apiurl, httpOptions).pipe(map((res) => res));
   }
   getitem(): Observable<Item>
   {
-    this.apiurl = 'https://cors-anywhere.herokuapp.com/' + this.baseDragonUrl + '/cdn/9.2.1/data/en_US/item.json';
+    this.apiurl = 'https://cors-anywhere.herokuapp.com/' + this.baseDragonUrl + '/cdn/9.3.1/data/en_US/item.json';
     return this.http.get<Item>(this.apiurl, httpOptions).pipe(map((res) => res));
   }
 }
