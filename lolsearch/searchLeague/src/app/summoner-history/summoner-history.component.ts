@@ -266,10 +266,11 @@ export class SummonerHistoryComponent implements OnInit{
 		}
 	}
 	toggle(gid : string, n: string, event){//where n is order number of li tag
+		let div = document.getElementById(n);
+		let li = document.getElementById(gid);
 		if(this.deviceType == "smartphone" && (event.target.tagName == "BUTTON" || event.target.tagName == "I"))
 		{
 			event.stopPropagation();	
-			let div = document.getElementById(n);
 			if(div.getAttribute("value") == "yes")
 			{
 				div.style.display = "none";
@@ -279,12 +280,11 @@ export class SummonerHistoryComponent implements OnInit{
 			{
 				div.style.display = "block";
 				div.setAttribute("value", "yes");
+				div.style.border = "none";
 			}
 		}
 		else if(this.deviceType == "desktop")
 		{
-			let div = document.getElementById(n);
-			let li = document.getElementById(gid);
 			if(div.getAttribute("value") == "yes")
 			{
 				div.style.display = "none";
