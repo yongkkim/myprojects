@@ -36,7 +36,12 @@ export class SummonerComponent implements OnInit{
     let start = document.getElementById("start");
 
     msg.style.display = "none";
-    start.style.marginTop = "80px";
+    if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      start.style.marginTop = "50px";
+    }
+    else{
+      start.style.marginTop = "80px";
+    }
   }
   getHeroes(name: string): void {
     this.summonerService.getdata(name)
