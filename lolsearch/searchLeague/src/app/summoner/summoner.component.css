@@ -94,7 +94,7 @@ div#err1, div#err2{
     }
     div#message{
         height: 30px;
-        font-size: 8px;
+        font-size: 5px;
         line-height: 30px;
     }
     div.alert-danger{
