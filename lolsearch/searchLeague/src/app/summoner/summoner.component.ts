@@ -31,7 +31,13 @@ export class SummonerComponent implements OnInit{
       summonerName: this.summonerName
     });
   }
+  message(){
+    let msg = document.getElementById("message");
+    let start = document.getElementById("start");
 
+    msg.style.display = "none";
+    start.style.marginTop = "80px";
+  }
   getHeroes(name: string): void {
     this.summonerService.getdata(name)
     .subscribe(hero => {
@@ -83,9 +89,12 @@ export class SummonerComponent implements OnInit{
     let error2 = document.getElementById("err2");
     let logo = document.getElementById("textLogo");
     let html = document.getElementsByTagName("html")[0];
+    let message = document.getElementById("message");
 
     if(hrs != null){
       //console.log("came in = " + this.submitted);
+      message.style.display = "none";
+
       this.form.get("summonerName").markAsPristine();
       this.form.get("summonerName").markAsUntouched();
 

@@ -8,6 +8,21 @@ div#textLogo{
 span#lol{
     text-shadow: -3px 12px 0px #96B6FF, -5px 12px 0px #CBDBFF;
 }
+div#message{
+    display: block;
+    height: 40px;
+    font-size: 20px;
+    line-height: 33px;
+    background-color: #042e6f;
+    color: white;
+    text-align: center;
+}
+span#close{
+    float: right;
+}
+span#close:hover{
+    cursor: pointer;
+}
 div#start, .sticky{
     border-top: 5px solid;
     border-bottom: 5px solid;
@@ -15,7 +30,7 @@ div#start, .sticky{
     width: 100%;
     height: 430px;
     margin: 0 auto;
-    margin-top: 80px;
+    margin-top: 40px;
     padding-top: 60px;
     border-radius: 60px;
 }
@@ -76,6 +91,11 @@ div#err1, div#err2{
         width: 65px;
         padding: 0;
     }
+    div#message{
+        height: 30px;
+        font-size: 8px;
+        line-height: 30px;
+    }
     div.alert-danger{
         width: 330px;
         margin-top: 4px;
@@ -86,6 +106,7 @@ div#err1, div#err2{
         border-color: #5f9ea0;
         width: 100%;
         height: 260px;
+        margin-top: 20px;
         padding-top: 40px;
         border-radius: 10px;
     }
