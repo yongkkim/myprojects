@@ -86,7 +86,6 @@ li.btnonehistory div.items{
 	display: flex;
 	height: 80px;
 	flex-wrap: wrap;
-	align-content: flex-start;
 	float: left;
 }
 li.btnonehistory div.items .item{
@@ -431,6 +430,7 @@ ul#columnName2 li.accounti img{
 	}
 	li.btnonehistory div.items{
 		flex-direction: column;
+		align-content: flex-start;
 		height: 40px;
 		flex: 1;
 		float: none;
