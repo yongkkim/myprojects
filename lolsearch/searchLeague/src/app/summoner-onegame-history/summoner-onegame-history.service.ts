@@ -30,8 +30,8 @@ export class SummonerOnegameHistoryService {
 
   setURL(gameid: string)
   {
-    //this.apiurl = "/api/lol/match/v4/matches/" + gameid + "?api_key=RGAPI-a5e4a7a5-8e9f-4103-b937-e4509d0cf400";
-	  this.apiurl = 'https://cors-anywhere.herokuapp.com/' + this.baseApiUrl + "/lol/match/v4/matches/" + gameid + "?api_key=RGAPI-a5e4a7a5-8e9f-4103-b937-e4509d0cf400";
+    //this.apiurl = "/api/lol/match/v4/matches/" + gameid + "?api_key=RGAPI-5d8f19a0-1331-403f-b642-c518a07ccdea";
+	  this.apiurl = 'https://cors-anywhere.herokuapp.com/' + this.baseApiUrl + "/lol/match/v4/matches/" + gameid + "?api_key=RGAPI-5d8f19a0-1331-403f-b642-c518a07ccdea";
   }
   
   getdata(match: Match): Observable<Player[]>

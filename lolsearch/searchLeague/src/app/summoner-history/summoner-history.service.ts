@@ -28,8 +28,8 @@ export class SummonerHistoryService {
   constructor(private  http:  HttpClient) {}
   
   setURL(id: string){
-   //this.apiurl = '/api/lol/match/v4/matchlists/by-account/' + id + '?beginIndex=0&endIndex=10&api_key=RGAPI-a5e4a7a5-8e9f-4103-b937-e4509d0cf400';
-   this.apiurl = 'https://cors-anywhere.herokuapp.com/' + this.baseApiUrl + '/lol/match/v4/matchlists/by-account/' + id + '?beginIndex=0&endIndex=20&api_key=RGAPI-a5e4a7a5-8e9f-4103-b937-e4509d0cf400';
+   //this.apiurl = '/api/lol/match/v4/matchlists/by-account/' + id + '?beginIndex=0&endIndex=10&api_key=RGAPI-5d8f19a0-1331-403f-b642-c518a07ccdea';
+   this.apiurl = 'https://cors-anywhere.herokuapp.com/' + this.baseApiUrl + '/lol/match/v4/matchlists/by-account/' + id + '?beginIndex=0&endIndex=20&api_key=RGAPI-5d8f19a0-1331-403f-b642-c518a07ccdea';
   }
   getdata(id: string): Observable<Match>
   {
