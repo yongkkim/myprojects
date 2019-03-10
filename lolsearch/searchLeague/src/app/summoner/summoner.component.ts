@@ -29,7 +29,7 @@ import { trigger, state, transition, animate, style } from '@angular/animations'
 
 export class SummonerComponent implements OnInit{
 
-  private status : string = "open";
+  status : string = "open";
   private typed : boolean = false;
   public heroes: LOLUserData;
   private url: string = 'http://ddragon.leagueoflegends.com/cdn/9.3.1/img/profileicon/';
