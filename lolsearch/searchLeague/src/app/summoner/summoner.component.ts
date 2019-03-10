@@ -2,16 +2,34 @@ import { OnInit, NgZone, Component } from '@angular/core';
 import { LOLUserData } from './lolinterface';
 import { SummonerService } from './summoner.service';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { trigger, state, transition, animate, style } from '@angular/animations';
 
 @Component({
   selector: 'app-summoner',
   templateUrl: './summoner.component.html',
   providers: [ SummonerService ],
-  styleUrls: ['./summoner.component.css']
+  styleUrls: ['./summoner.component.css'],
+  animations:[
+		trigger('message', [
+			state('open', style({
+				'opacity' : '1',
+				'display' : 'block' 
+			})),
+			state('close', style({
+				'opacity' : '0',
+				'display' : 'none'
+      })),
+      transition(':enter', [style({opacity:0}),
+      animate('1000ms', style({opacity:1})) 
+    ]),
+			transition('open => close', animate('1000ms'))
+		])
+	]
 })
 
 export class SummonerComponent implements OnInit{
 
+  private status : string = "open";
   private typed : boolean = false;
   public heroes: LOLUserData;
   private url: string = 'http://ddragon.leagueoflegends.com/cdn/9.3.1/img/profileicon/';
@@ -35,13 +53,7 @@ export class SummonerComponent implements OnInit{
     let msg = document.getElementById("message");
     let start = document.getElementById("start");
 
-    msg.style.display = "none";
-    if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-      start.style.marginTop = "50px";
-    }
-    else{
-      start.style.marginTop = "80px";
-    }
+    this.status = "close";
   }
   getHeroes(name: string): void {
     this.summonerService.getdata(name)
