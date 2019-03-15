@@ -128,7 +128,7 @@ li.btnonehistory div#kda p, div#gamemode p, div#minion p, div#money p, div#time 
 /* after click button css */
 ul.history{
 	display: flex;
-	height: 360px;
+	height: 325px;
 	flex-wrap: wrap;
 	flex-direction: column;
 	list-style-type: none;
@@ -238,8 +238,6 @@ div.container{
 div#content{
 	margin: 0 auto;
 	width: 70%;
-	border-style: ridge;
-	border-width: 5px;
 }
 
 .fa{

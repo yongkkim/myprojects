@@ -32,7 +32,7 @@ export class SummonerComponent implements OnInit{
   status : string = "open";
   private typed : boolean = false;
   public heroes: LOLUserData;
-  private url: string = 'http://ddragon.leagueoflegends.com/cdn/9.3.1/img/profileicon/';
+  private url: string = 'http://ddragon.leagueoflegends.com/cdn/9.5.1/img/profileicon/';
   private profileimg: string = "";
   private notMatching: boolean = false;
   private errorMsg: string = "";

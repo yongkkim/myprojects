@@ -13,6 +13,7 @@ import { trigger, state, style, transition,	animate, group, query, stagger, keyf
 } from '@angular/animations';
 import { Item } from './item';
 import { Spells } from './spells';
+import { SlicePipe } from '@angular/common';
 
 
 @Component({
@@ -46,8 +47,8 @@ export class SummonerHistoryComponent implements OnInit{
 	public images: Array<any[]> = [];
 	private memberimages: Array<Array<string[]>> = [];
 	private players: Player[];
-	private url: string = 'http://ddragon.leagueoflegends.com/cdn/9.3.1/img/champion/';
-	private spellurl: string = 'http://ddragon.leagueoflegends.com/cdn/9.3.1/img/spell/';
+	private url: string = 'http://ddragon.leagueoflegends.com/cdn/9.5.1/img/champion/';
+	private spellurl: string = 'http://ddragon.leagueoflegends.com/cdn/9.5.1/img/spell/';
 	private itemurl: string = 'http://ddragon.leagueoflegends.com/cdn/9.3.1/img/item/';
 	public itemicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/items.png';
 	public goldicon: string = 'http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/gold.png';
@@ -258,6 +259,15 @@ export class SummonerHistoryComponent implements OnInit{
 		});
 	});
 	}
+
+	checkImage(image: any) : string{
+		if(image == "nothing"){
+			return "assets/empty.png";
+		}
+		else{
+			return image.itemsrc;
+		}
+	}
 	setBackground(winloss: string){
 		if(winloss == "win"){
 			return "#a3cfec";
@@ -265,7 +275,7 @@ export class SummonerHistoryComponent implements OnInit{
 			return "#e2b6b3";
 		}
 	}
-	toggle(gid : string, n: string, event){//where n is order number of li tag
+	toggle(gid : string, n: string, abc: any, event){//where n is order number of li tag
 		let div = document.getElementById(n);
 		let li = document.getElementById(gid);
 		if(this.deviceType == "smartphone" && (event.target.tagName == "BUTTON" || event.target.tagName == "I"))
@@ -294,6 +304,9 @@ export class SummonerHistoryComponent implements OnInit{
 			else
 			{
 				div.style.display = "block";
+				div.style.borderWidth = "0 1px 1px 1px";
+				div.style.borderColor = "#008B8B";
+				div.style.borderStyle = "solid";
 				div.setAttribute("value", "yes");
 				li.scrollIntoView();
 				window.scrollBy(0, -80);

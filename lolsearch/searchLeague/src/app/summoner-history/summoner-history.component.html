@@ -30,28 +30,18 @@
 <div id = "content">
 <div class = "eachgame" *ngFor = "let m of images; index as p">
   <ul class  = "btnhistory">
-    <li class = "btnonehistory" id = {{m[m.length-1]}} [style.background-color]="setBackground(initialhis[p][14])" *ngIf = "initialhis[p]" (click) = "toggle(m[m.length-1], p, $event)">
+    <li class = "btnonehistory" id = {{m[m.length-1]}} [style.background-color]="setBackground(initialhis[p][14])" *ngIf = "initialhis[p]" (click) = "toggle(m[m.length-1], p, initialhis[p], $event)">
       <img src = {{m[0]}} (mouseover)="pop(-4, '', initialhis[p][15], $event)" (mouseout) = "out()" />
       <ul class = "spells"> 
         <!-- in function pop, parameter "-1" is only for button pop ups -->
         <li class = "spell"><img class = "spellimg" (mouseover)="pop(-1, initialhis[p][1].spellurl, initialhis[p][1].description, $event)" (mouseout) = "out()" src = {{initialhis[p][1].spellurl}}/></li>
         <li class = "spell"><img class = "spellimg" (mouseover)="pop(-1, initialhis[p][2].spellurl, initialhis[p][2].description, $event)" (mouseout) = "out()" src = {{initialhis[p][2].spellurl}}/></li>
       </ul>
-      <div class = "items">
-        <div class = "item" *ngIf = "initialhis[p][3] == 'nothing'"></div>
-        <img class = "item" *ngIf = "initialhis[p][3] != 'nothing'" (mouseover)="pop(-1, initialhis[p][3].itemsrc, initialhis[p][3].description, $event)" (mouseout) = "out()" src = {{initialhis[p][3].itemsrc}}/>
-        <div class = "item" *ngIf = "initialhis[p][4] == 'nothing'"></div>
-        <img class = "item" *ngIf = "initialhis[p][4] != 'nothing'" (mouseover)="pop(-1, initialhis[p][4].itemsrc, initialhis[p][4].description, $event)" (mouseout) = "out()" src = {{initialhis[p][4].itemsrc}}/>
-        <div class = "item" *ngIf = "initialhis[p][5] == 'nothing'"></div>
-        <img class = "item" *ngIf = "initialhis[p][5] != 'nothing'" (mouseover)="pop(-1, initialhis[p][5].itemsrc, initialhis[p][5].description, $event)" (mouseout) = "out()" src = {{initialhis[p][5].itemsrc}}/>
-        <div class = "item" *ngIf = "initialhis[p][6] == 'nothing'"></div>
-        <img class = "item" *ngIf = "initialhis[p][6] != 'nothing'" (mouseover)="pop(-1, initialhis[p][6].itemsrc, initialhis[p][6].description, $event)" (mouseout) = "out()" src = {{initialhis[p][6].itemsrc}}/>
-        <div class = "item" *ngIf = "initialhis[p][7] == 'nothing'"></div>
-        <img class = "item" *ngIf = "initialhis[p][7] != 'nothing'" (mouseover)="pop(-1, initialhis[p][7].itemsrc, initialhis[p][7].description, $event)" (mouseout) = "out()" src = {{initialhis[p][7].itemsrc}}/>
-        <div class = "item" *ngIf = "initialhis[p][8] == 'nothing'"></div>
-        <img class = "item" *ngIf = "initialhis[p][8] != 'nothing'" (mouseover)="pop(-1, initialhis[p][8].itemsrc, initialhis[p][8].description, $event)" (mouseout) = "out()" src = {{initialhis[p][8].itemsrc}}/>
-        <div class = "item" *ngIf = "initialhis[p][9] == 'nothing'"></div>
-        <img class = "item" *ngIf = "initialhis[p][9] != 'nothing'" (mouseover)="pop(-1, initialhis[p][9].itemsrc, initialhis[p][9].description, $event)" (mouseout) = "out()" src = {{initialhis[p][9].itemsrc}}/>
+      <div class = "items"><!-- use *ngFor -->
+        <ng-container *ngFor="let item of initialhis[p] | slice: 3 : 10;">
+            <img class = "item" *ngIf = "item != 'nothing'; else empty" (mouseover)="pop(-1, item.itemsrc, item.description, $event)" (mouseout) = "out()" [src] = "checkImage(item)"/>
+            <ng-template #empty> <div class = "item"></div> </ng-template>
+        </ng-container>
       </div>
       <div class = "forme">
         <div id = "gamemode" >
@@ -76,37 +66,17 @@
   </ul>
   <div class = "container" id = {{p}}>
         <ul class= "history">
-          <div class = "column">
-            <ul id = "columnName">
-              <li class = "champi"><img src = "{{champicon}}"/></li>
-              <li class = "spelli"><img src = "{{spellicon}}"/></li>
-              <li class = "itemi"><img src = "{{itemicon}}"/></li>
-            </ul>
-            <ul id = "columnName2">
-                <li class = "accounti"><img src = "assets/account.png"/></li>
-            </ul>
-          </div>  
-          <li *ngFor = "let z of data(m[m.length-1]) | slice: 0 : 5; index as j" [style.background-color]="setBackground(z[14])" class = "onehistory">
+          <li *ngFor = "let z of data(m[m.length-1]) | slice: 0 : 10; index as j" [style.background-color]="setBackground(z[14])" class = "onehistory">
             <img class = "champ" src = {{z[0]}}  (mouseover)="pop(-4, '', z[15], $event)" (mouseout) = "out()" />
             <ul class = "spells">
-                <li class = "spell"><img class = "spellimg" (mouseover)="pop(j, z[1].spellurl, z[1].description, $event)" (mouseout) = "out()" src = {{z[1].spellurl}}/></li>
-                <li class = "spell"><img class = "spellimg" (mouseover)="pop(j, z[2].spellurl, z[2].description, $event)" (mouseout) = "out()" src = {{z[2].spellurl}}/></li>
+                <li class = "spell"><img class = "spellimg" (mouseover)="pop(j, z[1].spellurl, z[1], $event)" (mouseout) = "out()" src = {{z[1].spellurl}}/></li>
+                <li class = "spell"><img class = "spellimg" (mouseover)="pop(j, z[2].spellurl, z[2], $event)" (mouseout) = "out()" src = {{z[2].spellurl}}/></li>
             </ul>
             <div class = "items">
-              <div class = "item" *ngIf = "z[3] == 'nothing'"></div>
-              <img class = "item" *ngIf = "z[3] != 'nothing'" (mouseover)="pop(j, z[3].itemsrc, z[3].description, $event)" (mouseout) = "out()" src = {{z[3].itemsrc}}/>
-              <div class = "item" *ngIf = "z[4] == 'nothing'"></div>
-              <img class = "item" *ngIf = "z[4] != 'nothing'" (mouseover)="pop(j, z[4].itemsrc, z[4].description, $event)" (mouseout) = "out()" src = {{z[4].itemsrc}}/>
-              <div class = "item" *ngIf = "z[5] == 'nothing'"></div>
-              <img class = "item" *ngIf = "z[5] != 'nothing'" (mouseover)="pop(j, z[5].itemsrc, z[5].description, $event)" (mouseout) = "out()" src = {{z[5].itemsrc}}/>
-              <div class = "item" *ngIf = "z[6] == 'nothing'"></div>
-              <img class = "item" *ngIf = "z[6] != 'nothing'" (mouseover)="pop(j, z[6].itemsrc, z[6].description, $event)" (mouseout) = "out()" src = {{z[6].itemsrc}}/>
-              <div class = "item" *ngIf = "z[7] == 'nothing'"></div>
-              <img class = "item" *ngIf = "z[7] != 'nothing'" (mouseover)="pop(j, z[7].itemsrc, z[7].description, $event)" (mouseout) = "out()" src = {{z[7].itemsrc}}/>
-              <div class = "item" *ngIf = "z[8] == 'nothing'"></div>
-              <img class = "item" *ngIf = "z[8] != 'nothing'" (mouseover)="pop(j, z[8].itemsrc, z[8].description, $event)" (mouseout) = "out()" src = {{z[8].itemsrc}}/>
-              <div class = "item" *ngIf = "z[9] == 'nothing'"></div>
-              <img class = "item" *ngIf = "z[9] != 'nothing'" (mouseover)="pop(j, z[9].itemsrc, z[9].description, $event)" (mouseout) = "out()" src = {{z[9].itemsrc}}/>
+              <ng-container *ngFor="let item of z | slice: 3 : 10;">
+                  <img class = "item" *ngIf = "item != 'nothing'; else empty" (mouseover)="pop(-1, item.itemsrc, item.description, $event)" (mouseout) = "out()" [src] = "checkImage(item)"/>
+                  <ng-template #empty> <div class = "item"></div> </ng-template>
+              </ng-container>
             </div>
             <div class = "forone">
               <div class = "accountforone" >
@@ -125,55 +95,6 @@
               </div>
             </div>
           </li>
-          <div class = "column">
-            <ul id = "columnName">
-              <li class = "champi"><img src = "{{champicon}}"/></li>
-              <li class = "spelli"><img src = "{{spellicon}}"/></li>
-              <li class = "itemi"><img src = "{{itemicon}}"/></li>
-            </ul>
-            <ul id = "columnName2">
-                <li class = "accounti"><img src = "assets/account.png"/></li>
-            </ul>
-          </div>   
-          <li *ngFor = "let z of data(m[m.length-1]) | slice: 5 : 10; index as j" [style.background-color]="setBackground(z[14])" class = "onehistory">
-              <img class = "champ" src = {{z[0]}} (mouseover)="pop(-4, '', z[15], $event)" (mouseout) = "out()"/>
-              <ul class = "spells">
-                  <li class = "spell"><img class = "spellimg" (mouseover)="pop(j, z[1].spellurl, z[1].description, $event)" (mouseout) = "out()" src = {{z[1].spellurl}}/></li>
-                  <li class = "spell"><img class = "spellimg" (mouseover)="pop(j, z[2].spellurl, z[2].description, $event)" (mouseout) = "out()" src = {{z[2].spellurl}}/></li>
-              </ul>
-              <div class = "items">
-                <div class = "item" *ngIf = "z[3] == 'nothing'"></div>
-                <img class = "item" *ngIf = "z[3] != 'nothing'" (mouseover)="pop(j, z[3].itemsrc, z[3].description, $event)" (mouseout) = "out()" src = {{z[3].itemsrc}}/>
-                <div class = "item" *ngIf = "z[4] == 'nothing'"></div>
-                <img class = "item" *ngIf = "z[4] != 'nothing'" (mouseover)="pop(j, z[4].itemsrc, z[4].description, $event)" (mouseout) = "out()" src = {{z[4].itemsrc}}/>
-                <div class = "item" *ngIf = "z[5] == 'nothing'"></div>
-                <img class = "item" *ngIf = "z[5] != 'nothing'" (mouseover)="pop(j, z[5].itemsrc, z[5].description, $event)" (mouseout) = "out()" src = {{z[5].itemsrc}}/>
-                <div class = "item" *ngIf = "z[6] == 'nothing'"></div>
-                <img class = "item" *ngIf = "z[6] != 'nothing'" (mouseover)="pop(j, z[6].itemsrc, z[6].description, $event)" (mouseout) = "out()" src = {{z[6].itemsrc}}/>
-                <div class = "item" *ngIf = "z[7] == 'nothing'"></div>
-                <img class = "item" *ngIf = "z[7] != 'nothing'" (mouseover)="pop(j, z[7].itemsrc, z[7].description, $event)" (mouseout) = "out()" src = {{z[7].itemsrc}}/>
-                <div class = "item" *ngIf = "z[8] == 'nothing'"></div>
-                <img class = "item" *ngIf = "z[8] != 'nothing'" (mouseover)="pop(j, z[8].itemsrc, z[8].description, $event)" (mouseout) = "out()" src = {{z[8].itemsrc}}/>
-                <div class = "item" *ngIf = "z[9] == 'nothing'"></div>
-                <img class = "item" *ngIf = "z[9] != 'nothing'" (mouseover)="pop(j, z[9].itemsrc, z[9].description, $event)" (mouseout) = "out()" src = {{z[9].itemsrc}}/>
-              </div>
-              <div class = "forone">
-                <div class = "accountforone" >
-                  <a href = "#" (click) = "searchIt(z[16][0])">{{z[16][0]}}</a>
-                </div>
-                <div class = "kmm">
-                  <div class = "kdaforone" >
-                    <p (mouseover)="pop(-3, '', z[11], $event)" (mouseout) = "out()">{{z[10]}}</p>
-                  </div>
-                  <div class = "minionforone" >
-                      <p>{{z[12]}}</p>
-                  </div>
-                  <div class = "moneyforone" >
-                    <p>{{z[13]}}</p>
-                  </div>
-                </div>
-              </div>
-            </li>
         </ul>
   </div>
 </div>
