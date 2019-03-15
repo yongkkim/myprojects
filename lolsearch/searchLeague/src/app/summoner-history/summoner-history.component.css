@@ -346,51 +346,9 @@ ul#columnName2 li.accounti img{
 	height: 75%;
 }
 
-
 /*@media only screen and (min-width: 768px) and (max-width: 1024px){
-	li.btnonehistory{
-		margin-bottom: 3px;
-	}
-	li.btnonehistory img{
-		height: 60px;
-		width: 60px;
-	}
-	li.btnonehistory ul.spells li.spell{
-		display: block;
-		padding: 0;
-		height: 30px;
-		width: 30px;
-	}
-	ul.history{
-		height: 265px;
-	}
-	li.onehistory{
-		margin-bottom: 3px;
-	}
-	li.onehistory img.champ{
-		height: 50px;
-		width: 50px;
-	}
-	li.onehistory ul.spells li.spell{
-		height: 25px;
-		width: 25px;
-	}
-	li.onehistory div.items{
-		height: 50px;
-	}
-	li.onehistory div.items img.item{
-		height: 25px;
-		width: 25px;
-	}
-	li.onehistory div.items div.item{
-		height: 25px;
-		width: 25px;
-		box-shadow: inset 0px 0px 4px #000000;
-	}
-	button{
-		height: 60px;
-	}
 }*/
+
 @media only screen and (min-width: 375px) and (max-width: 1024px){
 	table#profile{
 		margin-top: 35px;

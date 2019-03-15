@@ -338,21 +338,11 @@ export class SummonerHistoryComponent implements OnInit{
 		
 
 		if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-		/*newdiv.setAttribute("style", 
-		"position: fixed; height:auto; width: 150px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;");
-		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 2px;");
-		newimg.setAttribute("style", "height: 30px; width: 30px;"); chrome mobile*/
 		newdiv.setAttribute("style", 
 		"position: fixed; height:auto; width: 650px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;");
 		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 8px;");
 		newimg.setAttribute("style", "height: 30px; width: 30px;");
 		}
-		/*else if( /iPad/i.test(navigator.userAgent) ) {
-			newdiv.setAttribute("style", 
-		"position: absolute; height:auto; width: 175px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;");
-		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 7px;");
-		newimg.setAttribute("style", "height: 40px; width: 40px;");
-		}*/
 		else{
 			newdiv.setAttribute("style", 
 		"position: fixed; height:auto; width: 250px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;");
