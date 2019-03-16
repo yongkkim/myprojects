@@ -342,8 +342,7 @@ export class SummonerHistoryComponent implements OnInit{
 		"position: fixed; height:auto; width: 650px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;");
 		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 8px;");
 		newimg.setAttribute("style", "height: 30px; width: 30px;");
-		}
-		else{
+		}else{
 			newdiv.setAttribute("style", 
 		"position: fixed; height:auto; width: 250px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;");
 		newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 11px;");
