@@ -1,0 +1,41 @@
+.commentForm {
+  display: flex;
+}
+
+.commentForm input {
+  flex: 1; /* Fill the rest of spaces with a button */
+  font-size: 10px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #c5f6fa;
+}
+
+.form input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+.form input:focus:-moz-placeholder {
+  color: transparent;
+} /* FF 4-18 */
+.form input:focus::-moz-placeholder {
+  color: transparent;
+} /* FF 19+ */
+.form input:focus:-ms-input-placeholder {
+  color: transparent;
+} /* IE 10+ */
+
+.create-commentbutton {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
+  margin-left: 0.7rem;
+  background: #22b8cf;
+  border-radius: 3px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.create-button:hover {
+  background: #3bc9db;
+}
