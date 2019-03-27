@@ -31,13 +31,13 @@ export class SummonerHistoryService {
   constructor(private http: HttpClient) {}
 
   setURL(id: string) {
-    //this.apiurl = '/api/lol/match/v4/matchlists/by-account/' + id + '?beginIndex=0&endIndex=10&api_key=RGAPI-49ba9a4b-4a5d-4315-a0d4-ac320e91494c';
+    //this.apiurl = '/api/lol/match/v4/matchlists/by-account/' + id + '?beginIndex=0&endIndex=10&api_key=RGAPI-93b9d08f-2d53-4ab6-9469-660b5fb4231d';
     this.apiurl =
       "https://cors-anywhere.herokuapp.com/" +
       this.baseApiUrl +
       "/lol/match/v4/matchlists/by-account/" +
       id +
-      "?beginIndex=0&endIndex=20&api_key=RGAPI-49ba9a4b-4a5d-4315-a0d4-ac320e91494c";
+      "?beginIndex=0&endIndex=20&api_key=RGAPI-93b9d08f-2d53-4ab6-9469-660b5fb4231d";
   }
   getdata(id: string): Observable<Match> {
     this.setURL(id);
@@ -47,7 +47,7 @@ export class SummonerHistoryService {
     this.apiurl =
       "https://cors-anywhere.herokuapp.com/" +
       this.baseDragonUrl +
-      "/cdn/9.5.1/data/en_US/champion.json"; //for production
+      "/cdn/9.6.1/data/en_US/champion.json"; //for production
     //this.apiurl = '/dragon/cdn/9.5.1/data/en_US/champion.json';//localhost
     return this.http.get<Champ>(this.apiurl, httpOptions).pipe(map(res => res));
   }
@@ -55,7 +55,7 @@ export class SummonerHistoryService {
     this.apiurl =
       "https://cors-anywhere.herokuapp.com/" +
       this.baseDragonUrl +
-      "/cdn/9.5.1/data/en_US/summoner.json"; //for production
+      "/cdn/9.6.1/data/en_US/summoner.json"; //for production
     //this.apiurl = '/dragon/cdn/9.5.1/data/en_US/summoner.json';//localhost
     return this.http.get<Spell>(this.apiurl, httpOptions).pipe(map(res => res));
   }
@@ -63,7 +63,7 @@ export class SummonerHistoryService {
     this.apiurl =
       "https://cors-anywhere.herokuapp.com/" +
       this.baseDragonUrl +
-      "/cdn/9.5.1/data/en_US/item.json"; //for production
+      "/cdn/9.6.1/data/en_US/item.json"; //for production
     //this.apiurl = '/dragon/cdn/9.5.1/data/en_US/item.json';//localhost
     return this.http.get<Item>(this.apiurl, httpOptions).pipe(map(res => res));
   }
