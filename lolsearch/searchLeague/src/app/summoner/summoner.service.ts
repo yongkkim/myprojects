@@ -29,8 +29,8 @@ export class SummonerService {
       this.baseApiUrl +
       "/lol/summoner/v4/summoners/by-name/" +
       name +
-      "?api_key=RGAPI-eb672dd3-0bf9-40e0-8c15-c4ae5fe4676e";
-    //this.apiurl = '/api/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-eb672dd3-0bf9-40e0-8c15-c4ae5fe4676e';//localhost
+      "?api_key=RGAPI-19ffb91a-7c59-448c-bee1-722d9baba6aa";
+    //this.apiurl = '/api/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-19ffb91a-7c59-448c-bee1-722d9baba6aa';//localhost
   }
   setURL2(summonerID: string) {
     this.apiurl =
@@ -38,8 +38,8 @@ export class SummonerService {
       this.baseApiUrl +
       "/lol/league/v4/positions/by-summoner/" +
       summonerID +
-      "?api_key=RGAPI-eb672dd3-0bf9-40e0-8c15-c4ae5fe4676e";
-    //this.apiurl = '/api/lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-eb672dd3-0bf9-40e0-8c15-c4ae5fe4676e';//localhost
+      "?api_key=RGAPI-19ffb91a-7c59-448c-bee1-722d9baba6aa";
+    //this.apiurl = '/api/lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-19ffb91a-7c59-448c-bee1-722d9baba6aa';//localhost
   }
 
   getdata(name: string): Observable<LOLUserData> {
