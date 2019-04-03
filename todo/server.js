@@ -1,23 +1,24 @@
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
 const port = 5000;
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-const todoListSchema = new Schema({
-  author: String,
-  title: String,
-  todos: [{ todo: String, date: Date, checked: Boolean, color: Number }],
-  comments: [{ comment: String, color: Number }]
-});
+const ServerPortRouter = require("./ServerPortRouter");
+const cors = require("cors");
 
-const connect = () => {
-  mongoose.connect("mongodb://localhost:27017/todoDB");
-};
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-const todoList = mongoose.model("todoList", todoListSchema);
+mongoose.connect("mongodb://localhost:27017/todoDB").then(
+  () => {
+    console.log("connected to the database");
+  },
+  err => {
+    console.log("Can not connect to the database -> " + err);
+  }
+);
 
-app.post("/add", function(req, res) {
-  res.send("POST request to the homepage");
-});
+app.use("/serverport", ServerPortRouter);
 
 app.listen(port, () => console.log(`Server started on paort ${port}`));
