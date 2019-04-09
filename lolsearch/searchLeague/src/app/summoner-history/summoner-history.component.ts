@@ -72,11 +72,11 @@ export class SummonerHistoryComponent implements OnInit {
   private memberimages: Array<Array<string[]>> = [];
   private players: Player[];
   private url: string =
-    "http://ddragon.leagueoflegends.com/cdn/9.6.1/img/champion/";
+    "http://ddragon.leagueoflegends.com/cdn/9.7.1/img/champion/";
   private spellurl: string =
-    "http://ddragon.leagueoflegends.com/cdn/9.6.1/img/spell/";
+    "http://ddragon.leagueoflegends.com/cdn/9.7.1/img/spell/";
   private itemurl: string =
-    "http://ddragon.leagueoflegends.com/cdn/9.6.1/img/item/";
+    "http://ddragon.leagueoflegends.com/cdn/9.7.1/img/item/";
   public itemicon: string =
     "http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/items.png";
   public goldicon: string =
@@ -108,7 +108,7 @@ export class SummonerHistoryComponent implements OnInit {
     private summonerComponent: SummonerComponent,
     private summonerHistoryService: SummonerHistoryService,
     private summonerOneGameHistoryService: SummonerOnegameHistoryService
-  ) {}
+  ) { }
 
   ngOnInit() {
     window.addEventListener("scroll", this.searchbar, true);
@@ -288,10 +288,10 @@ export class SummonerHistoryComponent implements OnInit {
                     temp2.push(total);
                     temp2.push(
                       d.getDate() +
-                        "/" +
-                        (d.getMonth() + 1) +
-                        "/" +
-                        d.getFullYear()
+                      "/" +
+                      (d.getMonth() + 1) +
+                      "/" +
+                      d.getFullYear()
                     );
                     me = temp2;
                   }

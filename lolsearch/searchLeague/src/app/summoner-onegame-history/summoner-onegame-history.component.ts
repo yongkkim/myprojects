@@ -14,7 +14,7 @@ export class SummonerOnegameHistoryComponent implements OnInit {
   private champimages: Champ;
   private images: string[] = [];
   private url: string =
-    "http://ddragon.leagueoflegends.com/cdn/9.6.1/img/champion/";
+    "http://ddragon.leagueoflegends.com/cdn/9.7.1/img/champion/";
   private typed: boolean = false;
   private players: Player[];
   @Input("info") private matchinfo: Match;
@@ -22,7 +22,7 @@ export class SummonerOnegameHistoryComponent implements OnInit {
   constructor(
     private summonerHistoryService: SummonerHistoryService,
     private summonerOneGameHistoryService: SummonerOnegameHistoryService
-  ) {}
+  ) { }
 
   ngOnInit() {
     if (this.matchinfo != null) {

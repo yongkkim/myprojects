@@ -44,7 +44,7 @@ export class SummonerComponent implements OnInit {
   private typed: boolean = false;
   public heroes: LOLUserData;
   private url: string =
-    "http://ddragon.leagueoflegends.com/cdn/9.6.1/img/profileicon/";
+    "http://ddragon.leagueoflegends.com/cdn/9.7.1/img/profileicon/";
   private profileimg: string = "";
   private notMatching: boolean = false;
   private errorMsg: string = "";
@@ -53,7 +53,7 @@ export class SummonerComponent implements OnInit {
   private fromClick: boolean = false;
   public submitted: boolean = false;
   private wrong: boolean = false;
-  constructor(private summonerService: SummonerService, private zone: NgZone) {}
+  constructor(private summonerService: SummonerService, private zone: NgZone) { }
 
   ngOnInit(): void {
     this.summonerName = new FormControl("", Validators.required);
