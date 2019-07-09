@@ -31,40 +31,40 @@ export class SummonerHistoryService {
   constructor(private http: HttpClient) { }
 
   setURL(id: string) {
-    //this.apiurl = '/api/lol/match/v4/matchlists/by-account/' + id + '?beginIndex=0&endIndex=10&api_key=RGAPI-ca7ce4b6-aa5a-4e18-9ea4-6ba7121bd06e';
-    this.apiurl =
-      "https://cors-anywhere.herokuapp.com/" +
-      this.baseApiUrl +
-      "/lol/match/v4/matchlists/by-account/" +
-      id +
-      "?beginIndex=0&endIndex=20&api_key=RGAPI-ca7ce4b6-aa5a-4e18-9ea4-6ba7121bd06e";
+    this.apiurl = '/api/lol/match/v4/matchlists/by-account/' + id + '?beginIndex=0&endIndex=10&api_key=RGAPI-3a352cd3-776d-4ac7-bb75-1431ecd63367';
+    // this.apiurl =
+    //   "https://cors-anywhere.herokuapp.com/" +
+    //   this.baseApiUrl +
+    //   "/lol/match/v4/matchlists/by-account/" +
+    //   id +
+    //   "?beginIndex=0&endIndex=20&api_key=RGAPI-3a352cd3-776d-4ac7-bb75-1431ecd63367";
   }
   getdata(id: string): Observable<Match> {
     this.setURL(id);
     return this.http.get<Match>(this.apiurl, httpOptions).pipe(map(res => res));
   }
   getimage(): Observable<Champ> {
-    this.apiurl =
-      "https://cors-anywhere.herokuapp.com/" +
-      this.baseDragonUrl +
-      "/cdn/9.7.1/data/en_US/champion.json"; //for production
-    //this.apiurl = '/dragon/cdn/9.7.1/data/en_US/champion.json';//localhost
+    // this.apiurl =
+    //   "https://cors-anywhere.herokuapp.com/" +
+    //   this.baseDragonUrl +
+    //   "/cdn/9.7.1/data/en_US/champion.json"; //for production
+    this.apiurl = '/dragon/cdn/9.7.1/data/en_US/champion.json';//localhost
     return this.http.get<Champ>(this.apiurl, httpOptions).pipe(map(res => res));
   }
   getspell(): Observable<Spell> {
-    this.apiurl =
-      "https://cors-anywhere.herokuapp.com/" +
-      this.baseDragonUrl +
-      "/cdn/9.7.1/data/en_US/summoner.json"; //for production
-    //this.apiurl = '/dragon/cdn/9.7.1/data/en_US/summoner.json';//localhost
+    // this.apiurl =
+    //   "https://cors-anywhere.herokuapp.com/" +
+    //   this.baseDragonUrl +
+    //   "/cdn/9.7.1/data/en_US/summoner.json"; //for production
+    this.apiurl = '/dragon/cdn/9.7.1/data/en_US/summoner.json';//localhost
     return this.http.get<Spell>(this.apiurl, httpOptions).pipe(map(res => res));
   }
   getitem(): Observable<Item> {
-    this.apiurl =
-      "https://cors-anywhere.herokuapp.com/" +
-      this.baseDragonUrl +
-      "/cdn/9.7.1/data/en_US/item.json"; //for production
-    //this.apiurl = '/dragon/cdn/9.5.1/data/en_US/item.json';//localhost
+    // this.apiurl =
+    //   "https://cors-anywhere.herokuapp.com/" +
+    //   this.baseDragonUrl +
+    //   "/cdn/9.7.1/data/en_US/item.json"; //for production
+    this.apiurl = '/dragon/cdn/9.5.1/data/en_US/item.json';//localhost
     return this.http.get<Item>(this.apiurl, httpOptions).pipe(map(res => res));
   }
 }
