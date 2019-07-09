@@ -9,62 +9,13 @@ import { Match } from "./match";
 import { Champ } from "./champ";
 import { Spell } from "./Spell";
 import { Player } from "../summoner-onegame-history/player";
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-  group,
-  query,
-  stagger,
-  keyframes
-} from "@angular/animations";
 import { Item } from "./item";
 import { Spells } from "./spells";
 
 @Component({
   selector: "app-summoner-history",
   templateUrl: "./summoner-history.component.html",
-  styleUrls: ["./summoner-history.component.css"],
-  animations: [
-    trigger("toggle", [
-      state(
-        "open",
-        style({
-          opacity: "1",
-          display: "block"
-        })
-      ),
-      state(
-        "close",
-        style({
-          opacity: "0",
-          display: "none"
-        })
-      ),
-      transition(
-        "open => close",
-        animate(
-          "1000ms ease-in-out",
-          style({
-            opacity: "0",
-            display: "none"
-          })
-        )
-      ),
-      transition(
-        "close => open",
-        animate(
-          "1000ms ease-in-out",
-          style({
-            opacity: "1",
-            display: "block"
-          })
-        )
-      )
-    ])
-  ]
+  styleUrls: ["./summoner-history.component.css"]
 })
 export class SummonerHistoryComponent implements OnInit {
   private champimages: Champ;
@@ -72,11 +23,11 @@ export class SummonerHistoryComponent implements OnInit {
   private memberimages: Array<Array<string[]>> = [];
   private players: Player[];
   private url: string =
-    "http://ddragon.leagueoflegends.com/cdn/9.7.1/img/champion/";
+    "http://ddragon.leagueoflegends.com/cdn/9.13.1/img/champion/";
   private spellurl: string =
-    "http://ddragon.leagueoflegends.com/cdn/9.7.1/img/spell/";
+    "http://ddragon.leagueoflegends.com/cdn/9.13.1/img/spell/";
   private itemurl: string =
-    "http://ddragon.leagueoflegends.com/cdn/9.7.1/img/item/";
+    "http://ddragon.leagueoflegends.com/cdn/9.13.1/img/item/";
   public itemicon: string =
     "http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/items.png";
   public goldicon: string =

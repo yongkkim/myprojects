@@ -36,10 +36,10 @@ export class SummonerService {
     this.apiurl =
       "https://cors-anywhere.herokuapp.com/" +
       this.baseApiUrl +
-      "/lol/league/v4/positions/by-summoner/" +
+      "/lol/league/v4/entries/by-summoner/" +
       summonerID +
       "?api_key=RGAPI-3a352cd3-776d-4ac7-bb75-1431ecd63367";
-    // this.apiurl = '/api/lol/league/v4/positions/by-summoner/' + summonerID + '?api_key=RGAPI-3a352cd3-776d-4ac7-bb75-1431ecd63367';//localhost
+    // this.apiurl = '/api/lol/league/v4/entries/by-summoner/' + summonerID + '?api_key=RGAPI-3a352cd3-776d-4ac7-bb75-1431ecd63367';//localhost
   }
 
   getdata(name: string): Observable<LOLUserData> {
