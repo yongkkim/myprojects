@@ -190,12 +190,7 @@ export class SummonerHistoryComponent implements OnInit {
                   temp2.push(this.finditem(igs.stats.item6, temp2[0]));
 
                   //kda (Kill/Death/Assist)
-                  kda =
-                    igs.stats.kills.toString() +
-                    "/" +
-                    igs.stats.deaths.toString() +
-                    "/" +
-                    igs.stats.assists.toString();
+                  kda = igs.stats.kills.toString() + "/" + igs.stats.deaths.toString() + "/" + igs.stats.assists.toString();
                   temp2.push(kda);
                   if (igs.stats.deaths == 0) {
                     //when there is no death
