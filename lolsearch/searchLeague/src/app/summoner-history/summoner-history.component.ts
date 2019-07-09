@@ -147,9 +147,9 @@ export class SummonerHistoryComponent implements OnInit {
 
               //checking a date differenced between game creation and current date
               let dayDifference: number = this.datediff(gc, currdate);
+
               //checking every game that has been played within 6 months.
               //if a game is older than 6 months, it will be discardedd
-
               if (dayDifference < 185) {
                 player.teams.forEach(winteam => {
                   if (winteam.win == "Win") {
@@ -225,19 +225,12 @@ export class SummonerHistoryComponent implements OnInit {
                     }
                     temp2.push(player.gameMode);
                     let second = Number((timetaken % 60).toFixed(2));
-                    let total = (
-                      Math.floor(timetaken / 60) +
-                      second / 100
-                    ).toFixed(2);
+                    let total = (Math.floor(timetaken / 60) + second / 100).toFixed(2);
                     total = total.replace(/\./g, ":");
                     let d = new Date(gameCreated);
                     temp2.push(total);
                     temp2.push(
-                      d.getDate() +
-                      "/" +
-                      (d.getMonth() + 1) +
-                      "/" +
-                      d.getFullYear()
+                      d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear()
                     );
                     me = temp2;
                   }
@@ -249,15 +242,15 @@ export class SummonerHistoryComponent implements OnInit {
                 gameid.push(player.gameId.toString());
                 temp.push(gameid);
                 this.memberimages.push(temp);
+
+                this.winRate =
+                  this.countWin +
+                  "W/" +
+                  Math.abs(this.countWin - this.initialhis.length) +
+                  "L";
               }
               //console.log("--------------done info----------------");
             });
-            this.winRate =
-              this.countWin +
-              "W/" +
-              Math.abs(this.countWin - this.initialhis.length) +
-              "L";
-
             setTimeout(() => {
               if (this.initialhis.length == 0) {
                 let noinfo = document.getElementById("content");
@@ -341,20 +334,14 @@ export class SummonerHistoryComponent implements OnInit {
     let pos = event.target.getBoundingClientRect();
     let newpos;
 
-    if (
-      /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      )
-    ) {
-      newdiv.setAttribute(
-        "style",
+    if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      newdiv.setAttribute("style",
         "position: fixed; height:auto; width: 650px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;"
       );
       newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 8px;");
       newimg.setAttribute("style", "height: 30px; width: 30px;");
     } else {
-      newdiv.setAttribute(
-        "style",
+      newdiv.setAttribute("style",
         "position: fixed; height:auto; width: 250px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;"
       );
       newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 11px;");
@@ -398,23 +385,14 @@ export class SummonerHistoryComponent implements OnInit {
       return "nothing";
     }
   }
-  setdivpos(
-    th: number,
-    cname: string,
-    width: number,
-    targettop: number,
-    targetbot: number
-  ): string { //prevent popup window from going out of a page
+  setdivpos(th: number, cname: string, width: number, targettop: number, targetbot: number): string {
+    //prevent popup window from going out of a page
     let pop = document.getElementById("desc");
     let poptext = document.getElementById("text");
     let poppos = pop.getBoundingClientRect();
     let pos: string = "";
 
-    if (
-      /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      )
-    ) {
+    if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       if (th == -4) {
         pop.style.top = targetbot + "px";
         poptext.style.fontSize = "9px";
@@ -497,11 +475,7 @@ export class SummonerHistoryComponent implements OnInit {
     return pos;
   }
   findtype(): boolean {
-    if (
-      /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      )
-    ) {
+    if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       this.deviceType = "smartphone";
       return true;
     } else {
