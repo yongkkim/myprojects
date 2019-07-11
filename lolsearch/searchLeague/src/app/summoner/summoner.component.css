@@ -15,7 +15,7 @@ div#message{
     right: 0;
 
     display: block;
-    width: 25%;
+    width: 40%;
     height: auto;
 
     margin: 0 auto;
@@ -38,7 +38,7 @@ span#close{
     display: block;
     border-radius: 10px;
     border:  3px solid rgba(0,191,255, 0.8);
-    width: 50%;
+    width: 20%;
     margin: 0 auto;
     font-weight: bold;
     text-shadow: -1px 0 rgb(0,191,255), 0 1px rgb(0,191,255), 1px 0 rgb(0,191,255), 0 -1px rgb(0,191,255);
@@ -74,24 +74,29 @@ input#search{
     display: inline-block;
     margin-top: 100px;
     width: 720px;
-    padding-top: 5px;
+    /*padding-top: 5px;*/
     -webkit-appearance: none;
     height: 70px;
     border: none;
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.30);
-    -webkit-box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.30);
+    -webkit-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.30);
     border-radius: 6px;
 }
 button#submit{
     display: inline-block;
     -webkit-appearance: none;
     text-align: center;
-    margin-left: -73px;
-    height: 58px;
+    vertical-align: bottom;
+    margin-left: -150px;
+    height: 70px;
+    width: 150px;
     color: white;
     font-weight: bold;
-    background-color:  rgba(0,191,255, 0.9);
+    background-color:  rgba(0,115,157,.9);
     border-radius: 7px;
+}
+button#submit:hover{
+    cursor: pointer;
 }
 div.alert-danger{
     width: 720px;
