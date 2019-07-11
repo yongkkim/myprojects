@@ -1,12 +1,12 @@
 div#textLogo{
     color:#ECECEC;
-    text-shadow: 1px 3px 2px #969696, 1px 13px 3px #aba8a8;
+    text-shadow: 1px 5px 1px #969696, 1px 1px 1px #aba8a8;
     font-weight: bold;
     font-size: 90px;
     text-align: center;
 }
 span#lol{
-    text-shadow: -3px 12px 0px #96B6FF, -5px 12px 0px #CBDBFF;
+    text-shadow: 0px 6px 0 #96b6ff, 0px 6px 0 #cbdbff;
 }
 div#message{
     position: absolute;
@@ -48,15 +48,14 @@ span#close:hover{
     background-color: rgba(0,191,255, 0.8);
 }
 div#start, .sticky{
-    border-top: 5px solid;
-    border-bottom: 5px solid;
-    border-color: cadetblue;
+    border-top: 3px solid;
+    border-bottom: 3px solid;
+    border-color: rgba(0, 115, 157, 0.8);
     width: 100%;
     height: 430px;
     margin: 0 auto;
-    margin-top: 80px;
+    margin-top: 90px;
     padding-top: 60px;
-    border-radius: 60px;
 }
 .sticky {
     position: fixed;
@@ -82,6 +81,26 @@ input#search{
     -webkit-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.30);
     border-radius: 6px;
 }
+::-webkit-input-placeholder {
+    font-size: 15px;
+    font-weight: bold;
+    opacity: 0.7;
+}
+::-moz-placeholder {
+    font-size: 15px;
+    font-weight: bold;
+    opacity: 0.7;
+  }
+  :-ms-input-placeholder {
+    font-size: 15px;
+    font-weight: bold;
+    opacity: 0.7;
+  }
+  ::placeholder {
+    font-size: 15px;
+    font-weight: bold;
+    opacity: 0.7;
+  }
 button#submit{
     display: inline-block;
     -webkit-appearance: none;
@@ -93,7 +112,10 @@ button#submit{
     color: white;
     font-weight: bold;
     background-color:  rgba(0,115,157,.9);
-    border-radius: 7px;
+    border: none;
+    padding: 0;
+    font-size: 35px;
+    font-weight: bold;
 }
 button#submit:hover{
     cursor: pointer;
