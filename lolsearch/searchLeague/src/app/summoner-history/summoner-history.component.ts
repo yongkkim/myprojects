@@ -336,13 +336,13 @@ export class SummonerHistoryComponent implements OnInit {
 
     if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       newdiv.setAttribute("style",
-        "position: fixed; height:auto; width: 650px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;"
+        "position: fixed; height:auto; width: 650px; background-color: #3B3B3B; color: white; z-index: 90; border-radius: 5px; padding: 5px; opacity: 0.9;"
       );
       newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 8px;");
       newimg.setAttribute("style", "height: 30px; width: 30px;");
     } else {
       newdiv.setAttribute("style",
-        "position: fixed; height:auto; width: 250px; background-color: #3B3B3B; color: white; z-index: 10; border-radius: 5px; padding: 5px; opacity: 0.9;"
+        "position: fixed; height:auto; width: 250px; background-color: #3B3B3B; color: white; z-index: 90; border-radius: 5px; padding: 5px; opacity: 0.9;"
       );
       newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 11px;");
     }
@@ -353,13 +353,7 @@ export class SummonerHistoryComponent implements OnInit {
     newdiv.appendChild(newtext);
     event.target.parentElement.appendChild(newdiv);
     newdiv.style.display = "block";
-    newpos = this.setdivpos(
-      half,
-      event.target.className,
-      pos.width,
-      pos.top,
-      pos.bottom
-    );
+    newpos = this.setdivpos(half, event.target.className, pos.width, pos.top, pos.bottom);
     newdiv.style.transform = newpos;
   }
   out() {
@@ -394,6 +388,7 @@ export class SummonerHistoryComponent implements OnInit {
 
     if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       if (th == -4) {
+        console.log("4targetbot = " + targetbot);
         pop.style.top = targetbot + "px";
         poptext.style.fontSize = "9px";
         pop.style.textAlign = "center";
@@ -403,12 +398,14 @@ export class SummonerHistoryComponent implements OnInit {
         pop.style.opacity = "1";
         pop.style.padding = "2px";
       } else if (th == -3) {
+        console.log("3targetbot = " + targetbot);
         pop.style.top = targetbot - 35 + "px";
         poptext.style.fontSize = "9px";
         pop.style.textAlign = "center";
         pop.style.width = "auto";
         //pop.style.padding = "3px";
       } else if (th == -2) {
+        console.log("2targetbot = " + targetbot);
         pop.style.top = targetbot - 28 + "px";
         poptext.style.fontSize = "9px";
         poptext.style.textAlign = "center";
@@ -418,13 +415,16 @@ export class SummonerHistoryComponent implements OnInit {
         pop.style.width = "150px";
         if (targetbot + poppos.height > window.innerHeight - 40) {
           let newtop = targettop - poppos.height;
+          console.log("1newtop = " + newtop);
           pop.style.top = newtop + "px";
           pos = "translateX(" + width + "px)";
         } else {
           let firstc = cname.split(" ");
           if (firstc[0] == "spellimg") {
+            console.log("1targettop = " + targettop);
             pop.style.top = targettop.toString() + "px";
           } else if (firstc[0] == "item") {
+            console.log("1targetbot = " + targetbot);
             pop.style.top = targetbot.toString() + "px";
           }
           pos = "translateX(" + width + "px)";
