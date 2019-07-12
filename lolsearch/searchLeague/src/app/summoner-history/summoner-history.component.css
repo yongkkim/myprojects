@@ -59,7 +59,7 @@ li.btnonehistory{
 	transition: transform .2s;
 }
 li.btnonehistory:hover{
-	transform: scale(1.2);
+	transform: scale(1.05);
 }
 li.btnonehistory img{
 	float: left;
