@@ -56,6 +56,7 @@
         </ul>
         <div class="items">
           <!-- use *ngFor -->
+          <!--initialhis array would better be dictionary-->
           <ng-container *ngFor="let item of initialhis[p] | slice: 3 : 10;">
             <img class="item" *ngIf="item != 'nothing'; else empty"
               (mouseover)="pop(-1, item.itemsrc, item.description, $event)" (mouseout)="out()"
