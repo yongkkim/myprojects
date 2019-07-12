@@ -39,16 +39,19 @@
         <li title = "Total Time & Date" class = "htimei"><img src = "assets/clock.svg"/></li>
     </ul>
   </div-->
+<!--below part is to create a list of game history. Each history is a button to toggle down for details-->
 <div id="content">
   <div class="eachgame" *ngFor="let m of images; index as p">
     <ul class="btnhistory">
       <li class="btnonehistory" id={{m[m.length-1]}} [style.background-color]="setBackground(initialhis[p][14])"
         *ngIf="initialhis[p]" (click)="toggle(m[m.length-1], p, initialhis[p], $event)">
-        <img src={{m[0]}} (mouseover)="pop(-4, '', initialhis[p][15], $event)" (mouseout)="out()" />
+        <div class="myChamp">
+          <img src={{m[0]}} (mouseover)="pop(-4, '', initialhis[p][15], $event)" (mouseout)="out()" />
+        </div>
         <ul class="spells">
           <!-- in function pop, parameter "-1" is only for button pop ups -->
           <li class="spell"><img class="spellimg"
-              (mouseover)="pop(-1, initialhis[p][1].spellurl, initialhis[p][1].description, $event)" (mouseout)="out()"
+              (mouseover)="pop(-1, initialhis[p][1].spellurl, initialhis[p][1].description,  $event)" (mouseout)="out()"
               src={{initialhis[p][1].spellurl}} /></li>
           <li class="spell"><img class="spellimg"
               (mouseover)="pop(-1, initialhis[p][2].spellurl, initialhis[p][2].description, $event)" (mouseout)="out()"
@@ -88,11 +91,14 @@
         </div>
       </li>
     </ul>
+    <!--below part is a toggle when click one your game history on the list-->
     <div class="container" id={{p}}>
       <ul class="history">
         <li *ngFor="let z of data(m[m.length-1]) | slice: 0 : 10; index as j"
           [style.background-color]="setBackground(z[14])" class="onehistory">
-          <img class="champ" src={{z[0]}} (mouseover)="pop(-4, '', z[15], $event)" (mouseout)="out()" />
+          <div class="oneChamp">
+            <img class="champ" src={{z[0]}} (mouseover)="pop(-4, '', z[15], $event)" (mouseout)="out()" />
+          </div>
           <ul class="spells">
             <li class="spell"><img class="spellimg" (mouseover)="pop(j, z[1].spellurl, z[1], $event)" (mouseout)="out()"
                 src={{z[1].spellurl}} /></li>

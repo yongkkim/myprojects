@@ -75,11 +75,6 @@ export class SummonerComponent implements OnInit {
         this.submitted = true;
         this.summonerService.getRankdata(this.heroes.id).subscribe(rank => {
           this.heroes.rank = rank;
-          console.log(this.heroes.rank.tier);
-          console.log(this.heroes.rank.rank);
-          console.log(this.heroes.rank.wins);
-          console.log(this.heroes.rank.losses);
-          console.log(this.heroes.rank.leaguePoints);
         });
       },
       error => this.setErrValue(this.heroes)

@@ -51,6 +51,7 @@ export class SummonerHistoryComponent implements OnInit {
   private form: FormGroup;
   private control: FormControl;
   private countWin: number = 0;
+  private toggled: boolean = false;
   public winRate: string = "";
   public rankinfo: string = "";
   @Input("userinfo") public info: LOLUserData;
@@ -67,16 +68,8 @@ export class SummonerHistoryComponent implements OnInit {
     if (this.info != null) {
       if (this.info.rank != undefined) {
         this.rankinfo =
-          this.info.rank.tier +
-          " " +
-          this.info.rank.rank +
-          " / " +
-          this.info.rank.leaguePoints +
-          " Point  / " +
-          this.info.rank.wins +
-          "W:" +
-          this.info.rank.losses +
-          "L";
+          this.info.rank.tier + " " + this.info.rank.rank + " / " +
+          this.info.rank.leaguePoints + " Point  / " + this.info.rank.wins + "W:" + this.info.rank.losses + "L";
       } else {
         this.rankinfo = "Unranked";
       }
@@ -168,9 +161,7 @@ export class SummonerHistoryComponent implements OnInit {
                   let temp2: any[] = [];
                   let kda: string = "";
                   let iturl: string[] = [];
-                  let mix = this.history.champlist.get(
-                    igs.championId.toString()
-                  );
+                  let mix = this.history.champlist.get(igs.championId.toString());
                   let champinfo = this.url + mix[0];
                   //console.log(mix[1]);
                   //Champion image
@@ -196,12 +187,7 @@ export class SummonerHistoryComponent implements OnInit {
                     //when there is no death
                     temp2.push("PERFECT KDA");
                   } else {
-                    temp2.push(
-                      (
-                        (igs.stats.kills + igs.stats.assists) /
-                        igs.stats.deaths
-                      ).toFixed(2) + ":1 KDA"
-                    );
+                    temp2.push(((igs.stats.kills + igs.stats.assists) / igs.stats.deaths).toFixed(2) + ":1 KDA");
                   }
 
                   //minions
@@ -229,9 +215,7 @@ export class SummonerHistoryComponent implements OnInit {
                     total = total.replace(/\./g, ":");
                     let d = new Date(gameCreated);
                     temp2.push(total);
-                    temp2.push(
-                      d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear()
-                    );
+                    temp2.push(d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear());
                     me = temp2;
                   }
                 });
@@ -243,11 +227,7 @@ export class SummonerHistoryComponent implements OnInit {
                 temp.push(gameid);
                 this.memberimages.push(temp);
 
-                this.winRate =
-                  this.countWin +
-                  "W/" +
-                  Math.abs(this.countWin - this.initialhis.length) +
-                  "L";
+                this.winRate = this.countWin + "W/" + Math.abs(this.countWin - this.initialhis.length) + "L";
               }
               //console.log("--------------done info----------------");
             });
@@ -279,27 +259,40 @@ export class SummonerHistoryComponent implements OnInit {
       return "#e2b6b3";
     }
   }
+
+  disableMouseOver(gid: string) {
+    let onegamehistory = document.getElementById(gid);
+    for (let i = 0; i < onegamehistory.children.length; i++) {
+      if (this.toggled) {
+        onegamehistory.children[i].setAttribute("style", "pointer-events: none");
+      } else {
+        onegamehistory.children[i].setAttribute("style", "pointer-events: auto");
+      }
+    }
+  }
+
   toggle(gid: string, n: string, abc: any, event) {
     //where n is order number of li tag
     let div = document.getElementById(n);
     let li = document.getElementById(gid);
-    if (
-      this.deviceType == "smartphone" &&
-      (event.target.tagName == "BUTTON" || event.target.tagName == "I")
-    ) {
+    if (this.deviceType == "smartphone" && (event.target.tagName == "BUTTON" || event.target.tagName == "I")) {
       event.stopPropagation();
       if (div.getAttribute("value") == "yes") {
         div.style.display = "none";
         div.setAttribute("value", "no");
+        this.toggled = false;
       } else {
         div.style.display = "block";
         div.setAttribute("value", "yes");
+        this.toggled = true;
         div.style.border = "none";
       }
     } else if (this.deviceType == "desktop") {
+      event.stopPropagation();
       if (div.getAttribute("value") == "yes") {
         div.style.display = "none";
         div.setAttribute("value", "no");
+        this.toggled = false;
         li.blur();
       } else {
         div.style.display = "block";
@@ -307,10 +300,12 @@ export class SummonerHistoryComponent implements OnInit {
         div.style.borderColor = "#008B8B";
         div.style.borderStyle = "solid";
         div.setAttribute("value", "yes");
+        this.toggled = true;
         li.scrollIntoView();
         window.scrollBy(0, -80);
       }
     }
+    this.disableMouseOver(gid);
   }
   data(gid: string): Array<string[]> {
     this.memberimages.forEach((item, index) => {
@@ -333,11 +328,10 @@ export class SummonerHistoryComponent implements OnInit {
     newtext.id = "text";
     let pos = event.target.getBoundingClientRect();
     let newpos;
-
     if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       newdiv.setAttribute("style",
         "position: fixed; height:auto; width: 650px; background-color: #3B3B3B; color: white; z-index: 90; border-radius: 5px; padding: 5px; opacity: 0.9;"
-      );
+      )
       newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 8px;");
       newimg.setAttribute("style", "height: 30px; width: 30px;");
     } else {
@@ -351,9 +345,16 @@ export class SummonerHistoryComponent implements OnInit {
     }
     newtext.innerHTML = desc;
     newdiv.appendChild(newtext);
-    event.target.parentElement.appendChild(newdiv);
+    event.target.parentElement.insertBefore(newdiv, event.target.nextSibling);
     newdiv.style.display = "block";
-    newpos = this.setdivpos(half, event.target.className, pos.width, pos.top, pos.bottom);
+    let classes = event.target.parentElement.parentElement.className.split(" ");
+    if (classes[0] == "btnonehistory" || classes[0] == "forme") {
+      console.log("btnonehistory");
+      newpos = this.setdivpos(half, event.target.className, pos.width, pos.top, pos.height, pos.bottom);
+    } else if (classes[0] == "onehistory" || classes[0] == "kmm") {
+      console.log("onehistory");
+      newpos = this.setdivTogglePos(half, event.target.className, pos.width, pos.top, pos.bottom);
+    }
     newdiv.style.transform = newpos;
   }
   out() {
@@ -379,7 +380,84 @@ export class SummonerHistoryComponent implements OnInit {
       return "nothing";
     }
   }
-  setdivpos(th: number, cname: string, width: number, targettop: number, targetbot: number): string {
+  //below function is for setting positions of hover pop ups on the list
+  setdivpos(th: number, cname: string, width: number, targettop: number, targetheight: number, targetbot: number): string {
+    //prevent popup window from going out of a page
+    let pop = document.getElementById("desc");
+    let poptext = document.getElementById("text");
+    let poppos = pop.getBoundingClientRect();
+    let pos: string = "";
+
+    if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      if (th == -4) {
+        pop.style.top = targetheight + "px";
+        poptext.style.fontSize = "9px";
+        pop.style.textAlign = "center";
+        pop.style.width = "40px";
+        pop.style.padding = "3px";
+        poptext.style.fontWeight = "bold";
+        pop.style.opacity = "1";
+        pop.style.padding = "2px";
+      } else if (th == -2) {
+        pop.style.top = targetheight - 28 + "px";
+        poptext.style.fontSize = "9px";
+        poptext.style.textAlign = "center";
+        pop.style.width = "auto";
+        pop.style.padding = "3px";
+      } else {
+        if (targetbot + poppos.height > window.innerHeight - 40) {
+          pop.style.bottom = targetheight + (targetheight / 2) + "px";
+          pos = "translateX(" + width + "px)";
+        } else {
+          let firstc = cname.split(" ");
+          if (firstc[0] == "spellimg") {
+            pop.style.top = targetheight + "px";
+          } else if (firstc[0] == "item") {
+            pop.style.top = targetheight + (targetheight / 2) + "px";
+          }
+          pos = "translateX(" + width + "px)";
+        }
+      }
+    } else {//desktop
+      if (th == -4) {
+        pop.style.top = targetheight + "px";
+        pop.style.transformOrigin = "0 0";
+        poptext.style.fontSize = "18px";
+        poptext.style.marginBottom = "13px";
+        poptext.style.fontWeight = "bold";
+        pop.style.textAlign = "center";
+        pop.style.opacity = "1";
+        pop.style.width = "80px";
+        pop.style.padding = "0px";
+        pos = "translateX(" + (width - pop.offsetWidth) / 2 + "px)";
+        console.log("champimg");
+      } else if (th == -2) {
+        console.log("kda");
+        pop.style.top = -5 + "px";
+        poptext.style.fontSize = "15px";
+        pop.style.textAlign = "center";
+        pop.style.width = "auto";
+        pop.style.padding = "6px";
+        pos = "translateX(" + (width - pop.offsetWidth) / 2 + "px)";
+      } else {
+        if (targetbot + poppos.height > window.innerHeight - 30) {
+          pop.style.bottom = targetheight + (targetheight / 2) + "px";
+          pos = "translateX(" + width + "px)";
+        } else {
+          let firstc = cname.split(" ");
+          if (firstc[0] == "spellimg") {
+            pop.style.top = targetheight + "px";
+          } else if (firstc[0] == "item") {
+            pop.style.top = targetheight + (targetheight / 2) + "px";
+          }
+          pos = "translateX(" + width + "px)";
+        }
+      }
+    }
+    return pos;
+  }
+
+  setdivTogglePos(th: number, cname: string, width: number, targettop: number, targetbot: number): string {
     //prevent popup window from going out of a page
     let pop = document.getElementById("desc");
     let poptext = document.getElementById("text");
@@ -404,13 +482,6 @@ export class SummonerHistoryComponent implements OnInit {
         pop.style.textAlign = "center";
         pop.style.width = "auto";
         //pop.style.padding = "3px";
-      } else if (th == -2) {
-        console.log("2targetbot = " + targetbot);
-        pop.style.top = targetbot - 28 + "px";
-        poptext.style.fontSize = "9px";
-        poptext.style.textAlign = "center";
-        pop.style.width = "auto";
-        pop.style.padding = "3px";
       } else {
         pop.style.width = "150px";
         if (targetbot + poppos.height > window.innerHeight - 40) {
@@ -451,14 +522,6 @@ export class SummonerHistoryComponent implements OnInit {
         pop.style.width = "auto";
         pop.style.padding = "4px";
         pos = "translateX(" + (width - pop.offsetWidth) / 2 + "px)";
-      } else if (th == -2) {
-        console.log("2targetbot = " + targetbot);
-        pop.style.top = targetbot - 50 + "px";
-        poptext.style.fontSize = "15px";
-        pop.style.textAlign = "center";
-        pop.style.width = "auto";
-        pop.style.padding = "6px";
-        pos = "translateX(" + (width - pop.offsetWidth) / 2 + "px)";
       } else {
         if (targetbot + poppos.height > window.innerHeight - 30) {
           let newtop = targettop - (poppos.height + 5);
@@ -480,6 +543,7 @@ export class SummonerHistoryComponent implements OnInit {
     }
     return pos;
   }
+
   findtype(): boolean {
     if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       this.deviceType = "smartphone";

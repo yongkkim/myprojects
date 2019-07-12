@@ -57,11 +57,23 @@ ul.btnhistory:hover{
 li.btnonehistory{
 	box-shadow: inset 0 0 40px darkslategrey;
 	transition: transform .2s;
+	/* transform-origin: top left; */
 }
 li.btnonehistory:hover{
 	transform: scale(1.05);
 }
-li.btnonehistory img{
+li.btnonehistory div.myChamp{
+	float: left;
+	display: block;
+	padding: 0;
+	margin: 0;
+}
+li.btnonehistory div.myChamp img{
+	border: none;
+	height: 80px;
+	width: 80px;
+}
+/* li.btnonehistory img{
 	float: left;
 	display: block;
 	padding: 0;
@@ -69,7 +81,7 @@ li.btnonehistory img{
 	border: none;
 	height: 80px;
 	width: 80px;
-}
+} */
 li.btnonehistory ul.spells{
 	float:left;
 	padding: 0;
@@ -170,9 +182,11 @@ li.onehistory div.forone div.accountforone p, div.kdaforone p, div.minionforone 
 	font-size: 14px;
 }
 li.onehistory div.forone div.accountforone p{font-size: 16px;}
-li.onehistory img.champ{
+li.onehistory div.oneChamp{
 	padding: 0;
 	float: left;
+}
+li.onehistory div.oneChamp img.champ{
 	height: 60px;
     width: 60px;
 }
@@ -223,6 +237,11 @@ li.onehistory div.items div.item{
 }
 li.onehistory div.items img.nothing, div.nothing{
 	display: none;
+}
+li.onehistory div.items > img.item:hover, 
+ul.spells > li.spell:hover, div.oneChamp > img.champ, 
+div.forone > div.kmm > div.kdaforone > p:hover{
+	cursor: pointer;
 }
 
 
