@@ -433,6 +433,7 @@ export class SummonerHistoryComponent implements OnInit {
     } else {
       if (th == -4) {
         ///Desktop
+        console.log("4targetbot = " + targetbot);
         pop.style.top = targetbot + "px";
         poptext.style.fontSize = "18px";
         poptext.style.marginBottom = "13px";
@@ -443,6 +444,7 @@ export class SummonerHistoryComponent implements OnInit {
         pop.style.padding = "0px";
         pos = "translateX(" + (width - pop.offsetWidth) / 2 + "px)";
       } else if (th == -3) {
+        console.log("3targetbot = " + targetbot);
         pop.style.top = targetbot - 50 + "px";
         poptext.style.fontSize = "13px";
         pop.style.textAlign = "center";
@@ -450,6 +452,7 @@ export class SummonerHistoryComponent implements OnInit {
         pop.style.padding = "4px";
         pos = "translateX(" + (width - pop.offsetWidth) / 2 + "px)";
       } else if (th == -2) {
+        console.log("2targetbot = " + targetbot);
         pop.style.top = targetbot - 50 + "px";
         poptext.style.fontSize = "15px";
         pop.style.textAlign = "center";
@@ -459,13 +462,16 @@ export class SummonerHistoryComponent implements OnInit {
       } else {
         if (targetbot + poppos.height > window.innerHeight - 30) {
           let newtop = targettop - (poppos.height + 5);
+          console.log("1newtop = " + newtop);
           pop.style.top = newtop.toString() + "px";
           pos = "translateX(" + width + "px)";
         } else {
           let firstc = cname.split(" ");
           if (firstc[0] == "spellimg") {
+            console.log("1targettop = " + targettop);
             pop.style.top = targettop.toString() + "px";
           } else if (firstc[0] == "item") {
+            console.log("1targetbot = " + targetbot);
             pop.style.top = targetbot.toString() + "px";
           }
           pos = "translateX(" + width + "px)";
