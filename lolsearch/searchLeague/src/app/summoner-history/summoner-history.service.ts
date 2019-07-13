@@ -31,9 +31,9 @@ export class SummonerHistoryService {
   constructor(private http: HttpClient) { }
 
   setURL(id: string) {
-    // this.apiurl = '/api/lol/match/v4/matchlists/by-account/' + id + '?beginIndex=0&endIndex=10&api_key=RGAPI-a4269463-814f-4578-a806-c9a558b894e9';
-    this.apiurl = "https://cors-anywhere.herokuapp.com/" + this.baseApiUrl +
-      "/lol/match/v4/matchlists/by-account/" + id + "?beginIndex=0&endIndex=20&api_key=RGAPI-a4269463-814f-4578-a806-c9a558b894e9";
+    this.apiurl = '/api/lol/match/v4/matchlists/by-account/' + id + '?beginIndex=0&endIndex=10&api_key=RGAPI-4409682f-290f-4d4c-a744-81ac2710816e';
+    // this.apiurl = "https://cors-anywhere.herokuapp.com/" + this.baseApiUrl +
+    //   "/lol/match/v4/matchlists/by-account/" + id + "?beginIndex=0&endIndex=20&api_key=RGAPI-4409682f-290f-4d4c-a744-81ac2710816e";
   }
   getdata(id: string): Observable<Match> {
     this.setURL(id);
@@ -41,18 +41,18 @@ export class SummonerHistoryService {
   }
   getimage(): Observable<Champ> {
     this.apiurl =
-      "https://cors-anywhere.herokuapp.com/" + this.baseDragonUrl + "/cdn/9.13.1/data/en_US/champion.json"; //for production
-    //     this.apiurl = '/dragon/cdn/9.13.1/data/en_US/champion.json';//localhost
+      // "https://cors-anywhere.herokuapp.com/" + this.baseDragonUrl + "/cdn/9.13.1/data/en_US/champion.json"; //for production
+      this.apiurl = '/dragon/cdn/9.13.1/data/en_US/champion.json';//localhost
     return this.http.get<Champ>(this.apiurl, httpOptions).pipe(map(res => res));
   }
   getspell(): Observable<Spell> {
-    this.apiurl = "https://cors-anywhere.herokuapp.com/" + this.baseDragonUrl + "/cdn/9.13.1/data/en_US/summoner.json"; //for production
-    // this.apiurl = '/dragon/cdn/9.13.1/data/en_US/summoner.json';//localhost
+    // this.apiurl = "https://cors-anywhere.herokuapp.com/" + this.baseDragonUrl + "/cdn/9.13.1/data/en_US/summoner.json"; //for production
+    this.apiurl = '/dragon/cdn/9.13.1/data/en_US/summoner.json';//localhost
     return this.http.get<Spell>(this.apiurl, httpOptions).pipe(map(res => res));
   }
   getitem(): Observable<Item> {
-    this.apiurl = "https://cors-anywhere.herokuapp.com/" + this.baseDragonUrl + "/cdn/9.13.1/data/en_US/item.json"; //for production
-    // this.apiurl = '/dragon/cdn/9.13.1/data/en_US/item.json';//localhost
+    // this.apiurl = "https://cors-anywhere.herokuapp.com/" + this.baseDragonUrl + "/cdn/9.13.1/data/en_US/item.json"; //for production
+    this.apiurl = '/dragon/cdn/9.13.1/data/en_US/item.json';//localhost
     return this.http.get<Item>(this.apiurl, httpOptions).pipe(map(res => res));
   }
 }

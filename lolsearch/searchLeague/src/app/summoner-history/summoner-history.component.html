@@ -100,10 +100,10 @@
             <img class="champ" src={{z[0]}} (mouseover)="pop(-4, '', z[15], $event)" (mouseout)="out()" />
           </div>
           <ul class="spells">
-            <li class="spell"><img class="spellimg" (mouseover)="pop(j, z[1].spellurl, z[1], $event)" (mouseout)="out()"
-                src={{z[1].spellurl}} /></li>
-            <li class="spell"><img class="spellimg" (mouseover)="pop(j, z[2].spellurl, z[2], $event)" (mouseout)="out()"
-                src={{z[2].spellurl}} /></li>
+            <li class="spell"><img class="spellimg" (mouseover)="pop(j, z[1].spellurl, z[1].description, $event)"
+                (mouseout)="out()" src={{z[1].spellurl}} /></li>
+            <li class="spell"><img class="spellimg" (mouseover)="pop(j, z[2].spellurl, z[2].description, $event)"
+                (mouseout)="out()" src={{z[2].spellurl}} /></li>
           </ul>
           <div class="items">
             <ng-container *ngFor="let item of z | slice: 3 : 10;">

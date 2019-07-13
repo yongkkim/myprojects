@@ -24,14 +24,14 @@ export class SummonerService {
   constructor(private http: HttpClient) { }
 
   setURL(name: string) {
-    this.apiurl = "https://cors-anywhere.herokuapp.com/" + this.baseApiUrl +
-      "/lol/summoner/v4/summoners/by-name/" + name + "?api_key=RGAPI-a4269463-814f-4578-a806-c9a558b894e9";
-    // this.apiurl = '/api/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-a4269463-814f-4578-a806-c9a558b894e9';//localhost
+    // this.apiurl = "https://cors-anywhere.herokuapp.com/" + this.baseApiUrl +
+    //   "/lol/summoner/v4/summoners/by-name/" + name + "?api_key=RGAPI-4409682f-290f-4d4c-a744-81ac2710816e";
+    this.apiurl = '/api/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-4409682f-290f-4d4c-a744-81ac2710816e';//localhost
   }
   setURL2(summonerID: string) {
-    this.apiurl = "https://cors-anywhere.herokuapp.com/" + this.baseApiUrl +
-      "/lol/league/v4/entries/by-summoner/" + summonerID + "?api_key=RGAPI-a4269463-814f-4578-a806-c9a558b894e9";
-    // this.apiurl = '/api/lol/league/v4/entries/by-summoner/' + summonerID + '?api_key=RGAPI-a4269463-814f-4578-a806-c9a558b894e9';//localhost
+    // this.apiurl = "https://cors-anywhere.herokuapp.com/" + this.baseApiUrl +
+    //   "/lol/league/v4/entries/by-summoner/" + summonerID + "?api_key=RGAPI-4409682f-290f-4d4c-a744-81ac2710816e";
+    this.apiurl = '/api/lol/league/v4/entries/by-summoner/' + summonerID + '?api_key=RGAPI-4409682f-290f-4d4c-a744-81ac2710816e';//localhost
   }
 
   getdata(name: string): Observable<LOLUserData> {

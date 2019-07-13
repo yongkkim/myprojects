@@ -142,7 +142,7 @@ export class SummonerHistoryComponent implements OnInit {
               let dayDifference: number = this.datediff(gc, currdate);
 
               //checking every game that has been played within 6 months.
-              //if a game is older than 6 months, it will be discardedd
+              //if a game is older than 6 months, it will not be displayed
               if (dayDifference < 185) {
                 player.teams.forEach(winteam => {
                   if (winteam.win == "Win") {
@@ -160,7 +160,6 @@ export class SummonerHistoryComponent implements OnInit {
                   let acid = accinfo[index];
                   let temp2: any[] = [];
                   let kda: string = "";
-                  let iturl: string[] = [];
                   let mix = this.history.champlist.get(igs.championId.toString());
                   let champinfo = this.url + mix[0];
                   //console.log(mix[1]);
@@ -183,6 +182,7 @@ export class SummonerHistoryComponent implements OnInit {
                   //kda (Kill/Death/Assist)
                   kda = igs.stats.kills.toString() + "/" + igs.stats.deaths.toString() + "/" + igs.stats.assists.toString();
                   temp2.push(kda);
+
                   if (igs.stats.deaths == 0) {
                     //when there is no death
                     temp2.push("PERFECT KDA");
@@ -354,6 +354,10 @@ export class SummonerHistoryComponent implements OnInit {
     } else if (classes[0] == "onehistory" || classes[0] == "kmm") {
       console.log("onehistory");
       newpos = this.setdivTogglePos(half, event.target.className, pos.width, pos.top, pos.bottom);
+    } else if (classes[0] == "spells") {
+      if (event.target.parentElement.parentElement.parentElement.className.split(" ")[0] == "onehistory") {
+        newpos = this.setdivTogglePos(half, event.target.className, pos.width, pos.top, pos.bottom);
+      }
     }
     newdiv.style.transform = newpos;
   }
@@ -430,9 +434,7 @@ export class SummonerHistoryComponent implements OnInit {
         pop.style.width = "80px";
         pop.style.padding = "0px";
         pos = "translateX(" + (width - pop.offsetWidth) / 2 + "px)";
-        console.log("champimg");
       } else if (th == -2) {
-        console.log("kda");
         pop.style.top = -5 + "px";
         poptext.style.fontSize = "15px";
         pop.style.textAlign = "center";
