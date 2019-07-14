@@ -1,46 +1,35 @@
 /* css for profile */
-table#profile{
-	border-collapse: collapse;
-	margin: 0 auto;
-	margin-top: 25px;
-	margin-bottom: 25px;
-	color: white;
-	background-color:rgba(69, 20, 170, 0.3);
-	font-weight: bold;
-	border-radius: 35px;
-	border: none;
-}
-table#profile td{
-	padding: 0;
-	margin: 0;
-	width: 300px;
-	height: 300px;
-}
-table#profile td#picTD{
-	text-align: center;
-}
-table#profile th#userTH{
-	text-align: center;
-	font-size: 50px;
-}
-hr {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    border: 0;
-    border-top: 3px solid #D4D9FF;
-    box-shadow: 0 1px #9AA2E3;
-}
-table#profile td#infogroup{height: 300px;}
-table#profile td.proinfos{
-	height: calc(300px / 5); 
-	padding-left: 10px;
+div#profile{
+	display: block;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    padding: 10px 20px 0 20px;
+    width: 400px;
+    height: 170px;
+    color: white;
+    font-weight: bold;
+    border-radius: 35px;
+    background-color:rgba(10, 0, 0, 0.7);
+	background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
 }
 img#profileImg{
 	display: block;
     padding: 0;
-    margin: 0 auto;
-    width: 80%;
-    border-radius: 20px;
+	margin: 0 auto;
+	width: 150px;
+	height: 150px;
+	border-radius: 20px;
+	float: left;
+}
+table#profileInfos{
+	margin-left: 25px;
+	border-collapse: collapse;
+	float: right;
+	height: 150px;
+}
+td.proinfos{
+	height: 36px;
 }
 
 /* css for button display*/
@@ -57,7 +46,6 @@ ul.btnhistory:hover{
 li.btnonehistory{
 	box-shadow: inset 0 0 40px darkslategrey;
 	transition: transform .2s;
-	/* transform-origin: top left; */
 }
 li.btnonehistory:hover{
 	transform: scale(1.05);
@@ -73,15 +61,7 @@ li.btnonehistory div.myChamp img{
 	height: 80px;
 	width: 80px;
 }
-/* li.btnonehistory img{
-	float: left;
-	display: block;
-	padding: 0;
-	margin: 0;
-	border: none;
-	height: 80px;
-	width: 80px;
-} */
+
 li.btnonehistory ul.spells{
 	float:left;
 	padding: 0;
@@ -257,6 +237,7 @@ div.container{
 }
 div#content{
 	margin: 0 auto;
+	margin-bottom: 50px;
 	width: 70%;
 }
 
@@ -370,7 +351,7 @@ ul#columnName2 li.accounti img{
 }*/
 
 @media only screen and (min-width: 375px) and (max-width: 1024px){
-	table#profile{
+	div#profile{
 		margin-top: 35px;
 		margin-bottom: 35px;
 		font-size: 8px;
@@ -385,7 +366,6 @@ ul#columnName2 li.accounti img{
 		height: 150px;
 	}
 	table#profile td#infogroup{height: 150px;}
-	table#profile td.proinfos{height: calc(150px / 5);}
 	ul.btnhistory{
 		width: 100%;
 		margin: 0 auto;

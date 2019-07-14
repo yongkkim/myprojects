@@ -63,7 +63,9 @@ export class SummonerHistoryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    window.addEventListener("scroll", this.searchbar, true);
+    setTimeout(() => {
+      window.addEventListener("scroll", this.searchbar, true);
+    }, 2000);
 
     if (this.info != null) {
       if (this.info.rank != undefined) {
@@ -80,15 +82,15 @@ export class SummonerHistoryComponent implements OnInit {
   searchbar() {
     let searchbar = document.getElementById("searchform");
     let sticky = searchbar.offsetTop;
-    let marginprofile = document.getElementById("profile");
+    //let marginprofile = document.getElementById("profile");
 
     if (window.pageYOffset > sticky) {
       searchbar.classList.add("sticky");
-      marginprofile.style.marginTop = "85px";
+      //marginprofile.style.marginTop = "85px";
       searchbar.style.marginBottom = "80px";
     } else {
       searchbar.classList.remove("sticky");
-      marginprofile.style.marginTop = "25px";
+      //marginprofile.style.marginTop = "25px";
       searchbar.style.marginBottom = "0";
     }
   }
@@ -171,13 +173,13 @@ export class SummonerHistoryComponent implements OnInit {
                   temp2.push(this.findspell(igs.spell2Id));
 
                   //items
-                  temp2.push(this.finditem(igs.stats.item0, temp2[0]));
-                  temp2.push(this.finditem(igs.stats.item1, temp2[0]));
-                  temp2.push(this.finditem(igs.stats.item2, temp2[0]));
-                  temp2.push(this.finditem(igs.stats.item3, temp2[0]));
-                  temp2.push(this.finditem(igs.stats.item4, temp2[0]));
-                  temp2.push(this.finditem(igs.stats.item5, temp2[0]));
-                  temp2.push(this.finditem(igs.stats.item6, temp2[0]));
+                  temp2.push(this.finditem(igs.stats.item0));
+                  temp2.push(this.finditem(igs.stats.item1));
+                  temp2.push(this.finditem(igs.stats.item2));
+                  temp2.push(this.finditem(igs.stats.item3));
+                  temp2.push(this.finditem(igs.stats.item4));
+                  temp2.push(this.finditem(igs.stats.item5));
+                  temp2.push(this.finditem(igs.stats.item6));
 
                   //kda (Kill/Death/Assist)
                   kda = igs.stats.kills.toString() + "/" + igs.stats.deaths.toString() + "/" + igs.stats.assists.toString();
@@ -336,7 +338,7 @@ export class SummonerHistoryComponent implements OnInit {
       newimg.setAttribute("style", "height: 30px; width: 30px;");
     } else {
       newdiv.setAttribute("style",
-        "position: fixed; height:auto; width: 250px; background-color: #3B3B3B; color: white; z-index: 90; border-radius: 5px; padding: 5px; opacity: 0.9;"
+        "position: fixed; height:auto; width: 250px; background-color: #3B3B3B; color: white; z-index: 90; border-radius: 5px; padding: 0px; opacity: 0.9;"
       );
       newtext.setAttribute("style", "padding: 0; margin: 0; font-size: 11px;");
     }
@@ -374,11 +376,10 @@ export class SummonerHistoryComponent implements OnInit {
       }
     }
   }
-  finditem(itemnum: number, hero: string): any {
+  finditem(itemnum: number): any {
     //console.log(itemnum);
     if (itemnum != 0) {
-      this.item.data[itemnum].itemsrc =
-        this.itemurl + this.item.data[itemnum].image.full;
+      this.item.data[itemnum].itemsrc = this.itemurl + this.item.data[itemnum].image.full;
       return this.item.data[itemnum];
     } else if (itemnum == 0) {
       return "nothing";
@@ -425,14 +426,13 @@ export class SummonerHistoryComponent implements OnInit {
     } else {//desktop
       if (th == -4) {
         pop.style.top = targetheight + "px";
-        pop.style.transformOrigin = "0 0";
         poptext.style.fontSize = "18px";
-        poptext.style.marginBottom = "13px";
         poptext.style.fontWeight = "bold";
         pop.style.textAlign = "center";
         pop.style.opacity = "1";
-        pop.style.width = "80px";
-        pop.style.padding = "0px";
+        pop.style.width = "auto";
+        pop.style.paddingLeft = "4px";
+        pop.style.paddingRight = "4px";
         pos = "translateX(" + (width - pop.offsetWidth) / 2 + "px)";
       } else if (th == -2) {
         pop.style.top = -5 + "px";
@@ -468,36 +468,31 @@ export class SummonerHistoryComponent implements OnInit {
 
     if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       if (th == -4) {
-        console.log("4targetbot = " + targetbot);
         pop.style.top = targetbot + "px";
         poptext.style.fontSize = "9px";
         pop.style.textAlign = "center";
+        pop.style.transformOrigin = "top right";
         pop.style.width = "40px";
         pop.style.padding = "3px";
         poptext.style.fontWeight = "bold";
         pop.style.opacity = "1";
         pop.style.padding = "2px";
       } else if (th == -3) {
-        console.log("3targetbot = " + targetbot);
         pop.style.top = targetbot - 35 + "px";
         poptext.style.fontSize = "9px";
         pop.style.textAlign = "center";
         pop.style.width = "auto";
-        //pop.style.padding = "3px";
       } else {
         pop.style.width = "150px";
         if (targetbot + poppos.height > window.innerHeight - 40) {
           let newtop = targettop - poppos.height;
-          console.log("1newtop = " + newtop);
           pop.style.top = newtop + "px";
           pos = "translateX(" + width + "px)";
         } else {
           let firstc = cname.split(" ");
           if (firstc[0] == "spellimg") {
-            console.log("1targettop = " + targettop);
             pop.style.top = targettop.toString() + "px";
           } else if (firstc[0] == "item") {
-            console.log("1targetbot = " + targetbot);
             pop.style.top = targetbot.toString() + "px";
           }
           pos = "translateX(" + width + "px)";
@@ -506,18 +501,16 @@ export class SummonerHistoryComponent implements OnInit {
     } else {
       if (th == -4) {
         ///Desktop
-        console.log("4targetbot = " + targetbot);
         pop.style.top = targetbot + "px";
         poptext.style.fontSize = "18px";
-        poptext.style.marginBottom = "13px";
         poptext.style.fontWeight = "bold";
         pop.style.textAlign = "center";
         pop.style.opacity = "1";
-        pop.style.width = "80px";
-        pop.style.padding = "0px";
+        pop.style.width = "auto";
+        pop.style.paddingLeft = "4px";
+        pop.style.paddingRight = "4px"
         pos = "translateX(" + (width - pop.offsetWidth) / 2 + "px)";
       } else if (th == -3) {
-        console.log("3targetbot = " + targetbot);
         pop.style.top = targetbot - 50 + "px";
         poptext.style.fontSize = "13px";
         pop.style.textAlign = "center";
@@ -527,16 +520,13 @@ export class SummonerHistoryComponent implements OnInit {
       } else {
         if (targetbot + poppos.height > window.innerHeight - 30) {
           let newtop = targettop - (poppos.height + 5);
-          console.log("1newtop = " + newtop);
           pop.style.top = newtop.toString() + "px";
           pos = "translateX(" + width + "px)";
         } else {
           let firstc = cname.split(" ");
           if (firstc[0] == "spellimg") {
-            console.log("1targettop = " + targettop);
             pop.style.top = targettop.toString() + "px";
           } else if (firstc[0] == "item") {
-            console.log("1targetbot = " + targetbot);
             pop.style.top = targetbot.toString() + "px";
           }
           pos = "translateX(" + width + "px)";

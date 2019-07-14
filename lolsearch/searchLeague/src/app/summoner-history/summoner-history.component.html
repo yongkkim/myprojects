@@ -1,16 +1,9 @@
-<table id="profile">
-  <tbody>
+<div id="profile">
+  <img id="profileImg" src={{info?.profileimg}} />
+  <table id="profileInfos">
     <tr>
-      <th colspan="2" id="userTH">{{info?.name}}</th>
+      <td class="proinfos">{{info?.name}}</td>
     </tr>
-    <tr>
-      <th colspan="2">
-        <hr />
-      </th>
-    </tr>
-    <tr>
-      <td id="picTD"><img id="profileImg" src={{info?.profileimg}} /></td>
-      <td id="infogroup">
     <tr>
       <td class="proinfos">LEVEL : {{info?.summonerLevel}}</td>
     </tr>
@@ -20,13 +13,8 @@
     <tr>
       <td class="proinfos">Rank : {{rankinfo}}</td>
     </tr>
-    <tr>
-      <td class="proinfos"></td>
-    </tr>
-    </td>
-    </tr>
-  </tbody>
-</table>
+  </table>
+</div>
 <!--div class = "hcolumn"> need to upgrade
     <ul id = "hcolumnName">
         <li title = "Champion" class = "hchampi"><img src = "{{champicon}}"/></li>
