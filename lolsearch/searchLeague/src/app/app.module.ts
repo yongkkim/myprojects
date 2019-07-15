@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { SummonerComponent } from './summoner/summoner.component';
@@ -9,6 +10,10 @@ import { ChampionStatsComponent } from './champion-stats/champion-stats.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+const appRoutes: Routes = [
+  { path: '', component: SummonerComponent }
+];
 
 @NgModule({
   declarations: [
@@ -21,10 +26,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     HttpClientModule,
-    BrowserAnimationsModule ,
+    BrowserAnimationsModule,
     AngularFontAwesomeModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

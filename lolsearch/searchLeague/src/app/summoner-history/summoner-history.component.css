@@ -1,5 +1,5 @@
 /* css for profile */
-div#profile{
+div.profile{
 	display: block;
     margin: 0 auto;
     margin-top: 50px;
@@ -13,7 +13,7 @@ div#profile{
 	background-color: black;
 	border: 2px groove gold;
 }
-img#profileImg{
+img.profileImg{
 	display: block;
     padding: 0;
 	margin: 0 auto;
@@ -23,16 +23,19 @@ img#profileImg{
 	border-radius: 20px;
 	float: left;
 }
-table#profileInfos{
-	border-collapse: collapse;
+table.profileInfos{
 	height: 150px;
 }
-table#profileInfos tr{
+table.profileInfos tr:not(:first-child){
 	width: 100%;
 	border-bottom: 1px solid gold;
 }
-td.proinfos{
-	height: 36px;
+table.profileInfos tr:first-child td{
+	height: 40px;
+	font-size: 25px;
+}
+.proinfos{
+	height: 30px;
 }
 
 /* css for button display*/
@@ -158,13 +161,13 @@ li.onehistory div.forone div.kmm div.kdaforone, div.minionforone, div.moneyforon
 	display: inline-block;
 	width: 60px;
 }
-/*li.onehistory div.forone div.accountforone{width: 130px;}*/
-li.onehistory div.forone div.accountforone p, div.kdaforone p, div.minionforone p, div.moneyforone p{
+li.onehistory div.forone div.kdaforone p, div.minionforone p, div.moneyforone p{
 	margin: 0;
 	color: black;
 	font-size: 14px;
 }
-li.onehistory div.forone div.accountforone p{font-size: 16px;}
+li.onehistory div.forone div.accountforone a:hover{color: black; font-weight: bold}
+
 li.onehistory div.oneChamp{
 	padding: 0;
 	float: left;

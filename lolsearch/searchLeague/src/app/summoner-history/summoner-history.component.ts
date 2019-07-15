@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, ElementRef } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Component, OnInit, Input } from "@angular/core";
+import { FormControl, FormGroup } from "@angular/forms";
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { SummonerHistoryService } from "./summoner-history.service";
 import { SummonerComponent } from "../summoner/summoner.component";
 import { SummonerOnegameHistoryService } from "../summoner-onegame-history/summoner-onegame-history.service";
 import { LOLUserData } from "../summoner/lolinterface";
-import { RankInfo } from "../summoner/rankinfo";
 import { Match } from "./match";
 import { Champ } from "./champ";
 import { Spell } from "./Spell";
@@ -15,7 +15,8 @@ import { Spells } from "./spells";
 @Component({
   selector: "app-summoner-history",
   templateUrl: "./summoner-history.component.html",
-  styleUrls: ["./summoner-history.component.css"]
+  styleUrls: ["./summoner-history.component.css"],
+  providers: [Location, { provide: LocationStrategy, useClass: PathLocationStrategy }]
 })
 export class SummonerHistoryComponent implements OnInit {
   private champimages: Champ;
@@ -59,7 +60,8 @@ export class SummonerHistoryComponent implements OnInit {
   constructor(
     private summonerComponent: SummonerComponent,
     private summonerHistoryService: SummonerHistoryService,
-    private summonerOneGameHistoryService: SummonerOnegameHistoryService
+    private summonerOneGameHistoryService: SummonerOnegameHistoryService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -77,6 +79,13 @@ export class SummonerHistoryComponent implements OnInit {
       }
       this.findHistory();
     }
+  }
+
+  goBack() {
+    this.location.back();
+  }
+  goForward() {
+    this.location.forward();
   }
 
   searchbar() {
@@ -304,7 +313,7 @@ export class SummonerHistoryComponent implements OnInit {
         div.setAttribute("value", "yes");
         this.toggled = true;
         li.scrollIntoView();
-        window.scrollBy(0, -80);
+        window.scrollBy(0, -140);
       }
     }
     this.disableMouseOver(gid);
@@ -351,10 +360,8 @@ export class SummonerHistoryComponent implements OnInit {
     newdiv.style.display = "block";
     let classes = event.target.parentElement.parentElement.className.split(" ");
     if (classes[0] == "btnonehistory" || classes[0] == "forme") {
-      console.log("btnonehistory");
       newpos = this.setdivpos(half, event.target.className, pos.width, pos.top, pos.height, pos.bottom);
     } else if (classes[0] == "onehistory" || classes[0] == "kmm") {
-      console.log("onehistory");
       newpos = this.setdivTogglePos(half, event.target.className, pos.width, pos.top, pos.bottom);
     } else if (classes[0] == "spells") {
       if (event.target.parentElement.parentElement.parentElement.className.split(" ")[0] == "onehistory") {

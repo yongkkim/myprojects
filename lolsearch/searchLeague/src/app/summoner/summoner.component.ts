@@ -2,13 +2,8 @@ import { OnInit, NgZone, Component } from "@angular/core";
 import { LOLUserData } from "./lolinterface";
 import { SummonerService } from "./summoner.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import {
-  trigger,
-  state,
-  transition,
-  animate,
-  style
-} from "@angular/animations";
+import { trigger, state, transition, animate, style } from "@angular/animations";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-summoner",
@@ -17,43 +12,22 @@ import {
   styleUrls: ["./summoner.component.css"],
   animations: [
     trigger("message", [
-      state(
-        "open",
-        style({
-          opacity: "1",
-          display: "block"
-        })
-      ),
-      state(
-        "close",
-        style({
-          opacity: "0",
-          display: "none"
-        })
-      ),
-      transition(":enter", [
-        style({ opacity: 0 }),
-        animate("1000ms", style({ opacity: 1 }))
-      ]),
+      state("open", style({ opacity: "1", display: "block" })),
+      state("close", style({ opacity: "0", display: "none" })),
+      transition(":enter", [style({ opacity: 0 }), animate("1000ms", style({ opacity: 1 }))]),
       transition("open => close", animate("1000ms"))
     ])
   ]
 })
 export class SummonerComponent implements OnInit {
   status: string = "open";
-  private typed: boolean = false;
   public heroes: LOLUserData;
   private url: string =
     "http://ddragon.leagueoflegends.com/cdn/9.13.1/img/profileicon/";
-  private profileimg: string = "";
-  private notMatching: boolean = false;
-  private errorMsg: string = "";
   public form: FormGroup;
   public summonerName: FormControl;
-  private fromClick: boolean = false;
   public submitted: boolean = false;
-  private wrong: boolean = false;
-  constructor(private summonerService: SummonerService, private zone: NgZone) { }
+  constructor(private summonerService: SummonerService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.summonerName = new FormControl("", Validators.required);
@@ -62,9 +36,6 @@ export class SummonerComponent implements OnInit {
     });
   }
   message() {
-    let msg = document.getElementById("message");
-    let start = document.getElementById("start");
-
     this.status = "close";
   }
   getHeroes(name: string): void {
@@ -118,14 +89,12 @@ export class SummonerComponent implements OnInit {
     let message = document.getElementById("message");
 
     if (hrs != null) {
-      //console.log("came in = " + this.submitted);
       message.style.display = "none";
 
       this.form.get("summonerName").markAsPristine();
       this.form.get("summonerName").markAsUntouched();
 
-      html.style.backgroundImage =
-        "linear-gradient(to bottom, transparent 60%, #07131A), url('assets/Bilgewater.jpg')";
+      html.style.backgroundImage = "linear-gradient(to bottom, transparent 60%, #07131A), url('assets/Bilgewater.jpg')";
       html.style.backgroundColor = "#07131A";
       html.style.backgroundSize = "100% 100%";
       html.style.backgroundRepeat = "no-repeat";
@@ -139,11 +108,7 @@ export class SummonerComponent implements OnInit {
       start.style.border = "none";
       start.style.borderRadius = "0";
 
-      if (
-        /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent
-        )
-      ) {
+      if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         start.style.height = "60px";
         start.style.position = "relative";
         input.style.width = "100%";
