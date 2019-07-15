@@ -57,8 +57,7 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "searchLeague:build:production",
-              "proxyConfig": "./proxyconfig.json"
+              "browserTarget": "searchLeague:build:production"
             }
           }
         },

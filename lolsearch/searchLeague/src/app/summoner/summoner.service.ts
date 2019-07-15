@@ -28,11 +28,13 @@ export class SummonerService {
     this.apiurl = this.baseApiUrl +
       "/lol/summoner/v4/summoners/by-name/" + name + "?api_key=RGAPI-b52d3728-fadb-44fe-9d74-d05c55114eff";
     // this.apiurl = '/api/lol/summoner/v4/summoners/by-name/' + name + '?api_key=RGAPI-b52d3728-fadb-44fe-9d74-d05c55114eff';//localhost
+    console.log(this.apiurl);
   }
   setURL2(summonerID: string) {
     this.apiurl = this.baseApiUrl +
       "/lol/league/v4/entries/by-summoner/" + summonerID + "?api_key=RGAPI-b52d3728-fadb-44fe-9d74-d05c55114eff";
     // this.apiurl = '/api/lol/league/v4/entries/by-summoner/' + summonerID + '?api_key=RGAPI-b52d3728-fadb-44fe-9d74-d05c55114eff';//localhost
+    console.log(this.apiurl);
   }
 
   getdata(name: string): Observable<LOLUserData> {
