@@ -29,6 +29,7 @@
   </div-->
 <!--below part is to create a list of game history. Each history is a button to toggle down for details-->
 <div id="content">
+  <div *ngIf="spinner" class="spinner-border text-danger"></div>
   <div class="eachgame" *ngFor="let m of images; index as p">
     <ul class="btnhistory">
       <li class="btnonehistory" id={{m[m.length-1]}} [style.background-color]="setBackground(initialhis[p][14])"

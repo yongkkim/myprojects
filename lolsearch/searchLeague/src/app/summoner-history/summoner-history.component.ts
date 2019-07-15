@@ -55,6 +55,7 @@ export class SummonerHistoryComponent implements OnInit {
   private toggled: boolean = false;
   public winRate: string = "";
   public rankinfo: string = "";
+  public spinner: boolean = true;
   @Input("userinfo") public info: LOLUserData;
 
   constructor(
@@ -237,8 +238,8 @@ export class SummonerHistoryComponent implements OnInit {
                 gameid.push(player.gameId.toString());
                 temp.push(gameid);
                 this.memberimages.push(temp);
-
                 this.winRate = this.countWin + "W/" + Math.abs(this.countWin - this.initialhis.length) + "L";
+                this.spinner = false;
               }
               //console.log("--------------done info----------------");
             });
