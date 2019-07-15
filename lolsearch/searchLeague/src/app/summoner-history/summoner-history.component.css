@@ -10,6 +10,7 @@ div#profile{
     color: white;
     font-weight: bold;
 	border-radius: 35px;
+	background-color: black;
 	border: 2px groove gold;
 }
 img#profileImg{
