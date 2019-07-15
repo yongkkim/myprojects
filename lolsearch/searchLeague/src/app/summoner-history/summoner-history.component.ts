@@ -156,6 +156,7 @@ export class SummonerHistoryComponent implements OnInit {
               //checking every game that has been played within 6 months.
               //if a game is older than 6 months, it will not be displayed
               if (dayDifference < 185) {
+
                 player.teams.forEach(winteam => {
                   if (winteam.win == "Win") {
                     winner = winteam.teamId;
@@ -273,12 +274,14 @@ export class SummonerHistoryComponent implements OnInit {
   }
 
   disableMouseOver(gid: string) {
-    let onegamehistory = document.getElementById(gid);
-    for (let i = 0; i < onegamehistory.children.length; i++) {
-      if (this.toggled) {
-        onegamehistory.children[i].setAttribute("style", "pointer-events: none");
-      } else {
-        onegamehistory.children[i].setAttribute("style", "pointer-events: auto");
+    if (!/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      let onegamehistory = document.getElementById(gid);
+      for (let i = 0; i < onegamehistory.children.length; i++) {
+        if (this.toggled) {
+          onegamehistory.children[i].setAttribute("style", "pointer-events: none");
+        } else {
+          onegamehistory.children[i].setAttribute("style", "pointer-events: auto");
+        }
       }
     }
   }
