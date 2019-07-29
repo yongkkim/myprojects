@@ -193,7 +193,22 @@ class OneBlock extends React.Component {
         let daysInMonth = [];
         for (let d = 1; d <= this.daysInMonth(); d++) {
             let withToDo = ""
-            let todoInfo = this.setToDoBgColor(d);
+            //let todoInfo = this.setToDoBgColor(d);
+
+            //body of function -> setToDoBgColor(d)
+            let todoInfo = "";
+            if (this.state.daysWithToDo.length !== 0) {
+                this.state.daysWithToDo.forEach(obj => {
+                    if (obj.toDoObject.year === this.currentYear() && obj.toDoObject.month === this.currentMonth() &&
+                        d === obj.toDoObject.day) {
+                        todoInfo = obj.toDoObject.todos.map(todo => {
+                            return todo.props.children;
+                        });
+                    }
+                })
+            }
+            //end
+
             if (todoInfo !== "") {
                 withToDo = <td key={d} className={"calendar-day has-todo"} onClick={e => this.setToDo(d, todoInfo)} ><p>{d}</p></td>
             } else {

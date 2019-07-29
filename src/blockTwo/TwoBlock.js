@@ -39,7 +39,7 @@ class TwoBlock extends React.Component {
         let eachTodo = ""
         if (this.state.todos !== undefined) {
             eachTodo = this.state.todos.map(todo => {
-                return <div>{todo}</div>
+                return <li className="each-todo">{todo}</li>
             })
         }
 
@@ -52,7 +52,7 @@ class TwoBlock extends React.Component {
                     <input className="todoform" placeholder="Enter your task" value={this.state.input}
                         onChange={e => this.handleChange(e)} onKeyPress={e => this.handleKeyPress(e)} />
                     <hr className="text-primary" />
-                    {eachTodo}
+                    <ul>{eachTodo}</ul>
                 </div>
                 <div className="done bg-primary" onClick={e => this.props.toDoDone(this.state.todos)}>
                     Done

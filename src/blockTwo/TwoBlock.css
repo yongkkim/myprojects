@@ -28,6 +28,11 @@
 
 .todos{
     font-size: 20px;
+    overflow-y:scroll;
+}
+
+.each-todo{
+    word-wrap: break-word;
 }
 
 .todoform{
