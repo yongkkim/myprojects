@@ -35,6 +35,15 @@
     word-wrap: break-word;
 }
 
+.delete{
+    color: red;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.delete:hover{
+    cursor: pointer;
+}
+
 .todoform{
     display: block;
     width: 50%;

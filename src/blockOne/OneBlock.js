@@ -9,15 +9,16 @@ class OneBlock extends React.Component {
         super(prop);
         this.state = {
             dateObject: moment(),
-            monthDiv: false,
-            yearDiv: false,
-            toDoOpen: false,
+            monthDiv: false, // boolean for toggling down month selection div
+            yearDiv: false, // boolean for toggling down year selection div
+            toDoOpen: false, // boolean for opening todo div
             currentMonth: "",
             currentDayNum: "",
-            height: 0,
-            hasToDo: false,
-            daysWithToDo: [],
-            todos: ""
+            height: 0, // props for setting height in todo component
+            daysWithToDo: [], // save all todo objects
+            todos: [],// props for a list of todos
+            index: "", //index of object in daysWithToDo
+            isToDo: false // check if there are todos in a selected day
         }
     }
 
@@ -125,11 +126,14 @@ class OneBlock extends React.Component {
     //     return lastDay;
     // }
 
-    setToDo = (dayNum, content) => {
+    setToDo = (dayNum, content, objNum, checkToDo) => {
+        console.log(content);
         this.setState({
             toDoOpen: true,
             currentDayNum: dayNum,
-            todos: content
+            todos: content,
+            index: objNum,
+            isToDo: checkToDo //boolean to check if there are todos in a selected day
         })
     }
 
@@ -143,7 +147,7 @@ class OneBlock extends React.Component {
 
     toDoDone = (allToDos) => {
         let todowithdiv = allToDos.map(todo => {
-            return <div>{todo}</div>
+            return todo
         });
 
         let toDoObject = {
@@ -153,28 +157,34 @@ class OneBlock extends React.Component {
             todos: todowithdiv
         }
 
+        let changedToDo = Object.assign([], this.state.daysWithToDo)
+        changedToDo.forEach((ctd, i) => {
+            if (i === this.state.index) {
+                ctd.toDoObject = toDoObject;
+            }
+        })
+
         this.setState({
             toDoOpen: false,
-            daysWithToDo: this.state.daysWithToDo.concat({ toDoObject })
+            daysWithToDo: this.state.isToDo ? changedToDo : this.state.daysWithToDo.concat({ toDoObject })
         })
     }
-    setToDoBgColor = (selectedDay) => {
-        if (this.state.daysWithToDo.length !== 0) {
-            this.state.daysWithToDo.forEach(obj => {
-                if (obj.toDoObject.year === this.currentYear() && obj.toDoObject.month === this.currentMonth() &&
-                    selectedDay === obj.toDoObject.day) {
-                    let contents = obj.toDoObject.todos.map(todo => {
-                        return todo.props.children;
-                    });
-                    return contents;
-                }
-            })
-        }
-        return "";
-    }
+    // setToDoBgColor = (selectedDay) => {
+    //     if (this.state.daysWithToDo.length !== 0) {
+    //         this.state.daysWithToDo.forEach(obj => {
+    //             if (obj.toDoObject.year === this.currentYear() && obj.toDoObject.month === this.currentMonth() &&
+    //                 selectedDay === obj.toDoObject.day) {
+    //                 let contents = obj.toDoObject.todos.map(todo => {
+    //                     return todo;
+    //                 });
+    //                 return contents;
+    //             }
+    //         })
+    //     }
+    //     return "";
+    // }
 
     render() {
-        console.log(this.state.daysWithToDo.length);
         let weekdayshortname = this.weekdayshort.map(day => {
             return (
                 <th key={day} className="week-day bg-primary">
@@ -197,22 +207,23 @@ class OneBlock extends React.Component {
 
             //body of function -> setToDoBgColor(d)
             let todoInfo = "";
+            let objNum;
             if (this.state.daysWithToDo.length !== 0) {
-                this.state.daysWithToDo.forEach(obj => {
+                this.state.daysWithToDo.forEach((obj, index) => {
                     if (obj.toDoObject.year === this.currentYear() && obj.toDoObject.month === this.currentMonth() &&
                         d === obj.toDoObject.day) {
+                        objNum = index;
                         todoInfo = obj.toDoObject.todos.map(todo => {
-                            return todo.props.children;
+                            return todo
                         });
                     }
                 })
             }
             //end
-
             if (todoInfo !== "") {
-                withToDo = <td key={d} className={"calendar-day has-todo"} onClick={e => this.setToDo(d, todoInfo)} ><p>{d}</p></td>
+                withToDo = <td key={d} className={"calendar-day has-todo"} onClick={e => this.setToDo(d, todoInfo, objNum, true)} ><p>{d}</p></td>
             } else {
-                withToDo = <td key={d} className={"calendar-day"} onClick={e => this.setToDo(d, "")} ><p>{d}</p></td>
+                withToDo = <td key={d} className={"calendar-day"} onClick={e => this.setToDo(d, "", -1, false)} ><p>{d}</p></td>
             }
             daysInMonth.push(withToDo);
         }
