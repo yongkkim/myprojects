@@ -220,7 +220,7 @@ class OneBlock extends React.Component {
     // }
 
     render() {
-        //console.log(this.state.daysWithToDo.length, this.state.index);
+        console.log(this.state.daysWithToDo.length);
         let weekdayshortname = this.weekdayshort.map(day => {
             return (
                 <th key={day} className="week-day bg-primary">
@@ -245,10 +245,12 @@ class OneBlock extends React.Component {
             let todoInfo = {};
             let todoList = [];
             let objNum;
+            let found = false;
             if (this.state.daysWithToDo.length !== 0) {
                 this.state.daysWithToDo.forEach((obj, index) => {
                     if (obj.toDoObject.year === this.currentYear() && obj.toDoObject.month === this.currentMonth() &&
                         d === obj.toDoObject.day) {
+                        found = true;
                         objNum = index;
                         todoList = obj.toDoObject.todos.map(todo => {
                             return todo
@@ -257,11 +259,14 @@ class OneBlock extends React.Component {
                             todoList: todoList,
                             nthObject: objNum
                         }
-                    } else {
+                        console.log(todoInfo, index, d);
+                    }
+                    if (!found) {
                         todoInfo = {
                             todoList: todoList,
                             nthObject: -1
                         }
+                        console.log(todoInfo, index, d);
                     }
                 })
             } else {
@@ -270,9 +275,9 @@ class OneBlock extends React.Component {
                     nthObject: -1
                 }
             }
-            //console.log(todoInfo);
             //end
             if (todoList.length !== 0) {
+                console.log(todoInfo, d);
                 withToDo = <td key={d} id={d} className={"calendar-day has-todo"} onClick={e => this.setToDo(d, todoInfo, true)}
                     onMouseEnter={e => {
                         let elementID = e.currentTarget.id;
