@@ -18,7 +18,8 @@ class OneBlock extends React.Component {
             daysWithToDo: [], // save all todo objects
             todos: [],// props for a list of todos
             index: "", //index of object in daysWithToDo
-            isToDo: false // check if there are todos in a selected day
+            isToDo: false, // check if there are todos in a selected day
+            optionDiv: false
         }
     }
 
@@ -126,12 +127,12 @@ class OneBlock extends React.Component {
     //     return lastDay;
     // }
 
-    setToDo = (dayNum, content, objNum, checkToDo) => {
+    setToDo = (dayNum, content, checkToDo) => {
         this.setState({
             toDoOpen: true,
             currentDayNum: dayNum,
-            todos: content,
-            index: objNum,
+            todos: content.todoList,
+            index: content.nthObject,
             isToDo: checkToDo //boolean to check if there are todos in a selected day
         })
     }
@@ -180,6 +181,29 @@ class OneBlock extends React.Component {
 
         }
     }
+
+    handleEnter = (id, todoInfo) => {
+        console.log(todoInfo);
+        let targetted = document.getElementById(id).lastElementChild;
+        targetted.setAttribute("style", "display: flex;");
+    }
+
+    handleLeave = id => {
+        let targetted = document.getElementById(id).lastElementChild;
+        targetted.setAttribute("style", "display: none;");
+    }
+
+    quickDelete = tobeDeleted => {
+        console.log(tobeDeleted.nthObject);
+        let changedToDo = Object.assign([], this.state.daysWithToDo)
+        changedToDo.splice(tobeDeleted.nthObject, 1);
+
+        this.setState({
+            toDoOpen: false,
+            daysWithToDo: changedToDo
+        })
+    }
+
     // setToDoBgColor = (selectedDay) => {
     //     if (this.state.daysWithToDo.length !== 0) {
     //         this.state.daysWithToDo.forEach(obj => {
@@ -196,7 +220,7 @@ class OneBlock extends React.Component {
     // }
 
     render() {
-        //console.log(this.state.daysWithToDo, this.state.index);
+        //console.log(this.state.daysWithToDo.length, this.state.index);
         let weekdayshortname = this.weekdayshort.map(day => {
             return (
                 <th key={day} className="week-day bg-primary">
@@ -218,24 +242,63 @@ class OneBlock extends React.Component {
             //let todoInfo = this.setToDoBgColor(d);
 
             //body of function -> setToDoBgColor(d)
-            let todoInfo = "";
+            let todoInfo = {};
+            let todoList = [];
             let objNum;
             if (this.state.daysWithToDo.length !== 0) {
                 this.state.daysWithToDo.forEach((obj, index) => {
                     if (obj.toDoObject.year === this.currentYear() && obj.toDoObject.month === this.currentMonth() &&
                         d === obj.toDoObject.day) {
                         objNum = index;
-                        todoInfo = obj.toDoObject.todos.map(todo => {
+                        todoList = obj.toDoObject.todos.map(todo => {
                             return todo
                         });
+                        todoInfo = {
+                            todoList: todoList,
+                            nthObject: objNum
+                        }
+                    } else {
+                        todoInfo = {
+                            todoList: todoList,
+                            nthObject: -1
+                        }
                     }
                 })
-            }
-            //end
-            if (todoInfo !== "") {
-                withToDo = <td key={d} className={"calendar-day has-todo"} onClick={e => this.setToDo(d, todoInfo, objNum, true)} ><p>{d}</p></td>
             } else {
-                withToDo = <td key={d} className={"calendar-day"} onClick={e => this.setToDo(d, "", -1, false)} ><p>{d}</p></td>
+                todoInfo = {
+                    todoList: todoList,
+                    nthObject: -1
+                }
+            }
+            //console.log(todoInfo);
+            //end
+            if (todoList.length !== 0) {
+                withToDo = <td key={d} id={d} className={"calendar-day has-todo"} onClick={e => this.setToDo(d, todoInfo, true)}
+                    onMouseEnter={e => {
+                        let elementID = e.currentTarget.id;
+                        this.handleEnter(elementID, todoInfo);
+                    }
+                    } onMouseLeave={e => {
+                        let elementID = e.currentTarget.id;
+                        this.handleLeave(elementID)
+                    }
+                    }>
+                    <p>{d}</p>
+                    <div className="option-container">
+                        <div className="delete-todo" onClick={e => {
+                            e.stopPropagation();
+                            this.quickDelete(todoInfo)
+                        }
+                        }>Delete</div>
+                        <div className="view-todo bg-primary" onClick={e => {
+                            e.stopPropagation();
+                            this.setToDo(d, todoInfo, true)
+                        }
+                        }>View</div>
+                    </div>
+                </td>
+            } else {
+                withToDo = <td key={d} className={"calendar-day"} onClick={e => this.setToDo(d, todoInfo, false)} ><p>{d}</p></td>
             }
             daysInMonth.push(withToDo);
         }

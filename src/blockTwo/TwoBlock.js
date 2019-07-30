@@ -6,7 +6,7 @@ class TwoBlock extends React.Component {
         super(prop);
         this.state = {
             input: "",
-            todos: this.props.todoinfo === "" ? [] : this.props.todoinfo
+            todos: this.props.todoinfo === [] ? [] : this.props.todoinfo
         }
     }
 

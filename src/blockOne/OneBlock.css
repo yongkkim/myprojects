@@ -119,3 +119,22 @@
 .has-todo{
     background-color:#7db490;
 }
+
+.has-todo:hover{
+    background-color: gray;
+}
+
+.option-container{
+    display: none;
+}
+
+.delete-todo, .view-todo{
+    flex: 1 1;
+    color: white;
+    font-weight: normal;
+    text-align: center;
+    
+}
+.delete-todo{
+    background-color: black;
+}
