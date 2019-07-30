@@ -127,7 +127,6 @@ class OneBlock extends React.Component {
     // }
 
     setToDo = (dayNum, content, objNum, checkToDo) => {
-        console.log(content);
         this.setState({
             toDoOpen: true,
             currentDayNum: dayNum,
@@ -146,28 +145,40 @@ class OneBlock extends React.Component {
     }
 
     toDoDone = (allToDos) => {
-        let todowithdiv = allToDos.map(todo => {
-            return todo
-        });
+        if (allToDos.length === 0) {
+            let changedToDo = Object.assign([], this.state.daysWithToDo)
+            changedToDo.splice(this.state.index, 1);
 
-        let toDoObject = {
-            year: this.currentYear(),
-            month: this.currentMonth(),
-            day: this.state.currentDayNum,
-            todos: todowithdiv
-        }
+            this.setState({
+                toDoOpen: false,
+                daysWithToDo: changedToDo
+            })
 
-        let changedToDo = Object.assign([], this.state.daysWithToDo)
-        changedToDo.forEach((ctd, i) => {
-            if (i === this.state.index) {
-                ctd.toDoObject = toDoObject;
+        } else {
+            let todowithdiv = allToDos.map(todo => {
+                return todo
+            });
+
+            let toDoObject = {
+                year: this.currentYear(),
+                month: this.currentMonth(),
+                day: this.state.currentDayNum,
+                todos: todowithdiv
             }
-        })
 
-        this.setState({
-            toDoOpen: false,
-            daysWithToDo: this.state.isToDo ? changedToDo : this.state.daysWithToDo.concat({ toDoObject })
-        })
+            let changedToDo = Object.assign([], this.state.daysWithToDo)
+            changedToDo.forEach((ctd, i) => {
+                if (i === this.state.index) {
+                    ctd.toDoObject = toDoObject;
+                }
+            })
+
+            this.setState({
+                toDoOpen: false,
+                daysWithToDo: this.state.isToDo ? changedToDo : this.state.daysWithToDo.concat({ toDoObject })
+            })
+
+        }
     }
     // setToDoBgColor = (selectedDay) => {
     //     if (this.state.daysWithToDo.length !== 0) {
@@ -185,6 +196,7 @@ class OneBlock extends React.Component {
     // }
 
     render() {
+        //console.log(this.state.daysWithToDo, this.state.index);
         let weekdayshortname = this.weekdayshort.map(day => {
             return (
                 <th key={day} className="week-day bg-primary">

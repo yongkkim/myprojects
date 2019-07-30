@@ -4,7 +4,6 @@ import './TwoBlock.css';
 class TwoBlock extends React.Component {
     constructor(prop) {
         super(prop);
-        console.log(this.props.todoinfo);
         this.state = {
             input: "",
             todos: this.props.todoinfo === "" ? [] : this.props.todoinfo
@@ -44,9 +43,16 @@ class TwoBlock extends React.Component {
         })
     }
 
+    clearToDo = () => {
+        this.setState({
+            todos: []
+        })
+    }
+
     render() {
+        //console.log(this.state.todos);
         let eachTodo = ""
-        if (this.state.todos !== undefined) {
+        if (this.state.todos !== []) {
             eachTodo = this.state.todos.map((todo, index) => {
                 return <div className="each-todo">
                     <span className="delete" onClick={e => { this.deleteToDo(index) }
@@ -62,8 +68,11 @@ class TwoBlock extends React.Component {
                     To-Do List
                 </div>
                 <div className="todos" style={{ height: this.props.height }}>
-                    <input className="todoform" placeholder="Enter your task" value={this.state.input}
-                        onChange={e => this.handleChange(e)} onKeyPress={e => this.handleKeyPress(e)} />
+                    <div className="form-container">
+                        <input className="todoform" placeholder="Enter your task" value={this.state.input}
+                            onChange={e => this.handleChange(e)} onKeyPress={e => this.handleKeyPress(e)} />
+                        <div className="clear" onClick={e => this.clearToDo()}>Clear</div>
+                    </div>
                     <hr className="text-primary" />
                     {eachTodo}
                 </div>
