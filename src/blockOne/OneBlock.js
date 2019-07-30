@@ -259,14 +259,14 @@ class OneBlock extends React.Component {
                             todoList: todoList,
                             nthObject: objNum
                         }
-                        console.log(todoInfo, index, d);
+                        // console.log(todoInfo, index, d);
                     }
                     if (!found) {
                         todoInfo = {
                             todoList: todoList,
                             nthObject: -1
                         }
-                        console.log(todoInfo, index, d);
+                        // console.log(todoInfo, index, d);
                     }
                 })
             } else {
@@ -277,7 +277,7 @@ class OneBlock extends React.Component {
             }
             //end
             if (todoList.length !== 0) {
-                console.log(todoInfo, d);
+                // console.log(todoInfo, d);
                 withToDo = <td key={d} id={d} className={"calendar-day has-todo"} onClick={e => this.setToDo(d, todoInfo, true)}
                     onMouseEnter={e => {
                         let elementID = e.currentTarget.id;
