@@ -1,0 +1,104 @@
+.schedule-container{
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    font-weight: bold;
+    background-color: white;
+    width: 70%;
+    font-family: fantasy;
+}
+
+.container-title{
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    font-size: 35px;
+    font-weight: bold;
+    font-family: fantasy;
+    color: white;
+    letter-spacing: 5px;
+    background-color: #ff5e69;
+}
+
+.btn-container{
+    display: flex;
+}
+
+.clear, .done{
+    flex: 1 1;
+    text-align: center;
+    height: 50px;
+    margin: 20px 10px 20px 10px;
+    background-color: #ff5e69;
+    font-size: 35px;
+    font-weight: bold;
+    font-family: fantasy;
+    color: white;
+    letter-spacing: 5px;
+}
+
+.clear:hover{
+    cursor: pointer
+}
+
+.done:hover{
+    cursor: pointer;
+}
+
+.todos{
+    font-size: 20px;
+    overflow-y:scroll;
+}
+
+.each-todo{
+    word-wrap: break-word;
+}
+
+.delete{
+    color: red;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.delete:hover{
+    cursor: pointer;
+}
+
+.todoform{
+    display: block;
+    width: 50%;
+    height: 50px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+hr{
+    border-bottom: 2px solid
+}
+
+input::-webkit-input-placeholder {
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+input::-moz-placeholder {
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+input:-ms-input-placeholder {
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+input::placeholder {
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
+input:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
+input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
