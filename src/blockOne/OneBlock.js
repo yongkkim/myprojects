@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import './OneBlock.css';
 import moment from 'moment';
 import TwoBlock from '../blockTwo/TwoBlock';
+import Cookies from 'universal-cookie';
 import { CSSTransition } from "react-transition-group";
+
+const cookies = new Cookies();
 
 class OneBlock extends React.Component {
     constructor(prop) {
@@ -15,7 +18,7 @@ class OneBlock extends React.Component {
             currentMonth: "",
             currentDayNum: "",
             height: 0, // props for setting height in todo component
-            daysWithToDo: [], // save all todo objects
+            daysWithToDo: cookies.get("todos") === undefined ? [] : cookies.get("todos"), // save all todo objects
             todos: [],// props for a list of todos
             index: "", //index of object in daysWithToDo
             isToDo: false, // check if there are todos in a selected day
@@ -121,12 +124,6 @@ class OneBlock extends React.Component {
         return this.state.dateObject.daysInMonth();
     }
 
-    // lastDayOfMonth = () => {
-    //     let dateObject = this.state.dateObject;
-    //     let lastDay = moment(dateObject).endOf("month").format("d");
-    //     return lastDay;
-    // }
-
     setToDo = (dayNum, content, checkToDo) => {
         this.setState({
             toDoOpen: true,
@@ -204,23 +201,9 @@ class OneBlock extends React.Component {
         })
     }
 
-    // setToDoBgColor = (selectedDay) => {
-    //     if (this.state.daysWithToDo.length !== 0) {
-    //         this.state.daysWithToDo.forEach(obj => {
-    //             if (obj.toDoObject.year === this.currentYear() && obj.toDoObject.month === this.currentMonth() &&
-    //                 selectedDay === obj.toDoObject.day) {
-    //                 let contents = obj.toDoObject.todos.map(todo => {
-    //                     return todo;
-    //                 });
-    //                 return contents;
-    //             }
-    //         })
-    //     }
-    //     return "";
-    // }
-
     render() {
-        console.log(this.state.daysWithToDo.length);
+        // cookies.remove("todos", { path: "/" });
+        cookies.set("todos", this.state.daysWithToDo, { path: '/', expires: new Date(Date.now() + 86400) });
         let weekdayshortname = this.weekdayshort.map(day => {
             return (
                 <th key={day} className="week-day bg-primary">

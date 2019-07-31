@@ -10,7 +10,7 @@
     font-family: fantasy;
 }
 
-.container-title, .done, .clear{
+.container-title{
     text-align: center;
     margin: 0 auto;
     width: 100%;
@@ -22,17 +22,21 @@
     background-color: #ff5e69;
 }
 
-.form-container{
+.btn-container{
     display: flex;
 }
 
-.clear{
-    width: 20%;
+.clear, .done{
+    flex: 1 1;
+    text-align: center;
     height: 50px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    margin: 20px 10px 20px 10px;
+    background-color: #ff5e69;
+    font-size: 35px;
+    font-weight: bold;
+    font-family: fantasy;
+    color: white;
+    letter-spacing: 5px;
 }
 
 .clear:hover{
@@ -62,9 +66,10 @@
 }
 
 .todoform{
-    flex: 1;
+    display: block;
     width: 50%;
     height: 50px;
+    margin: 0 auto;
     margin-top: 20px;
     margin-bottom: 20px;
 }

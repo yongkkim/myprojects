@@ -68,16 +68,14 @@ class TwoBlock extends React.Component {
                     To-Do List
                 </div>
                 <div className="todos" style={{ height: this.props.height }}>
-                    <div className="form-container">
-                        <input className="todoform" placeholder="Enter your task" value={this.state.input}
-                            onChange={e => this.handleChange(e)} onKeyPress={e => this.handleKeyPress(e)} />
-                        <div className="clear" onClick={e => this.clearToDo()}>Clear</div>
-                    </div>
+                    <input className="todoform" placeholder="Enter your task" value={this.state.input}
+                        onChange={e => this.handleChange(e)} onKeyPress={e => this.handleKeyPress(e)} />
                     <hr className="text-primary" />
                     {eachTodo}
                 </div>
-                <div className="done bg-primary" onClick={e => this.props.toDoDone(this.state.todos)}>
-                    Done
+                <div className="btn-container">
+                    <div className="done bg-primary" onClick={e => this.props.toDoDone(this.state.todos)}>Done</div>
+                    <div className="clear" onClick={e => this.clearToDo()}>Clear</div>
                 </div>
             </div>
         );
