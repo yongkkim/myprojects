@@ -6,6 +6,8 @@ import Cookies from 'universal-cookie';
 import { CSSTransition } from "react-transition-group";
 
 const cookies = new Cookies();
+// const [count, setCount] = useState(0); react hooks
+
 
 class OneBlock extends React.Component {
     constructor(prop) {
@@ -179,8 +181,7 @@ class OneBlock extends React.Component {
         }
     }
 
-    handleEnter = (id, todoInfo) => {
-        console.log(todoInfo);
+    handleEnter = (id) => {
         let targetted = document.getElementById(id).lastElementChild;
         targetted.setAttribute("style", "display: flex;");
     }
@@ -203,7 +204,7 @@ class OneBlock extends React.Component {
 
     render() {
         // cookies.remove("todos", { path: "/" });
-        cookies.set("todos", this.state.daysWithToDo, { path: '/', expires: new Date(Date.now() + 86400) });
+        cookies.set("todos", this.state.daysWithToDo, { path: '/', expires: new Date(Date.now() + 2592000) });
         let weekdayshortname = this.weekdayshort.map(day => {
             return (
                 <th key={day} className="week-day bg-primary">
@@ -264,7 +265,7 @@ class OneBlock extends React.Component {
                 withToDo = <td key={d} id={d} className={"calendar-day has-todo"} onClick={e => this.setToDo(d, todoInfo, true)}
                     onMouseEnter={e => {
                         let elementID = e.currentTarget.id;
-                        this.handleEnter(elementID, todoInfo);
+                        this.handleEnter(elementID);
                     }
                     } onMouseLeave={e => {
                         let elementID = e.currentTarget.id;
@@ -319,17 +320,13 @@ class OneBlock extends React.Component {
                     <p>{this.currentYear()}</p>
                 </div>
                 {this.state.yearDiv &&
-                    // <CSSTransition in={this.state.monthDiv} timeout={800} classNames='calShow' unmountOnExit appear>
                     <div className="year-selection">{this.yearList()}</div>
-                    // </CSSTransition> working on it
                 }
                 <div ref={(divele) => this.divele = divele} className="calendar-month" onClick={e => this.setMonth()}>
                     <p>{this.currentMonth().toLocaleUpperCase()}</p>
                 </div>
                 {this.state.monthDiv &&
-                    // <CSSTransition in={this.state.monthDiv} timeout={800} classNames='calShow' unmountOnExit appear>
                     <div className="month-selection">{this.monthList()}</div>
-                    // </CSSTransition>
                 }
                 <table className={this.state.monthDiv || this.state.yearDiv ? "calendar cal-blur" : "calendar"}>
                     <thead>
