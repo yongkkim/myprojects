@@ -311,9 +311,7 @@ export class SummonerHistoryComponent implements OnInit {
         li.blur();
       } else {
         div.style.display = "block";
-        div.style.borderWidth = "0 1px 1px 1px";
-        div.style.borderColor = "#008B8B";
-        div.style.borderStyle = "solid";
+        div.style.border = "3px groove gold";
         div.setAttribute("value", "yes");
         this.toggled = true;
         li.scrollIntoView();
