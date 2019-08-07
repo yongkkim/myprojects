@@ -8,7 +8,8 @@ class TwoBlock extends React.Component {
         super(prop);
         this.state = {
             input: "",
-            todos: this.props.todoinfo === [] ? [] : this.props.todoinfo
+            todos: this.props.todoinfo === [] ? [] : this.props.todoinfo,
+            savedTodos: []
         }
     }
 
@@ -24,7 +25,9 @@ class TwoBlock extends React.Component {
         if (this.state.input === "") {
             alert("Cannot be empty");
         } else {
+            let tobeSaved = [...this.state.todos];
             this.setState({
+                savedTodos: tobeSaved,
                 input: "",
                 todos: this.state.todos.concat(this.state.input)
             });
@@ -39,23 +42,33 @@ class TwoBlock extends React.Component {
 
     deleteToDo = (i) => {
         let copyToDos = [...this.state.todos];
+        let tobeSaved = [...this.state.todos];
         copyToDos.splice(i, 1);
 
         this.setState({
+            savedTodos: tobeSaved,
             todos: copyToDos
         })
     }
 
     clearToDo = () => {
+        let tobeSaved = [...this.state.todos];
         this.setState({
+            savedTodos: tobeSaved,
             todos: []
         })
     }
 
+    undo = () => {
+        this.setState({
+            todos: this.state.savedTodos
+        })
+    }
+
     render() {
-        //console.log(this.state.todos);
         let eachTodo = ""
         if (this.state.todos !== []) {
+            // console.log(this.state.todos);
             eachTodo = this.state.todos.map((todo, index) => {
                 return <div key={todo_key + this.todoNum++} className="each-todo">
                     <span className="delete" onClick={e => { this.deleteToDo(index) }
@@ -79,6 +92,7 @@ class TwoBlock extends React.Component {
                 <div className="btn-container">
                     <div className="done bg-primary" onClick={e => this.props.toDoDone(this.state.todos)}>Done</div>
                     <div className="clear" onClick={e => this.clearToDo()}>Clear</div>
+                    <div className="undo" onClick={e => this.undo()}>Undo</div>
                 </div>
             </div>
         );

@@ -39,7 +39,7 @@
     background-color: #ff5e69;
 }
 .all-todos{
-    background-color: #7db490;
+    background-color: #b47dac;
 }
 .all-todos:hover{
     cursor: pointer;
@@ -131,6 +131,7 @@
 
 .option-container{
     display: none;
+    z-index: 10;
 }
 
 .delete-todo, .view-todo{
@@ -142,4 +143,30 @@
 }
 .delete-todo{
     background-color: black;
+}
+
+.confirm-container{
+    height: 75px;
+    width: 20%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: white;
+    z-index: 1;
+    text-align: center;
+    border: 3px ridge #32a1ce;
+    font-weight: bold;
+    font-family: fantasy;
+}
+
+.yesorno-container{
+    display: flex;
+    margin-top: 15px;
+    color: white;
+}
+
+.yes, .no{
+    flex: 1 1;
+
 }
