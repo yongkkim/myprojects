@@ -20,14 +20,12 @@ class OneBlock extends React.Component {
             toDoOpen: false, // boolean for opening todo div
             currentMonth: "",
             currentDayNum: "",
-            height: 0, // props for setting height in todo component
             daysWithToDo: cookies.get("todos") === undefined ? [] : cookies.get("todos"), // save all todo objects
             todos: [],// props for a list of todos
             index: "", //index of object in daysWithToDo
             isToDo: false, // check if there are todos in a selected day
             optionDiv: false,
             todoDiv: false,
-            styleTop: 0,
             confirmDiv: false
         }
 
@@ -47,9 +45,9 @@ class OneBlock extends React.Component {
     btn = 0;
 
     componentDidMount() {
-        this.styleTop = this.tdlist.offsetTop;
+        this.styleTop = this.tdlist.clientTop;
         this.height = this.divElement.clientHeight - this.divele.clientHeight * 2.5;
-        this.heightThree = this.divElement.clientHeight;
+        this.heightThree = this.divElement.clientHeight - this.divele.clientHeight;
     }
 
     currentYear = () => {
@@ -152,7 +150,7 @@ class OneBlock extends React.Component {
 
     openSchedule = () => {
         if (this.state.toDoOpen) {
-            return <TwoBlock todoinfo={this.state.todos} height={this.height} toDoDone={this.toDoDone} />
+            return <TwoBlock todoinfo={this.state.todos} height={this.height} toDoDone={this.toDoDone} compo={1} />
         } else {
             return null;
         }
@@ -380,8 +378,7 @@ class OneBlock extends React.Component {
         return (
             <div ref={(divElement) => this.divElement = divElement}>
                 {this.openSchedule()}
-                <div ref={(tdlist) => this.tdlist = tdlist}
-                    className={this.state.confirmDiv || this.state.todoDiv || this.state.monthDiv ? "calendar-year cal-blur bg-primary" : "calendar-year bg-primary"} onClick={e => this.setYear()}>
+                <div className={this.state.confirmDiv || this.state.todoDiv || this.state.monthDiv ? "calendar-year cal-blur bg-primary" : "calendar-year bg-primary"} onClick={e => this.setYear()}>
                     <p>{this.currentYear()}</p>
                 </div>
 
@@ -413,7 +410,7 @@ class OneBlock extends React.Component {
                     </tbody>
                 </table>
                 <div className={this.state.confirmDiv || this.state.todoDiv || this.state.monthDiv || this.state.yearDiv ? "all-todos cal-blur" : "all-todos"}
-                    onClick={e => this.openToDoList()}>Check All To-Dos</div>
+                    ref={(tdlist) => this.tdlist = tdlist} onClick={e => this.openToDoList()}>Check All To-Dos</div>
                 {this.state.todoDiv &&
                     <ThreeBlock
                         getRows={this.getRows} sort={this.sort} top={this.styleTop} height={this.heightThree}

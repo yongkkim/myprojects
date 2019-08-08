@@ -36,7 +36,7 @@ class ThreeBlock extends React.Component {
 
     openSchedule = () => {
         if (this.state.openBlockTwo) {
-            return <TwoBlock todoinfo={this.state.selectedToDo} height={this.props.twoblockheight} toDoDone={this.toDoDone} />
+            return <TwoBlock todoinfo={this.state.selectedToDo} height={this.props.twoblockheight} toDoDone={this.toDoDone} compo={3} />
         } else {
             return null;
         }
@@ -172,11 +172,10 @@ class ThreeBlock extends React.Component {
         }
 
         return (
-            <div ref={(divThree) => this.divThree = divThree}>
+            <div className="three-container" ref={(divThree) => this.divThree = divThree}>
                 {this.openSchedule()}
-                <div style={{ top: this.props.top, height: this.props.height }} className="list-of-todos">
+                <div style={{ height: this.props.height }} className="list-of-todos">
                     <div className="list-name">List of All To-Dos in the Calendar</div>
-                    <div className="doneManage bg-primary" onScroll={e => this.handleScroll(e)} onClick={e => this.props.done(this.state.todo)}>Done</div>
                     {this.state.confirmDiv &&
                         <div className="confirm-container for-three-confirm">
                             Are you sure you delete this?
@@ -189,6 +188,7 @@ class ThreeBlock extends React.Component {
                     <br />
                     {todosinmonth}
                 </div>
+                <div className="doneManage bg-primary" onScroll={e => this.handleScroll(e)} onClick={e => this.props.done(this.state.todo)}>Done</div>
             </div>
         );
     }

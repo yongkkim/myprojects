@@ -65,6 +65,14 @@ class TwoBlock extends React.Component {
         })
     }
 
+    toporbottom() {
+        if (this.props.compo === 1) {
+            return "top: 0";
+        } else if (this.props.compo === 3) {
+            return "bottom: 0";
+        }
+    }
+
     render() {
         let eachTodo = ""
         if (this.state.todos !== []) {
@@ -79,7 +87,7 @@ class TwoBlock extends React.Component {
         }
 
         return (
-            <div className="schedule-container">
+            <div className={this.props.compo === 1 ? "schedule-container zero-top" : "schedule-container zero-bottom"}>
                 <div className="container-title">
                     To-Do List
                 </div>
