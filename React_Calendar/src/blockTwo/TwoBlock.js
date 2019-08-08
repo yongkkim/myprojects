@@ -1,5 +1,6 @@
 import React from 'react';
 import './TwoBlock.css';
+// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const todo_key = "todo_";
 
@@ -9,7 +10,8 @@ class TwoBlock extends React.Component {
         this.state = {
             input: "",
             todos: this.props.todoinfo === [] ? [] : this.props.todoinfo,
-            savedTodos: []
+            savedTodos: [],
+            undoDesc: "OK"
         }
     }
 
@@ -65,12 +67,11 @@ class TwoBlock extends React.Component {
         })
     }
 
-    toporbottom() {
-        if (this.props.compo === 1) {
-            return "top: 0";
-        } else if (this.props.compo === 3) {
-            return "bottom: 0";
-        }
+    disappear = () => {
+        this.setState({
+            undoDesc: "Closing"
+        })
+
     }
 
     render() {
@@ -88,6 +89,21 @@ class TwoBlock extends React.Component {
 
         return (
             <div className={this.props.compo === 1 ? "schedule-container zero-top" : "schedule-container zero-bottom"}>
+                {/* <ReactCSSTransitionGroup transitionName="undoDesc"
+                    transitionAppear={true}
+                    transitionAppearTimeout={1000}
+                    transitionEnter={true}
+                    transitionEnterTimeout={1000}
+                    transitionLeave={true}
+                    transitionLeaveTimeout={1000}
+                >
+                    <div key={"undo-btn-info" + this.state.undoDesc} id="undo-btn-info" className="bg-info">
+                        After adding, deleting, or clearing, Undo button can't be used consequtively (one at a time).
+                        After above three actions, Undo button works only once to restore the preceding data<br key={"br" + this.state.undoDesc} />
+                        <button key={"undo-btn-ok" + this.state.undoDesc} id="undo-btn-ok" className="btn-danger"
+                            onClick={e => this.disappear()}>{this.state.undoDesc}</button>
+                    </div>
+                </ReactCSSTransitionGroup> */}
                 <div className="container-title">
                     To-Do List
                 </div>

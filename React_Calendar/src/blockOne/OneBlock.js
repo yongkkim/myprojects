@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './OneBlock.css';
 import moment from 'moment';
 import TwoBlock from '../blockTwo/TwoBlock';
 import ThreeBlock from '../blockThree/ThreeBlock';
 import Cookies from 'universal-cookie';
-import { CSSTransition } from "react-transition-group";
 
 const cookies = new Cookies();
 // const [count, setCount] = useState(0); react hooks

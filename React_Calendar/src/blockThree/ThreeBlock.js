@@ -15,7 +15,12 @@ class ThreeBlock extends React.Component {
             confirmDiv: false
         }
     }
+
+    bottom = 0;
+
     set = (index, selected) => {
+        // this.bottom = document.getElementById("existing_"+ selected.date);
+
         this.setState({
             openBlockTwo: true,
             selectedToDo: selected.todos,
@@ -95,10 +100,11 @@ class ThreeBlock extends React.Component {
         if (yesorno) {
             let changedToDo = Object.assign([], this.state.todo)
             changedToDo.splice(this.state.index, 1);
+            console.log(changedToDo);
 
             this.setState({
                 confirmDiv: false,
-                daysWithToDo: changedToDo
+                todo: changedToDo
             })
         } else {
             this.setState({
@@ -122,7 +128,7 @@ class ThreeBlock extends React.Component {
                 index++;
             }
             todosinEachMonth.forEach(todo => {
-                currentMonthtodos.push(<td id={"existing_" + todo.date} className="item" key={"existing_" + todo.date}
+                currentMonthtodos.push(<td key={"existing_" + todo.date} id={"existing_" + todo.date} className="item"
                     onMouseEnter={e => {
                         let elementID = e.currentTarget.id;
                         this.handleEnter(elementID);
@@ -174,21 +180,21 @@ class ThreeBlock extends React.Component {
         return (
             <div className="three-container" ref={(divThree) => this.divThree = divThree}>
                 {this.openSchedule()}
-                <div style={{ height: this.props.height }} className="list-of-todos">
-                    <div className="list-name">List of All To-Dos in the Calendar</div>
-                    {this.state.confirmDiv &&
-                        <div className="confirm-container for-three-confirm">
-                            Are you sure you delete this?
-                                <div className="yesorno-container">
-                                <button className="yes btn-success" onClick={e => this.confirmation(true)}>Yes</button>
-                                <button className="no btn-danger" onClick={e => this.confirmation(false)}>No</button>
-                            </div>
+                {this.state.confirmDiv &&
+                    <div className="confirm-container for-three-confirm">
+                        Are you sure you delete this?
+                            <div className="yesorno-container">
+                            <button className="yes btn-success" onClick={e => this.confirmation(true)}>Yes</button>
+                            <button className="no btn-danger" onClick={e => this.confirmation(false)}>No</button>
                         </div>
-                    }
+                    </div>
+                }
+                <div style={{ height: this.props.height }} className={this.state.confirmDiv ? "list-of-todos confirm-active" : "list-of-todos"}>
+                    <div className="list-name">List of All To-Dos in the Calendar</div>
                     <br />
                     {todosinmonth}
                 </div>
-                <div className="doneManage bg-primary" onScroll={e => this.handleScroll(e)} onClick={e => this.props.done(this.state.todo)}>Done</div>
+                <div className="doneManage bg-primary" onClick={e => this.props.done(this.state.todo)}>Done</div>
             </div>
         );
     }
