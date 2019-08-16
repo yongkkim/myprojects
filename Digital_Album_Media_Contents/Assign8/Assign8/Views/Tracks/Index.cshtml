@@ -5,11 +5,11 @@
 }
 
 <h2>List of tracks</h2>
-
-<p>
+<div class = "artist-container">
+<p class = "create-btn">
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table-striped track">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -47,3 +47,5 @@
 }
 
 </table>
+<img class = "artist-bg" src = "../../photo/music-background4.jpg"/>
+</div>

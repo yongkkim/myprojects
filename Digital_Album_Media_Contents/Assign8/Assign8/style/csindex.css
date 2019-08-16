@@ -1,0 +1,72 @@
+﻿.music-container {
+    height: 100%;
+    width: 100%;
+    background-image: url("../../photo/music-background.jpg");
+    background-size: 100% 100%;
+    text-align: center;
+    padding-top: 190px;
+}
+
+.body-content {
+    width: 100%;
+    height: 92.5vh;
+    padding: 0;
+}
+
+
+.title-container {
+    display: block;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 80px;
+    font-family: Edwardian Script ITC;
+}
+
+.table-striped {
+    display: block;
+    margin: 0 auto;
+    width: 70%;
+    margin-bottom: 30px;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+        background-color: rgba(215, 215, 215, 0.5);
+}
+.create-btn{
+    text-align: center;
+}
+
+.table-striped > tbody > tr > th {
+    padding: 5px;
+    vertical-align: unset;
+}
+
+.artist-container {
+    height: 92.5vh;
+    margin-top: 70px;
+}
+
+.artist-bg {
+    position: absolute;
+    height: 140%;
+    width: 100%;
+    top: 0;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1100px) {
+    .artist-bg {
+        height: 110%;
+    }
+}
+
+.track{
+    width: 50%;
+}
+
+body {
+    padding: 0;
+}

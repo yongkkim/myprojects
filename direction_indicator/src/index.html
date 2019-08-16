@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
   <meta charset="UTF-8">
   <title>Ionic App</title>
-  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport"
+    content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
 
   <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#4e8ef7">
-  
+
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -30,13 +32,25 @@
   <link href="build/main.css" rel="stylesheet">
 
 </head>
+
 <body>
 
   <!-- Ionic's root component and where the app will load -->
   <ion-app></ion-app>
-	
-   <script src="https://maps.googleapis.com/maps/api/js"</script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA298wOacbgU-RimaRJd2GXuWwnozoA7XI" async
+    defer></script>
   <!-- The polyfills js is generated during the build process -->
+  <script>
+    function initMap() {
+      console.log('at maps');
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10,
+        center: { lat: -34.397, lng: 150.644 }
+      });
+    }
+  </script>
+  </script>
   <script src="build/polyfills.js"></script>
 
   <!-- The vendor js is generated during the build process
@@ -47,4 +61,5 @@
   <script src="build/main.js"></script>
 
 </body>
+
 </html>

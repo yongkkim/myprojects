@@ -9,6 +9,7 @@
     @{
         var userAccount = new Assign8.Controllers.UserAccount(User as System.Security.Claims.ClaimsPrincipal);
     }
+	<link href = "/style/csindex.css" rel = "stylesheet"/>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -23,7 +24,6 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Artist", "Index", "Artists")</li>
                     <li>@Html.ActionLink("Album", "Index", "Albums")</li>
                     <li>@Html.ActionLink("Track", "Index", "Tracks")</li>
@@ -35,9 +35,9 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <!--footer>
             <p>&copy; @DateTime.Now.Year - Yong Kuk Kim</p>
-        </footer>
+        </footer-->
     </div>
 
     @Scripts.Render("~/bundles/jquery")
