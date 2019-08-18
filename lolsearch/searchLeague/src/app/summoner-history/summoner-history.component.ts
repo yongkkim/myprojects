@@ -311,7 +311,6 @@ export class SummonerHistoryComponent implements OnInit {
         li.blur();
       } else {
         div.style.display = "block";
-        div.style.border = "3px groove gold";
         div.setAttribute("value", "yes");
         this.toggled = true;
         li.scrollIntoView();
@@ -546,7 +545,7 @@ export class SummonerHistoryComponent implements OnInit {
   }
 
   findtype(): boolean {
-    if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && window.innerWidth > 768) {
       this.deviceType = "smartphone";
       return true;
     } else {

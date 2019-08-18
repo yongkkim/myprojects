@@ -16,21 +16,21 @@ namespace Assign8.Controllers
         }
         [Required]
         [StringLength(60)]
-        [Display(Name = "Artist name or stage name")]
+        [Display(Name = "Artist Name")]
         public string Name { get; set; }
 
         [StringLength(60)]
-        [Display(Name = "If applicable, artist's birth name")]
+        [Display(Name = "Birth Name")]
         public string BirthName { get; set; }
 
-        [Display(Name = "Birth date, or start date")]
+        [Display(Name = "Birth Date")]
         [DataType(DataType.DateTime)]
         public DateTime BirthOrStartDate { get; set; }
 
-        [Display(Name = "Arist's primary genre")]
+        [Display(Name = "Primary Genre")]
         public string Genre { get; set; }
 
-        [Display(Name = "URL to artist photo")]
+        [Display(Name = "Artist Photo")]
         [StringLength(220)]
         public string UrlArtist { get; set; }
 
@@ -44,7 +44,7 @@ namespace Assign8.Controllers
         public int Id { get; set; }
 
         [StringLength(60)]
-        [Display(Name = "Executive who looks after this artist")]
+        [Display(Name = "Executive")]
         public string Executive { get; set; }
     }
 
@@ -63,23 +63,23 @@ namespace Assign8.Controllers
 
         [Required]
         [StringLength(60)]
-        [Display(Name = "Artist name or stage name")]
+        [Display(Name = "Artist Name")]
         public string Name { get; set; }
 
         [StringLength(60)]
-        [Display(Name = "If applicable, artist's birth name")]
+        [Display(Name = "Birth Name")]
         public string BirthName { get; set; }
 
-        [Display(Name = "Birth date, or start date")]
+        [Display(Name = "Birth Date")]
         [DataType(DataType.DateTime)]
         public DateTime BirthOrStartDate { get; set; }
 
-        [Display(Name = "Arist's primary genre")]
+        [Display(Name = "Primary Genre")]
         public SelectList GenreList { get; set; }
 
         [StringLength(220)]
         [DataType(DataType.ImageUrl)]
-        [Display(Name = "URL to artist photo")]
+        [Display(Name = "Artist Photo")]
         public string UrlArtist { get; set; }
 
         [DataType(DataType.MultilineText)]

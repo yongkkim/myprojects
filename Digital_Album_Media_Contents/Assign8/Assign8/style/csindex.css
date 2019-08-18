@@ -1,5 +1,13 @@
-﻿.music-container {
-    height: 100%;
+﻿*{
+    font-family: fantasy;
+}
+
+.pic{
+    border-radius: 5px;
+}
+
+.music-container {
+    height: 108%;
     width: 100%;
     background-image: url("../../photo/music-background.jpg");
     background-size: 100% 100%;
@@ -27,8 +35,8 @@
 .table-striped {
     display: block;
     margin: 0 auto;
-    width: 70%;
-    margin-bottom: 30px;
+    width: 50%;
+    margin-top: 40px;
 }
 
 .table-striped > tbody > tr:nth-of-type(odd) {
@@ -41,6 +49,7 @@
 .table-striped > tbody > tr > th {
     padding: 5px;
     vertical-align: unset;
+    text-align: unset;
 }
 
 .artist-container {
@@ -69,4 +78,8 @@
 
 body {
     padding: 0;
+}
+
+th{
+    text-align:center;
 }
