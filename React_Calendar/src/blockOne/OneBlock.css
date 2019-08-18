@@ -37,20 +37,28 @@
     color: white;
     letter-spacing: 5px;
     background-color: #ff5e69;
+    transform: scale(1);
 }
+
+.calendar-month{
+    margin: 7px auto;
+}
+
 .all-todos{
     background-color: #b47dac;
 }
 .all-todos:hover{
     cursor: pointer;
+    transform: scale(1.02);
 }
 .calendar-year{
-    margin-top: 15px;
+    margin-top: 30px;
 }
 
 
 .calendar-month:hover, .calendar-year:hover{
     cursor: pointer;
+    transform: scale(1.02);
 }
 
 .month-selection, .year-selection{
@@ -101,15 +109,14 @@
 }
 
 .calendar-day{
-    height: 80px;
-    font-size: 20px;
+    height: 70px;
+    font-size: 25px;
     font-weight: bold;
     transition: transform .5s;
 }
 
 .calendar-day:hover:not(.empty){
     border: 1px solid rgb(149, 147, 255);
-    cursor: pointer;
 }
 
 .calendar-day:hover:not(.empty) p{

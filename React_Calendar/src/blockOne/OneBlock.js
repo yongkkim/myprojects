@@ -25,7 +25,10 @@ class OneBlock extends React.Component {
             isToDo: false, // check if there are todos in a selected day
             optionDiv: false,
             todoDiv: false,
-            confirmDiv: false
+            confirmDiv: false,
+            newHeight: 0,
+            newHeightThree: 0
+
         }
 
 
@@ -342,7 +345,7 @@ class OneBlock extends React.Component {
             }
 
             if (todoList.length !== 0) {
-                withToDo = <td key={d} id={d} className={"calendar-day has-todo"} onClick={e => this.setToDo(d, todoInfo, true)}
+                withToDo = <td key={d} id={d} className={"calendar-day has-todo"}
                     onMouseEnter={e => {
                         let elementID = e.currentTarget.id;
                         this.handleEnter(elementID);
@@ -398,7 +401,7 @@ class OneBlock extends React.Component {
                         </div>
                     </div>
                 }
-                <table className={this.state.confirmDiv || this.state.monthDiv || this.state.yearDiv || this.state.todoDiv ? "calendar cal-blur" : "calendar"}>
+                <table className={this.state.toDoOpen || this.state.confirmDiv || this.state.monthDiv || this.state.yearDiv || this.state.todoDiv ? "calendar cal-blur" : "calendar"}>
                     <thead>
                         <tr className="weekday cal-container">
                             {weekdayshortname}
@@ -408,7 +411,7 @@ class OneBlock extends React.Component {
                         {daysinmonth}
                     </tbody>
                 </table>
-                <div className={this.state.confirmDiv || this.state.todoDiv || this.state.monthDiv || this.state.yearDiv ? "all-todos cal-blur" : "all-todos"}
+                <div className={this.state.toDoOpen || this.state.confirmDiv || this.state.todoDiv || this.state.monthDiv || this.state.yearDiv ? "all-todos cal-blur" : "all-todos"}
                     ref={(tdlist) => this.tdlist = tdlist} onClick={e => this.openToDoList()}>Check All To-Dos</div>
                 {this.state.todoDiv &&
                     <ThreeBlock

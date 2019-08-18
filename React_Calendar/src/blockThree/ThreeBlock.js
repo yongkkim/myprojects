@@ -122,8 +122,9 @@ class ThreeBlock extends React.Component {
             let currentMonthtodos = [];
             let todosinEachMonth = [];
             let month = todoList[i].date.format("MM");
+            let year = todoList[i].date.format("YYYY");
             let index = i;
-            while (index < todoList.length && todoList[index].date.format("MM") === month) {
+            while (index < todoList.length && todoList[index].date.format("MM") === month && todoList[index].date.format("YYYY") === year) {
                 todosinEachMonth.push(todoList[index]);
                 index++;
             }
@@ -174,7 +175,7 @@ class ThreeBlock extends React.Component {
 
             todosinmonth.push(year_month_todos);
 
-            i = index < todoList.length - 1 ? index - 1 : todoList.length;
+            i = index < todoList.length ? index - 1 : todoList.length;
         }
 
         return (
