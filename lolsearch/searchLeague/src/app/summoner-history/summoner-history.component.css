@@ -261,18 +261,16 @@ div#content{
 
 .fa{
 	color: rgb(46, 137, 255);
-	float: right;
 	height: 100%;
-    padding-top: 9px;
 }
 button#togglebtn{
 	-webkit-appearance: none;
 	-webkit-border-radius: 0;
 	background-color: whitesmoke;
-	border-color: currentColor;
-	float: right;
 	z-index: 9;
 	height: 100%;
+	padding: 0 3px;
+	border: none;
 }
 div.column, div.hcolumn{
 	height: 25px;
@@ -368,6 +366,10 @@ ul#columnName2 li.accounti img{
 	height: 75%;
 }
 
+@media only screen and (min-width: 1024px){
+
+}
+
 @media only screen and (min-width: 768px) and (max-width: 1024px){
 	li.onehistory {
 		width: 64%;
@@ -380,6 +382,12 @@ ul#columnName2 li.accounti img{
 	.container{
 		margin-left: unset;
 		margin-right: unset;
+	}
+	div.container{
+		width: 78%;
+	}
+	li.btnonehistory:hover{
+		transform: scale(1);
 	}
 }
 
@@ -460,7 +468,7 @@ ul#columnName2 li.accounti img{
 	li.btnonehistory div.forme{
 		float: right;
 		/*flex: 3 chrome mobile*/
-    	flex: 2.5;
+    	flex: 2;
 		height: 40px;
 	}
 	li.btnonehistory div.forme div#kda, div#gamemode, div#minion, div#money, div#time{
@@ -512,27 +520,23 @@ ul#columnName2 li.accounti img{
 	div.container{
 		position: relative;
 		width: 100%;
+		padding: 5px 0;
 		display: none;
 	}
 	div#content{
-		width: 80%;
+		width: 85%;
 		border-width: 3px;
 	}
 	button#togglebtn{
-		-webkit-appearance: none;
-		-webkit-border-radius: 0;
-		background-color: whitesmoke;
-		border-color: currentColor;
-		height: 100%;
-		width: 15px;
-		padding: 1px;
+		width: 10px;
+		margin-left: 3px;
 	}
 	li.onehistory div.forone{
 		height: 40px;
 		padding-top: 0;
 		margin-left: 15px;
 		flex:3;
-		flex-direction: row;
+		flex-direction: column-reverse;
 	}
 	li.onehistory div.forone div.kmm div.kdaforone, div.minionforone, div.moneyforone{
 		width: 40px;
@@ -543,10 +547,9 @@ ul#columnName2 li.accounti img{
 	}
 	li.onehistory div.forone div.accountforone{
 		font-size: 7px;
-	}
-	li.onehistory div.forone div.accountforone{
 		flex: none;
-		width: 60px;
+		width: 100%;
+		margin-bottom: 7px;
 	}
 	li.onehistory div.forone div.accountforone a{
 		word-break: break-word;
@@ -654,5 +657,9 @@ ul#columnName2 li.accounti img{
 
 	ul#hcolumnName li{
 		text-align: center;
+	}
+
+	.fa{
+		font: normal normal normal 10px/3 FontAwesome
 	}
 }

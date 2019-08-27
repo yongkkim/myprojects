@@ -545,7 +545,7 @@ export class SummonerHistoryComponent implements OnInit {
   }
 
   findtype(): boolean {
-    if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && window.innerWidth > 768) {
+    if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && window.innerWidth < 1025) {
       this.deviceType = "smartphone";
       return true;
     } else {

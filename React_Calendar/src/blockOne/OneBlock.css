@@ -117,6 +117,7 @@
 
 .calendar-day:hover:not(.empty){
     border: 1px solid rgb(149, 147, 255);
+    cursor: pointer;
 }
 
 .calendar-day:hover:not(.empty) p{
@@ -130,6 +131,8 @@
 
 .has-todo{
     background-color:#7db490;
+    cursor: default;
+
 }
 
 .has-todo:hover{
