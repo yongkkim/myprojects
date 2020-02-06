@@ -1,17 +1,15 @@
 export interface RankInfo {
-    tier: string;
+    queueType: string;
     summonerName: string;
     hotStreak: boolean;
     wins: number;
     veteran: boolean;
-    losses:	number;
+    losses: number;
     rank: string;
-    leagueName: string;
+    tier: string;
     inactive: boolean;
-    freshBlood:	boolean;
-    position: string;
+    freshBlood: boolean;
     leagueId: string;
-    queueType: string;
-    summonerId:	string;
+    summonerId: string;
     leaguePoints: number;
 }

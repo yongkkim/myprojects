@@ -11,6 +11,7 @@ import { Spell } from "./Spell";
 import { Player } from "../summoner-onegame-history/player";
 import { Item } from "./item";
 import { Spells } from "./spells";
+import { SummonerService } from "../summoner/summoner.service";
 
 @Component({
   selector: "app-summoner-history",
@@ -23,24 +24,9 @@ export class SummonerHistoryComponent implements OnInit {
   public images: Array<any[]> = [];
   private memberimages: Array<Array<string[]>> = [];
   private players: Player[];
-  private url: string =
-    "http://ddragon.leagueoflegends.com/cdn/9.13.1/img/champion/";
-  private spellurl: string =
-    "http://ddragon.leagueoflegends.com/cdn/9.13.1/img/spell/";
-  private itemurl: string =
-    "http://ddragon.leagueoflegends.com/cdn/9.13.1/img/item/";
-  public itemicon: string =
-    "http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/items.png";
-  public goldicon: string =
-    "http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/gold.png";
-  public kdaicon: string =
-    "http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/score.png";
-  public champicon: string =
-    "http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/champion.png";
-  public minionicon: string =
-    "http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/minion.png";
-  public spellicon: string =
-    "http://ddragon.leagueoflegends.com/cdn/5.5.1/img/ui/spells.png";
+  private url: string = "http://ddragon.leagueoflegends.com/cdn/10.1.1/img/champion/";
+  private spellurl: string = "http://ddragon.leagueoflegends.com/cdn/10.1.1/img/spell/";
+  private itemurl: string = "http://ddragon.leagueoflegends.com/cdn/10.1.1/img/item/";
   private spell: Spell;
   private item: Item;
   private keys = new Map();
@@ -54,13 +40,14 @@ export class SummonerHistoryComponent implements OnInit {
   private countWin: number = 0;
   private toggled: boolean = false;
   public winRate: string = "";
-  public rankinfo: string = "";
+  public rankinfo: string = "Unranked";
   public spinner: boolean = true;
   @Input("userinfo") public info: LOLUserData;
 
   constructor(
     private summonerComponent: SummonerComponent,
     private summonerHistoryService: SummonerHistoryService,
+    private summonerService: SummonerService,
     private summonerOneGameHistoryService: SummonerOnegameHistoryService,
     private location: Location
   ) { }
@@ -69,15 +56,17 @@ export class SummonerHistoryComponent implements OnInit {
     setTimeout(() => {
       window.addEventListener("scroll", this.searchbar, true);
     }, 2000);
-
+    console.log(this.info);
     if (this.info != null) {
-      if (this.info.rank != undefined) {
-        this.rankinfo =
-          this.info.rank.tier + " " + this.info.rank.rank + " / " +
-          this.info.rank.leaguePoints + " Point  / " + this.info.rank.wins + "W:" + this.info.rank.losses + "L";
-      } else {
-        this.rankinfo = "Unranked";
-      }
+      this.summonerService.getRankdata(this.info.id).subscribe(rank => {
+        if (rank !== undefined) {
+          this.rankinfo =
+            rank[0].tier + " " + rank[0].rank + " / " +
+            rank[0].leaguePoints + " Point  / " + rank[0].wins + "W:" + rank[0].losses + "L";
+        } else {
+          this.rankinfo = "Unranked";
+        }
+      });
       this.findHistory();
     }
   }
@@ -239,8 +228,11 @@ export class SummonerHistoryComponent implements OnInit {
                 gameid.push(player.gameId.toString());
                 temp.push(gameid);
                 this.memberimages.push(temp);
-                this.winRate = this.countWin + "W/" + Math.abs(this.countWin - this.initialhis.length) + "L";
-                this.spinner = false;
+
+                setTimeout(() => {
+                  this.winRate = this.countWin + "W/" + Math.abs(this.countWin - this.initialhis.length) + "L";
+                  this.spinner = false;
+                }, 200);
               }
               //console.log("--------------done info----------------");
             });

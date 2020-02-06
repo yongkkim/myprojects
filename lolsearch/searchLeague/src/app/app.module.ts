@@ -8,7 +8,7 @@ import { SummonerHistoryComponent } from './summoner-history/summoner-history.co
 import { SummonerOnegameHistoryComponent } from './summoner-onegame-history/summoner-onegame-history.component';
 import { ChampionStatsComponent } from './champion-stats/champion-stats.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
+// import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
@@ -27,7 +27,6 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    AngularFontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(

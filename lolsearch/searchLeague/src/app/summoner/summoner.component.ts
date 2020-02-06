@@ -23,7 +23,7 @@ export class SummonerComponent implements OnInit {
   status: string = "open";
   public heroes: LOLUserData;
   private url: string =
-    "http://ddragon.leagueoflegends.com/cdn/9.13.1/img/profileicon/";
+    "http://ddragon.leagueoflegends.com/cdn/10.1.1/img/profileicon/";
   public form: FormGroup;
   public summonerName: FormControl;
   public submitted: boolean = false;
@@ -39,17 +39,13 @@ export class SummonerComponent implements OnInit {
     this.status = "close";
   }
   getHeroes(name: string): void {
-    this.summonerService.getdata(name).subscribe(
-      hero => {
-        this.heroes = hero;
-        this.heroes.profileimg = this.url + this.heroes.profileIconId + ".png";
-        this.submitted = true;
-        this.summonerService.getRankdata(this.heroes.id).subscribe(rank => {
-          this.heroes.rank = rank;
-        });
-      },
+    this.summonerService.getdata(name).subscribe(hero => {
+      // console.log(hero);
+      this.heroes = hero;
+      this.heroes.profileimg = this.url + this.heroes.profileIconId + ".png";
+      this.submitted = true;
+    }),
       error => this.setErrValue(this.heroes)
-    );
   }
   setErrValue(ob: any) {
     this.submitted = false;
