@@ -99,7 +99,7 @@ if(isset($_SESSION['login']))//if login is successful,
 		<?php
 		if(!$successful):?>
 			<div class = "popup"><h2>No result found</h2></div>
-		<?php endif;
+		<?php unset($_SESSION['search_text']); endif;
 		while($row = mysqli_fetch_assoc($result))
 		{
 		?>
