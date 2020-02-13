@@ -23,6 +23,7 @@ if(isset($_SESSION['login']))//if login is successful,
 		$dabase = new db();
 		$info = "";
 		$html = $dabase->connect();
+		$successful = true;
 
 			//$menu->input();
 
@@ -55,16 +56,13 @@ if(isset($_SESSION['login']))//if login is successful,
 			//after chaning sorting value and search value through the if statments, finally run the query
 			$result = $dabase->sql_query($query);
 			
-			if(mysqli_num_rows($result))//check, if there is any information in this query
+			if(mysqli_num_rows($result) <= 0)//check, if there is any information in this query
 			{
-				$sccessful = true;
-			} 
-			else
-			{
-				$sccessful = false;
+				$successful = false;
+				$query = "select * from inventory order by ". $_SESSION['sort_table'] ."";
+				$result = $dabase->sql_query($query);
 			}
-			if($sccessful)//if there is information, it draws a table containing the records from the query.
-			{		
+	
 ?>
 <!DOCTYPE html>
 <html lang = "en">
@@ -99,6 +97,9 @@ if(isset($_SESSION['login']))//if login is successful,
 		<div class="grid-item g-header"><a href = "view.php?sorting=backOrder">On Back Order?</a></div>
 		<div class="grid-item g-header"><!--a href = "view.php?sorting=deleted">Delete</a-->Delete</div>
 		<?php
+		if(!$successful):?>
+			<div class = "popup"><h2>No result found</h2></div>
+		<?php endif;
 		while($row = mysqli_fetch_assoc($result))
 		{
 		?>
@@ -124,11 +125,6 @@ if(isset($_SESSION['login']))//if login is successful,
 	</body>
 </html>			
 <?php
-			}
-			else//if there is no information, it prints the message that there is no record that users want.
-			{
-				echo "No records found for search = '". $_SESSION['search_text'] ."'";
-			}
 $dabase->close();
 }
 else
